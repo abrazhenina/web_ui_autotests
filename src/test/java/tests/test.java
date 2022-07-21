@@ -3,11 +3,13 @@ package tests;
 import browser.Browser;
 import config.Config;
 import data.TestData;
-import jsonReader.JsonReader;
+import org.testng.Assert;
+import pageObjects.AlertsWindowsPage;
+import pageObjects.MainPage;
+import utils.JsonReader;
 import pageObjects.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -25,10 +27,11 @@ public class test {
     TestData testData;
     Config config;
     HomePage homePage;
+    MainPage mainPage;
+    AlertsWindowsPage alertsPage;
 
     @BeforeTest
     void setup () throws IOException {
-
         try {
             config = new Config(JsonReader.readJson(configPath));
             testData = new TestData(JsonReader.readJson(testDataPath));
@@ -36,16 +39,22 @@ public class test {
         catch(IOException e) {
             e.printStackTrace();
         }
-        driver = Browser.getBrowserInstance(config);
+        Browser.setParameters(config);
+        driver = Browser.getBrowserInstance();
         wait = new WebDriverWait(driver, Duration.ofSeconds(config.timeout));
         homePage = new HomePage(driver, config, testData);
+        mainPage = new MainPage();
     }
 
     @Test(priority = 1)
     void testCase1() {
         // 1
-        Reporter.log("Open HomePage.", true);
+        Reporter.log("Go to MainPage.", true);
         Browser.goToUrl(driver, config.homePageAddress);
+        Reporter.log("MainPage is opened.", true);
+        mainPage.isPageOpen();
+        Reporter.log("Click AlertsPage button.", true);
+        mainPage.clickButton();
     }
 
 

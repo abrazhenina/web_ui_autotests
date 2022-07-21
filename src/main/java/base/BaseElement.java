@@ -1,13 +1,14 @@
 package base;
 
+import browser.Browser;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 
 public abstract class BaseElement {
 	private String name;
 	private By loc;
-	private WebDriverWait wait;
 
 	public BaseElement(String name, By loc) {
 		this.name = name;
@@ -15,20 +16,25 @@ public abstract class BaseElement {
 	}
 
 	public String getName() {
-		return null;
+		return name;
 	}
 
 	public By getLocator() {
-		return null;
+		return loc;
 	}
 
-	public void click() {
-		this.wait.until(ExpectedConditions
-				.elementToBeClickable(this.getLocator()));
+	public void clickButton() {
+		WebDriver driver = Browser.getBrowserInstance();
+		WebElement button = new WebDriverWait(driver, Duration.ofSeconds(10))
+				.until(ExpectedConditions.elementToBeClickable(getLocator()));
+		button.click();
 	}
 
 	public boolean isDisplayed() {
-		return true;
+		WebDriver driver = Browser.getBrowserInstance();
+		return new WebDriverWait(driver, Duration.ofSeconds(10))
+				.until(ExpectedConditions.presenceOfElementLocated(getLocator()))
+				.isDisplayed();
 	}
 
 	public WebElement findElement() {
