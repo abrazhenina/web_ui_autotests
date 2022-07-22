@@ -3,7 +3,6 @@ package base;
 import base.elements.Label;
 import browser.Browser;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public abstract class BaseForm {
 	private String name;
@@ -15,8 +14,7 @@ public abstract class BaseForm {
 	}
 
 	public boolean isPageOpen() {
-
-		return Browser.getBrowserInstance().findElement(getLocator()).isDisplayed();
+		return Browser.getBrowserInstance().findElement(this.getLocator()).isDisplayed();
 	}
 
 	public String getName() {

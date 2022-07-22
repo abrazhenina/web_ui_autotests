@@ -3,14 +3,14 @@ package config;
 import com.google.gson.JsonObject;
 
 public class Config {
-	public String homePageAddress;
-	public String browserName;
-	public boolean browserIncognito;
-	public boolean browserLang;
-	public boolean browserWindowMaximized;
-	public int timeout;
-	public int timeout1;
-	public int timeout2;
+	public static String homePageAddress;
+	public static String browserName;
+	public static boolean browserIncognito;
+	public static boolean browserLang;
+	public static boolean browserWindowMaximized;
+	public static int timeout;
+	public static int timeout1;
+	public static int timeout2;
 
 	public Config (JsonObject config) {
 		homePageAddress = config.get("homePageAddress").getAsString();
@@ -19,6 +19,7 @@ public class Config {
 		browserLang = config.get("browserLang").getAsBoolean();
 		browserWindowMaximized = config.get("browserWindowMaximized").getAsBoolean();
 		timeout = config.get("timeout").getAsInt();
+		timeout1 = config.get("timeout1").getAsInt();
 		timeout2 = config.get("timeout2").getAsInt();
 	}
 }
