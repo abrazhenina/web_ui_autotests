@@ -1,9 +1,5 @@
 {
-  "gameTagInput": "Action",
-  "heroDropdownTag": "tag_npc_dota_hero_life_stealer",
-  "searchCommunityMarketInputValue": "golden",
-  "allGamesDropdownGameName": "Dota 2",
-  "dota2OptHeroDropdownOption": "Lifestealer",
-  "dota2RarityOption": "Immortal",
-  "marketPageSlotNum": 1
+  "toSeeAlertBtnName": "alertsBtn",
+  "toSeeAlertBtnAlertMessage": "You clicked a button",
+  "confirmBoxAlertMessage": "Do you confirm action?"
 }

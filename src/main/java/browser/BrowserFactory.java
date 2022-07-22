@@ -17,10 +17,10 @@ public class BrowserFactory {
 	}
 
 	public static void setParameters() {
-		browserName = Config.browserName;
-		browserIncognito = Config.browserIncognito;
-		browserLang = Config.browserLang;
-		browserWindowMaximized = Config.browserWindowMaximized;
+		browserName = Config.getBrowserName();
+		browserIncognito = Config.getBrowserIncognito();
+		browserLang = Config.getBrowserLang();
+		browserWindowMaximized = Config.getBrowserWindowMaximized();
 	}
 
 	public static WebDriver getBrowser() {

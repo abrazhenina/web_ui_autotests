@@ -48,7 +48,7 @@ public class HomePage {
     public void hoverOverNoteWorthyTab() {
         WebElement noteworthyTab = this.driver.findElement(By.cssSelector(noteWorthyTabLoc));
         new Actions(this.driver).moveToElement(noteworthyTab).perform();
-        new WebDriverWait(this.driver, Duration.ofSeconds(this.config.timeout))
+        new WebDriverWait(this.driver, Duration.ofSeconds(this.config.getTimeout()))
                 .until(ExpectedConditions.visibilityOfElementLocated(By
                         .cssSelector(noteWorthyMenuTopSellersBtnLoc)));
     }
@@ -68,7 +68,7 @@ public class HomePage {
     public void hoverOverHomePageCommunityBtn() {
         WebElement homePageCommunityBtn = this.driver.findElement(By.cssSelector(homePageCommunityBtnLoc));
         new Actions(this.driver).moveToElement(homePageCommunityBtn).perform();
-        new WebDriverWait(this.driver, Duration.ofSeconds(this.config.timeout))
+        new WebDriverWait(this.driver, Duration.ofSeconds(this.config.getTimeout()))
                 .until(ExpectedConditions.visibilityOfElementLocated(By
                         .cssSelector(homePageCommunityBtnLoc)));
     }

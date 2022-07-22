@@ -1,6 +1,5 @@
 package base;
 
-import base.elements.Label;
 import browser.Browser;
 import org.openqa.selenium.By;
 
@@ -24,9 +23,4 @@ public abstract class BaseForm {
 	public By getLocator() {
 		return loc;
 	}
-
-	public Label getPageLabel() {
-		return null;
-	}
-
 }

@@ -4,7 +4,5 @@
   "browserIncognito" : true,
   "browserLang": true,
   "browserWindowMaximized": true,
-  "timeout": 10,
-  "timeout1": 1,
-  "timeout2": 2
+  "timeout": 10
 }
