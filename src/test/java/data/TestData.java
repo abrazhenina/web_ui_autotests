@@ -16,6 +16,11 @@ public class TestData {
 	static private String alertPromptBoxBtnName;
 	static private String alertPromptBoxMessage;
 	static private String alertPromptResultLabelName;
+	static private String nestedFramesBtnName;
+	static private String nestedFramesParentFrameName;
+	static private String nestedFramesChildFrameName;
+	static private String nestedFramesParentFrameText;
+	static private String nestedFramesChildFrameText;
 
 	public TestData (JsonObject testData) {
 		map = new HashMap<>();
@@ -29,6 +34,11 @@ public class TestData {
 		alertPromptBoxBtnName = testData.get("alertPromptBoxBtnName").getAsString();
 		alertPromptBoxMessage = testData.get("alertPromptBoxMessage").getAsString();
 		alertPromptResultLabelName = testData.get("alertPromptResultLabelName").getAsString();
+		nestedFramesBtnName = testData.get("nestedFramesBtnName").getAsString();
+		nestedFramesParentFrameName = testData.get("nestedFramesParentFrameName").getAsString();
+		nestedFramesChildFrameName = testData.get("nestedFramesChildFrameName").getAsString();
+		nestedFramesParentFrameText = testData.get("nestedFramesParentFrameText").getAsString();
+		nestedFramesChildFrameText = testData.get("nestedFramesChildFrameText").getAsString();
 	}
 
 	public static String getAlertsWindowsPageAlertBtnName() {
@@ -62,5 +72,25 @@ public class TestData {
 	}
 	public static String getAlertPromptResultLabelName() {
 		return alertPromptResultLabelName;
+	}
+
+	public static String getNestedFramesBtnName() {
+		return nestedFramesBtnName;
+	}
+
+	public static String getNestedFramesParentFrameName() {
+		return nestedFramesParentFrameName;
+	}
+
+	public static String getNestedFramesChildFrameName() {
+		return nestedFramesChildFrameName;
+	}
+
+	public static String getNestedFramesParentFrameText() {
+		return nestedFramesParentFrameText;
+	}
+
+	public static String getNestedFramesChildFrameText() {
+		return nestedFramesChildFrameText;
 	}
 }

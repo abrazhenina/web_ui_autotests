@@ -1,5 +1,5 @@
 {
-  "alertsWindowsPageAlertBtnName": "alertsWindowsPageAlertBtn",
+  "alertsWindowsPageAlertBtnName": "alertBtn",
   "toSeeAlertBtnName": "seeAlertBtn",
   "toSeeAlertBtnAlertMessage": "You clicked a button",
   "alertConfirmBoxBtnName": "alertConfirmBoxBtn",
@@ -8,5 +8,10 @@
   "alertConfirmResultLabelText": "You selected Ok",
   "alertPromptBoxBtnName": "alertPromptBoxBtn",
   "alertPromptBoxMessage": "Please enter your name",
-  "alertPromptResultLabelName": "alertPromptResultLabel"
+  "alertPromptResultLabelName": "alertPromptResultLabel",
+  "nestedFramesBtnName": "nestedFramesBtn",
+  "nestedFramesParentFrameName": "frameParent",
+  "nestedFramesParentFrameText": "Parent frame",
+  "nestedFramesChildFrameName": "frameChild",
+  "nestedFramesChildFrameText": "Child frame"
 }

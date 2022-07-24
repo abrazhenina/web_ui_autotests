@@ -14,8 +14,6 @@ import utils.WaiterUtil;
 import utils.Waits;
 
 public class AlertsPage extends BaseForm {
-
-
 	private Button seeAlertBtn;
 	private String seeAlertBtnName = "seeAlertBtn";
 	private By seeAlertBtnLoc = By.id("alertButton");
@@ -31,7 +29,6 @@ public class AlertsPage extends BaseForm {
 	private Label promptResultLabel;
 	private String promptResultLabelName = "alertPromptResultLabel";
 	private By promptResultLoc = By.id("promptResult");
-
 
 	public AlertsPage() {
 		super("alertsPage", By.xpath("//div[text()='Alerts']"));

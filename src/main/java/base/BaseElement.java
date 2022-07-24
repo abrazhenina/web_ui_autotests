@@ -43,12 +43,11 @@ public abstract class BaseElement {
 				.isDisplayed();
 	}
 
-	public WebElement findElement(By loc) {
-		return Browser.getBrowserInstance().findElement(loc);
+	public WebElement findElement() {
+		return Browser.getBrowserInstance().findElement(this.loc);
 	}
 
-	public String getText(By loc) {
-		return Browser.getBrowserInstance().findElement(loc).getText();
+	public String getText() {
+		return Browser.getBrowserInstance().findElement(this.loc).getText();
 	}
-
 }
