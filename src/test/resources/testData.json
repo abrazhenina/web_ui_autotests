@@ -1,5 +1,7 @@
 {
-  "toSeeAlertBtnName": "alertsBtn",
+  "alertsWindowsPageAlertBtnName": "alertsWindowsPageAlertBtn",
+  "toSeeAlertBtnName": "seeAlertBtn",
   "toSeeAlertBtnAlertMessage": "You clicked a button",
-  "confirmBoxAlertMessage": "Do you confirm action?"
+  "alertConfirmBoxBtnName": "alertConfirmBoxBtn",
+  "alertConfirmBoxMessage": "Do you confirm action?"
 }

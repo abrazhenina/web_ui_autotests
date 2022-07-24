@@ -2,35 +2,61 @@ package pageObjects;
 
 import base.BaseForm;
 import base.elements.Button;
+import browser.Browser;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Reporter;
 import utils.WaiterUtil;
 import utils.Waits;
 
 public class AlertsPage extends BaseForm {
 
-	private Button seeAlertBtn = new Button("seeAlertBtn", By.xpath(
-			"//span[contains(text(),'see alert')]//parent::div[@class='col-md-6']//following-sibling::div//button"));
 
-	private Button alertConfirmBoxBtn = new Button("seeAlertBtn", By.xpath(
-			"//span[contains(text(),'confirm box')]//parent::div[@class='col-md-6']//following-sibling::div//button"));
+	private By seeAlertBtnLoc = By.id("alertButton");
+	private Button seeAlertBtn;
+	private String seeAlertBtnName = "seeAlertBtn";
+	private By alertConfirmBoxBtnLoc = By.id("confirmButton");
+	private Button alertConfirmBoxBtn;
+	private String alertConfirmBoxBtnName = "alertConfirmBoxBtn";
 
 	public AlertsPage() {
 		super("alertsPage", By.xpath("//div[text()='Alerts']"));
+		this.seeAlertBtn = new Button(seeAlertBtnName, seeAlertBtnLoc);
+		this.alertConfirmBoxBtn = new Button(alertConfirmBoxBtnName, alertConfirmBoxBtnLoc);
 	}
 
 	public void clickButton(String buttonName) {
-		if (buttonName == seeAlertBtn.getName()) {
+		if (buttonName.equals(seeAlertBtn.getName()))
 			seeAlertBtn.clickButton();
+		else if (buttonName.equals(alertConfirmBoxBtn.getName())) {
+			alertConfirmBoxBtn.clickButton();
 		}
+		else System.out.println("No button found.g");
 	}
 
 	public boolean isAlertDisplayed() {
-		Alert alert = WaiterUtil.waiter().until(ExpectedConditions.alertIsPresent());
-		if (alert != null) {
+		if (Waits.waiter().until(ExpectedConditions.alertIsPresent()) != null)
 			return true;
-		} else {
+		else
+			return false;
+	}
+
+	public boolean isAlertStillDisplayed() {
+		try
+		{
+			WebDriver driver = Browser.getBrowserInstance();
+			Alert alert = driver.switchTo().alert();
+			if (alert != null) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		catch (NoAlertPresentException Ex)
+		{
 			return false;
 		}
 	}

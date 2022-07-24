@@ -1,7 +1,8 @@
 package base;
 
-import browser.Browser;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.Waits;
 
 public abstract class BaseForm {
 	private String name;
@@ -13,14 +14,15 @@ public abstract class BaseForm {
 	}
 
 	public boolean isPageOpen() {
-		return Browser.getBrowserInstance().findElement(this.getLocator()).isDisplayed();
+		return Waits.waiter().until(ExpectedConditions
+				.presenceOfElementLocated(this.getLocator())).isDisplayed();
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public By getLocator() {
-		return loc;
+		return this.loc;
 	}
 }

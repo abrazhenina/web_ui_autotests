@@ -26,6 +26,7 @@ public class MainPageTests {
 	MainPage mainPage;
 	AlertsWindowsPage alertsWindowsPage;
 	AlertsPage alertsPage;
+	String message;
 
 	@BeforeTest
 	void setup () throws IOException {
@@ -53,37 +54,43 @@ public class MainPageTests {
 		Assert.assertTrue(mainPage.isPageOpen(), "MainPage not found.");
 
 		Reporter.log("2 step", true);
-		Reporter.log("Click AlertsPageButton on MainPage.", true);
+		Reporter.log("Click AlertsFrameAndWindowsPageButton on MainPage.", true);
 		mainPage.clickButton("alertsFrameAndWindowsBtn");
-		Assert.assertTrue(alertsWindowsPage.isPageOpen(),"AlertsPage not found.");
+		Assert.assertTrue(alertsWindowsPage.isPageOpen(),"AlertsFrameAndWindowsPage not found.");
 		Reporter.log("Click Alerts button on AlertsWindowsPage.", true);
-		//Почему-то не работает из тестДата, а только по прямому имени
-		//alertsWindowsPage.clickButton(TestData.getToSeeAlertBtnName());
-		alertsWindowsPage.clickButton("alertsBtn");
+		alertsWindowsPage.clickButton(TestData.getAlertsWindowsPageAlertBtnName());
 		Reporter.log("AlertsPage opens.", true);
+
 		Assert.assertTrue(alertsPage.isPageOpen(),"AlertsPage not found.");
 
 
 		Reporter.log("3 step", true);
 		Reporter.log("Click 'Button to see alert'", true);
-		alertsPage.clickButton("seeAlertBtn");
-		Reporter.log("Alert window opens.", true);
+		alertsPage.clickButton(TestData.getToSeeAlertBtnName());
+		Reporter.log("Alert opens.", true);
 		Assert.assertTrue(alertsPage.isAlertDisplayed(), "Alert not found.");
-		String message = TestData.getAlertMessage();
+		message = TestData.getToSeeAlertMessage();
 		Reporter.log("Alert message is '" + message + "'", true);
 		Assert.assertEquals(message, alertsPage.getAlertText(), "Alert message doesn't match.");
 
 		Reporter.log("4 step", true);
-		Reporter.log("Click AlertWindow OK button", true);
+		Reporter.log("Click AlertWindow OK button.", true);
 		alertsPage.acceptAlert();
-		// ДОДЕЛАТЬ - висит 10 сек и падает
-		// Assert.assertFalse(alertsPage.isAlertDisplayed(), "Alert window still displayed.");
+		Reporter.log("Alert closed.", true);
+		Assert.assertFalse(alertsPage.isAlertStillDisplayed(), "Alert still displayed.");
 
 		Reporter.log("5 step", true);
 		Reporter.log("Click 'On button click, confirm box will appear'", true);
-		//alertsPage.clickButton();
+		alertsPage.clickButton(TestData.getAlertConfirmBoxBtnName());
+		Reporter.log("ConfirmBoxAlert opens.", true);
+		Assert.assertTrue(alertsPage.isAlertDisplayed(), "Alert not found.");
+
+		message = TestData.getAlertConfirmBoxMessage();
+		Reporter.log("Alert message is '" + message + "'", true);
+		Assert.assertEquals(message, alertsPage.getAlertText(), "Alert message doesn't match.");
 
 
+		//Assert.assertFalse(alertsPage.isAlertDisplayed(), "Alert still displayed.");
 
 	}
 

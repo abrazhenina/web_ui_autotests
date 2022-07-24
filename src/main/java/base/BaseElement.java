@@ -1,6 +1,7 @@
 package base;
 
 import browser.Browser;
+import browser.BrowserFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Waits;
@@ -17,20 +18,26 @@ public abstract class BaseElement {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public By getLocator() {
-		return loc;
+		return this.loc;
 	}
 
 	public void clickButton() {
-		Waits.waiter()
-				.until(ExpectedConditions.elementToBeClickable(this.getLocator()))
+		Waits.waiter().until(ExpectedConditions
+				.elementToBeClickable(this.getLocator()))
 				.click();
 	}
 
 	public boolean isDisplayed() {
+		return Waits.waiter()
+				.until(ExpectedConditions.elementToBeClickable(this.getLocator()))
+				.isDisplayed();
+	}
+
+	public boolean isClickable() {
 		return Waits.waiter()
 				.until(ExpectedConditions.elementToBeClickable(this.getLocator()))
 				.isDisplayed();
