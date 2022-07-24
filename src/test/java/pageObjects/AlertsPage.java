@@ -28,6 +28,9 @@ public class AlertsPage extends BaseForm {
 	private Button promptBoxBtn;
 	private String promptBoxBtnName = "alertPromptBoxBtn";
 	private By promptBoxBtnLoc = By.id("promtButton");
+	private Label promptResultLabel;
+	private String promptResultLabelName = "alertPromptResultLabel";
+	private By promptResultLoc = By.id("promptResult");
 
 
 	public AlertsPage() {
@@ -36,6 +39,7 @@ public class AlertsPage extends BaseForm {
 		this.confirmBoxBtn = new Button(confirmBoxBtnName, confirmBoxBtnLoc);
 		this.confirmResultLabel = new Label(confirmResultLabelName, confirmResultLoc);
 		this.promptBoxBtn = new Button(promptBoxBtnName, promptBoxBtnLoc);
+		this.promptResultLabel = new Label(promptResultLabelName, promptResultLoc);
 	}
 
 	public void clickButton(String buttonName) {
@@ -76,9 +80,21 @@ public class AlertsPage extends BaseForm {
 		alert.accept();
 	}
 
-	public String getLabelText() {
-		return Waits.waiter()
-				.until(ExpectedConditions.presenceOfElementLocated(confirmResultLoc))
-				.getText();
+	public void sendKeysToAlertPrompt(String keys) {
+		Alert alert = WaiterUtil.waiter().until(ExpectedConditions.alertIsPresent());
+		alert.sendKeys(keys);
+	}
+
+	public String getLabelText(String labelName) {
+		if(labelName.equals(confirmResultLabelName)) {
+			return Waits.waiter()
+					.until(ExpectedConditions.presenceOfElementLocated(confirmResultLoc))
+					.getText();
+		} else if(labelName.equals(promptResultLabelName)) {
+			return Waits.waiter()
+					.until(ExpectedConditions.presenceOfElementLocated(promptResultLoc))
+					.getText();
+		}
+		return null;
 	}
 }

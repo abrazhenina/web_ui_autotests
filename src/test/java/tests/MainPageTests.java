@@ -4,9 +4,7 @@ import browser.Browser;
 import browser.BrowserFactory;
 import config.Config;
 import data.TestData;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import pageObjects.AlertsPage;
 import pageObjects.AlertsWindowsPage;
 import pageObjects.MainPage;
@@ -16,8 +14,9 @@ import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import utils.StringUtil;
+
 import java.io.IOException;
-import java.time.Duration;
 
 public class MainPageTests {
 	Browser browser;
@@ -90,12 +89,14 @@ public class MainPageTests {
 		Assert.assertEquals(message, alertsPage.getAlertText(), "Alert message doesn't match.");
 
 		Reporter.log("6 step", true);
-		Reporter.log("Click ConfirmBoxAlertWindow OK button.", true);
+		Reporter.log("Click OK button.", true);
 		alertsPage.acceptAlert();
 		Reporter.log("Alert closed.", true);
 		Assert.assertFalse(alertsPage.isAlertStillDisplayed(), "Alert still displayed.");
-		Reporter.log("ConfirmResultLabel 'You selected Ok' displayed.", true);
-		Assert.assertEquals(alertsPage.getLabelText(), TestData.getAlertConfirmResultLabelText(),
+		message = TestData.getAlertConfirmResultLabelText();
+		Reporter.log("ConfirmResultLabel text '"+message+"' displayed.", true);
+		Assert.assertEquals(alertsPage.getLabelText(TestData.getAlertConfirmResultLabelName()),
+				TestData.getAlertConfirmResultLabelText(),
 				"ConfirmResultText and TestDataText not equal.");
 
 		Reporter.log("7 step", true);
@@ -103,10 +104,26 @@ public class MainPageTests {
 		alertsPage.clickButton(TestData.getAlertPromptBoxBtnName());
 		Reporter.log("PromptBoxAlert opens.", true);
 		Assert.assertTrue(alertsPage.isAlertDisplayed(), "Alert not found.");
+		message = TestData.getAlertPromptBoxMessage();
+		Reporter.log("Alert message is '" + message + "'", true);
+		Assert.assertEquals(message, alertsPage.getAlertText(), "Alert message doesn't match.");
+
+		Reporter.log("8 step", true);
+		Reporter.log("Send random string to PromptBoxAlert.", true);
+		message = StringUtil.getRandomString();
+		alertsPage.sendKeysToAlertPrompt(message);
+		Reporter.log("Click OK button.", true);
+		alertsPage.acceptAlert();
+		Reporter.log("Alert closed.", true);
+		Assert.assertFalse(alertsPage.isAlertStillDisplayed(), "Alert still displayed.");
+		Reporter.log("Random string '"+message+"' displayed in the PromptLabel.", true);
+		Assert.assertTrue(StringUtil.strContainsSub(alertsPage
+				.getLabelText(TestData.getAlertPromptResultLabelName()), message),
+				"Randomly generated string not found in AlertPromptResultLabel.");
 	}
 
 	@AfterTest
 	void tearDown() {
-		driver.quit();
+		Browser.getBrowserInstance().quit();
 	}
 }

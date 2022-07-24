@@ -7,5 +7,6 @@
   "alertConfirmResultLabelName": "alertConfirmResultLabel",
   "alertConfirmResultLabelText": "You selected Ok",
   "alertPromptBoxBtnName": "alertPromptBoxBtn",
-  "alertPromptBoxMessage": "Please enter your name"
+  "alertPromptBoxMessage": "Please enter your name",
+  "alertPromptResultLabelName": "alertPromptResultLabel"
 }

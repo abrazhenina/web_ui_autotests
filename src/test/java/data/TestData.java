@@ -15,6 +15,7 @@ public class TestData {
 	static private String alertConfirmResultLabelText;
 	static private String alertPromptBoxBtnName;
 	static private String alertPromptBoxMessage;
+	static private String alertPromptResultLabelName;
 
 	public TestData (JsonObject testData) {
 		map = new HashMap<>();
@@ -27,6 +28,7 @@ public class TestData {
 		alertConfirmResultLabelText = testData.get("alertConfirmResultLabelText").getAsString();
 		alertPromptBoxBtnName = testData.get("alertPromptBoxBtnName").getAsString();
 		alertPromptBoxMessage = testData.get("alertPromptBoxMessage").getAsString();
+		alertPromptResultLabelName = testData.get("alertPromptResultLabelName").getAsString();
 	}
 
 	public static String getAlertsWindowsPageAlertBtnName() {
@@ -57,5 +59,8 @@ public class TestData {
 
 	public static String getAlertPromptBoxMessage() {
 		return alertPromptBoxMessage;
+	}
+	public static String getAlertPromptResultLabelName() {
+		return alertPromptResultLabelName;
 	}
 }
