@@ -4,7 +4,9 @@ import browser.Browser;
 import browser.BrowserFactory;
 import config.Config;
 import data.TestData;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import pageObjects.AlertsPage;
 import pageObjects.AlertsWindowsPage;
 import pageObjects.MainPage;
@@ -15,6 +17,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.io.IOException;
+import java.time.Duration;
 
 public class MainPageTests {
 	Browser browser;
@@ -56,13 +59,11 @@ public class MainPageTests {
 		Reporter.log("2 step", true);
 		Reporter.log("Click AlertsFrameAndWindowsPageButton on MainPage.", true);
 		mainPage.clickButton("alertsFrameAndWindowsBtn");
-		Assert.assertTrue(alertsWindowsPage.isPageOpen(),"AlertsFrameAndWindowsPage not found.");
+		Assert.assertTrue(alertsWindowsPage.isPageOpen(), "AlertsFrameAndWindowsPage not found.");
 		Reporter.log("Click Alerts button on AlertsWindowsPage.", true);
 		alertsWindowsPage.clickButton(TestData.getAlertsWindowsPageAlertBtnName());
 		Reporter.log("AlertsPage opens.", true);
-
-		Assert.assertTrue(alertsPage.isPageOpen(),"AlertsPage not found.");
-
+		Assert.assertTrue(alertsPage.isPageOpen(), "AlertsPage not found.");
 
 		Reporter.log("3 step", true);
 		Reporter.log("Click 'Button to see alert'", true);
@@ -84,16 +85,25 @@ public class MainPageTests {
 		alertsPage.clickButton(TestData.getAlertConfirmBoxBtnName());
 		Reporter.log("ConfirmBoxAlert opens.", true);
 		Assert.assertTrue(alertsPage.isAlertDisplayed(), "Alert not found.");
-
 		message = TestData.getAlertConfirmBoxMessage();
 		Reporter.log("Alert message is '" + message + "'", true);
 		Assert.assertEquals(message, alertsPage.getAlertText(), "Alert message doesn't match.");
 
+		Reporter.log("6 step", true);
+		Reporter.log("Click ConfirmBoxAlertWindow OK button.", true);
+		alertsPage.acceptAlert();
+		Reporter.log("Alert closed.", true);
+		Assert.assertFalse(alertsPage.isAlertStillDisplayed(), "Alert still displayed.");
+		Reporter.log("ConfirmResultLabel 'You selected Ok' displayed.", true);
+		Assert.assertEquals(alertsPage.getLabelText(), TestData.getAlertConfirmResultLabelText(),
+				"ConfirmResultText and TestDataText not equal.");
 
-		//Assert.assertFalse(alertsPage.isAlertDisplayed(), "Alert still displayed.");
-
+		Reporter.log("7 step", true);
+		Reporter.log("Click 'On button click, prompt box will appear'", true);
+		alertsPage.clickButton(TestData.getAlertPromptBoxBtnName());
+		Reporter.log("PromptBoxAlert opens.", true);
+		Assert.assertTrue(alertsPage.isAlertDisplayed(), "Alert not found.");
 	}
-
 
 	@AfterTest
 	void tearDown() {

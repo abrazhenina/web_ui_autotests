@@ -11,6 +11,10 @@ public class TestData {
 	static private String toSeeAlertBtnAlertMessage;
 	static private String alertConfirmBoxBtnName;
 	static private String alertConfirmBoxMessage;
+	static private String alertConfirmResultLabelName;
+	static private String alertConfirmResultLabelText;
+	static private String alertPromptBoxBtnName;
+	static private String alertPromptBoxMessage;
 
 	public TestData (JsonObject testData) {
 		map = new HashMap<>();
@@ -19,6 +23,10 @@ public class TestData {
 		toSeeAlertBtnAlertMessage = testData.get("toSeeAlertBtnAlertMessage").getAsString();
 		alertConfirmBoxBtnName = testData.get("alertConfirmBoxBtnName").getAsString();
 		alertConfirmBoxMessage = testData.get("alertConfirmBoxMessage").getAsString();
+		alertConfirmResultLabelName = testData.get("alertConfirmResultLabelName").getAsString();
+		alertConfirmResultLabelText = testData.get("alertConfirmResultLabelText").getAsString();
+		alertPromptBoxBtnName = testData.get("alertPromptBoxBtnName").getAsString();
+		alertPromptBoxMessage = testData.get("alertPromptBoxMessage").getAsString();
 	}
 
 	public static String getAlertsWindowsPageAlertBtnName() {
@@ -35,5 +43,19 @@ public class TestData {
 	}
 	public static String getAlertConfirmBoxMessage() {
 		return alertConfirmBoxMessage;
+	}
+	public static String getAlertConfirmResultLabelName() {
+		return alertConfirmResultLabelName;
+	}
+	public static String getAlertConfirmResultLabelText() {
+		return alertConfirmResultLabelText;
+	}
+
+	public static String getAlertPromptBoxBtnName() {
+		return alertPromptBoxBtnName;
+	}
+
+	public static String getAlertPromptBoxMessage() {
+		return alertPromptBoxMessage;
 	}
 }

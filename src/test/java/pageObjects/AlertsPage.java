@@ -2,6 +2,7 @@ package pageObjects;
 
 import base.BaseForm;
 import base.elements.Button;
+import base.elements.Label;
 import browser.Browser;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -15,26 +16,36 @@ import utils.Waits;
 public class AlertsPage extends BaseForm {
 
 
-	private By seeAlertBtnLoc = By.id("alertButton");
 	private Button seeAlertBtn;
 	private String seeAlertBtnName = "seeAlertBtn";
-	private By alertConfirmBoxBtnLoc = By.id("confirmButton");
-	private Button alertConfirmBoxBtn;
-	private String alertConfirmBoxBtnName = "alertConfirmBoxBtn";
+	private By seeAlertBtnLoc = By.id("alertButton");
+	private Button confirmBoxBtn;
+	private String confirmBoxBtnName = "alertConfirmBoxBtn";
+	private By confirmBoxBtnLoc = By.id("confirmButton");
+	private Label confirmResultLabel;
+	private String confirmResultLabelName = "alertConfirmResultLabel";
+	private By confirmResultLoc = By.id("confirmResult");
+	private Button promptBoxBtn;
+	private String promptBoxBtnName = "alertPromptBoxBtn";
+	private By promptBoxBtnLoc = By.id("promtButton");
+
 
 	public AlertsPage() {
 		super("alertsPage", By.xpath("//div[text()='Alerts']"));
 		this.seeAlertBtn = new Button(seeAlertBtnName, seeAlertBtnLoc);
-		this.alertConfirmBoxBtn = new Button(alertConfirmBoxBtnName, alertConfirmBoxBtnLoc);
+		this.confirmBoxBtn = new Button(confirmBoxBtnName, confirmBoxBtnLoc);
+		this.confirmResultLabel = new Label(confirmResultLabelName, confirmResultLoc);
+		this.promptBoxBtn = new Button(promptBoxBtnName, promptBoxBtnLoc);
 	}
 
 	public void clickButton(String buttonName) {
 		if (buttonName.equals(seeAlertBtn.getName()))
 			seeAlertBtn.clickButton();
-		else if (buttonName.equals(alertConfirmBoxBtn.getName())) {
-			alertConfirmBoxBtn.clickButton();
+		else if (buttonName.equals(confirmBoxBtn.getName())) {
+			confirmBoxBtn.clickButton();
+		} else if (buttonName.equals(promptBoxBtn.getName())) {
+			promptBoxBtn.clickButton();
 		}
-		else System.out.println("No button found.g");
 	}
 
 	public boolean isAlertDisplayed() {
@@ -47,16 +58,10 @@ public class AlertsPage extends BaseForm {
 	public boolean isAlertStillDisplayed() {
 		try
 		{
-			WebDriver driver = Browser.getBrowserInstance();
-			Alert alert = driver.switchTo().alert();
-			if (alert != null) {
-				return true;
-			} else {
-				return false;
-			}
+			Browser.getBrowserInstance().switchTo().alert();
+			return true;
 		}
-		catch (NoAlertPresentException Ex)
-		{
+		catch (NoAlertPresentException Ex) {
 			return false;
 		}
 	}
@@ -69,5 +74,11 @@ public class AlertsPage extends BaseForm {
 	public void acceptAlert() {
 		Alert alert = WaiterUtil.waiter().until(ExpectedConditions.alertIsPresent());
 		alert.accept();
+	}
+
+	public String getLabelText() {
+		return Waits.waiter()
+				.until(ExpectedConditions.presenceOfElementLocated(confirmResultLoc))
+				.getText();
 	}
 }

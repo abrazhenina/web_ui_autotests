@@ -3,5 +3,9 @@
   "toSeeAlertBtnName": "seeAlertBtn",
   "toSeeAlertBtnAlertMessage": "You clicked a button",
   "alertConfirmBoxBtnName": "alertConfirmBoxBtn",
-  "alertConfirmBoxMessage": "Do you confirm action?"
+  "alertConfirmBoxMessage": "Do you confirm action?",
+  "alertConfirmResultLabelName": "alertConfirmResultLabel",
+  "alertConfirmResultLabelText": "You selected Ok",
+  "alertPromptBoxBtnName": "alertPromptBoxBtn",
+  "alertPromptBoxMessage": "Please enter your name"
 }
