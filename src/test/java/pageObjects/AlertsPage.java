@@ -7,9 +7,7 @@ import browser.Browser;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Reporter;
 import utils.WaiterUtil;
 import utils.Waits;
 

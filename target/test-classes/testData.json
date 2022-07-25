@@ -13,5 +13,5 @@
   "nestedFramesParentFrameName": "frameParent",
   "nestedFramesParentFrameText": "Parent frame",
   "nestedFramesChildFrameName": "frameChild",
-  "nestedFramesChildFrameText": "Child frame"
+  "nestedFramesChildFrameText": "Child Iframe"
 }

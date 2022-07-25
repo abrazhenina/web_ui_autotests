@@ -5,10 +5,7 @@ import browser.BrowserFactory;
 import config.Config;
 import data.TestData;
 import org.testng.Assert;
-import pageObjects.AlertsPage;
-import pageObjects.AlertsWindowsPage;
-import pageObjects.MainPage;
-import pageObjects.NestedFramesPage;
+import pageObjects.*;
 import utils.JsonReader;
 import org.openqa.selenium.WebDriver;
 import org.testng.Reporter;
@@ -28,7 +25,10 @@ public class MainPageTests {
 	AlertsWindowsPage alertsWindowsPage;
 	AlertsPage alertsPage;
 	NestedFramesPage nestedFramesPage;
-	String message;
+	String name;
+	String text;
+	String text2;
+	FramesPage framesPage;
 
 	@BeforeTest
 	void setup () throws IOException {
@@ -45,6 +45,7 @@ public class MainPageTests {
 		alertsWindowsPage = new AlertsWindowsPage();
 		alertsPage = new AlertsPage();
 		nestedFramesPage = new NestedFramesPage();
+		framesPage = new FramesPage();
 	}
 
 	/*
@@ -138,18 +139,44 @@ public class MainPageTests {
 		Reporter.log("2/3", true);
 		Reporter.log("Click AlertsFrameAndWindowsPageButton on MainPage.", true);
 		mainPage.clickButton("alertsFrameAndWindowsBtn");
+		Reporter.log("AlertsFrameAndWindowsPage displayed.", true);
 		Assert.assertTrue(alertsWindowsPage.isPageOpen(), "AlertsFrameAndWindowsPage not found.");
 		Reporter.log("Click NestedFrames button on AlertsWindowsPage.", true);
 		alertsWindowsPage.clickButton(TestData.getNestedFramesBtnName());
 		Reporter.log("NestedFramesPage opens.", true);
 		Assert.assertTrue(nestedFramesPage.isPageOpen(), "NestedFramesPage not found.");
-		String frameName = TestData.getNestedFramesParentFrameName();
-		Reporter.log("'"+frameName+"' displayed on NestedFramesPage.", true);
-		message = TestData.getNestedFramesParentFrameText();
-		Reporter.log(frameName+" text is '"+message+"'.", true);
-		Assert.assertTrue(nestedFramesPage.isFrameOpen());
-		//Assert.assertEquals(nestedFramesPage.getElementText(frameName), message,
-		//		"Expected text and actual text not equal.");
+		name = TestData.getNestedFramesParentFrameName();
+		Reporter.log("'"+ name +"' displayed on NestedFramesPage.", true);
+		Assert.assertTrue(nestedFramesPage.isParentFrameOpen(), "ParentFrame not found.");
+		text = TestData.getNestedFramesParentFrameText();
+		Reporter.log(name +" text is '"+ text +"'.", true);
+		nestedFramesPage.switchToParentFrame();
+		Assert.assertEquals(nestedFramesPage.getTextFromParentFrame(), text,
+				"Expected text and actual text not equal.");
+		Assert.assertTrue(nestedFramesPage.isChildFrameOpen(), "ChildFrame not found.");
+		nestedFramesPage.switchToChildFrame();
+		name = TestData.getNestedFramesChildFrameName();
+		Reporter.log("'"+ name +"' displayed on NestedFramesPage.", true);
+		text = TestData.getNestedFramesChildFrameText();
+		Reporter.log(name +" text is '"+ text +"'.", true);
+		Assert.assertEquals(nestedFramesPage.getTextFromChildFrame(), text,
+				"Expected text and actual text not equal.");
+		nestedFramesPage.switchBackFromFrames();
+
+		Reporter.log("3/3", true);
+		Reporter.log("Click FramesButton on AlertsWindowsPage.", true);
+		alertsWindowsPage.clickButton("framesBtn");
+		Reporter.log("FramesPage opens.", true);
+		Assert.assertTrue(framesPage.isPageOpen(), "FramesPage not found.");
+		Reporter.log("UpperFrame on FramesPage displayed.", true);
+		Assert.assertTrue(framesPage.isUpperFrameOpen(), "UpperFrame not found.");
+		Reporter.log("Switch to UpperFrame.", true);
+		framesPage.switchToUpperFrame();
+		Reporter.log("Read UpperFrame text.", true);
+		text = framesPage.getTextFromUpperFrame();
+		Reporter.log("Switch back from frame.", true);
+
+
 	}
 
 	@AfterTest

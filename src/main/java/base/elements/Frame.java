@@ -1,23 +1,23 @@
 package base.elements;
 
-import base.BaseElement;
+import base.BaseForm;
 import browser.Browser;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.Waits;
 
-public class Frame extends BaseElement {
+public class Frame extends BaseForm {
 	public Frame(String name, By loc) {
 		super(name, loc);
 	}
 
-	public String getText() {
-		WebElement iframe = Waits.waiter().until(ExpectedConditions
-				.presenceOfElementLocated(this.getLocator()));
-		System.out.println("!"+iframe.getText()+"!");
-		Browser.getBrowserInstance().switchTo().frame(iframe);
-		System.out.println("!"+iframe.getText()+"!");
-		return iframe.getText();
+	public void switchToFrame() {
+		WebDriver driver = Browser.getBrowserInstance();
+		WebElement iframe = driver.findElement(this.getLocator());
+		driver.switchTo().frame(iframe);
+	}
+
+	public void switchBackFromFrames() {
+		Browser.getBrowserInstance().switchTo().defaultContent();
 	}
 }
