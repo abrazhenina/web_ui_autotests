@@ -113,6 +113,9 @@ public class TestData {
 		return nestedFramesChildFrameText;
 	}
 
+	public static int getUserNum() {
+		return userNum;
+	}
 	public static String getUserFirstName() {
 		return userFirstName;
 	}

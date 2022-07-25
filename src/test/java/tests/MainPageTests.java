@@ -32,6 +32,7 @@ public class MainPageTests {
 	ElementsPage elementsPage;
 	WebTablesPage webTablesPage;
 	RegistrationForm registrationForm;
+	BrowserWindowsPage browserWindowsPage;
 
 	@BeforeTest
 	void setup () throws IOException {
@@ -52,8 +53,39 @@ public class MainPageTests {
 		elementsPage = new ElementsPage();
 		webTablesPage = new WebTablesPage();
 		registrationForm = new RegistrationForm();
+		browserWindowsPage = new BrowserWindowsPage();
 	}
 
+	@Test(priority = 4)
+	void testCase4() {
+		Reporter.log("4 test case started.", true);
+		Reporter.log("1/7", true);
+		Reporter.log("Go to MainPage.", true);
+		Browser.goToUrl(config.getHomePageAddress());
+		Reporter.log("MainPage is open.", true);
+		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
+
+		Reporter.log("2/7", true);
+		Reporter.log("Click AlertsFrameAndWindowsPageButton on MainPage.", true);
+		mainPage.clickButton("alertsFrameAndWindowsBtn");
+		Assert.assertTrue(alertsWindowsPage.isOpen(), "AlertsFrameAndWindowsPage not found.");
+		Reporter.log("Click BrowserWindowsButton on AlertsWindowsPage.", true);
+		alertsWindowsPage.clickButton("browserWindowsBtn");
+		Reporter.log("BrowserWindowsPage opens.", true);
+		Assert.assertTrue(browserWindowsPage.isOpen(), "BrowserWindowsPage not found.");
+
+		Reporter.log("3/7", true);
+		Reporter.log("Click NewTabButton.", true);
+		browserWindowsPage.clickNewTabBtn();
+		Reporter.log("Check the URL of new tab contains '/sample'", true);
+		Assert.assertTrue(browserWindowsPage.isSubstringInCurrentUrl("/sample"));
+		Reporter.log("Close this tab.", true);
+		browserWindowsPage.closeCurrentTab();
+		Reporter.log("On the current tab is BrowserWindowsPage.", true);
+		Assert.assertTrue(browserWindowsPage.isOpen(), "BrowserWindowsPage not found.");
+
+
+/*
 	@Test(priority = 3)
 	void testCase3() {
 		Reporter.log("3 test case started.", true);
@@ -61,25 +93,49 @@ public class MainPageTests {
 		Reporter.log("Go to MainPage.", true);
 		Browser.goToUrl(config.getHomePageAddress());
 		Reporter.log("MainPage is open.", true);
-		Assert.assertTrue(mainPage.isPageOpen(), "MainPage not found.");
+		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
 
 		Reporter.log("2/5", true);
 		Reporter.log("Click ElementsButton.", true);
 		mainPage.clickButton("elementsBtn");
 		Reporter.log("ElementsPage opens.", true);
-		Assert.assertTrue(elementsPage.isPageOpen(), "ElementsPage not found.");
+		Assert.assertTrue(elementsPage.isOpen(), "ElementsPage not found.");
 		Reporter.log("Click WebTablesButton.", true);
 		elementsPage.clickButton("webTablesBtn");
 		Reporter.log("WebTablesPage opens.", true);
-		Assert.assertTrue(webTablesPage.isPageOpen());
+		Assert.assertTrue(webTablesPage.isOpen());
+
+		Reporter.log("3/5", true);
 		Reporter.log("Click AddButton.", true);
 		webTablesPage.clickButton("addBtn");
 		Reporter.log("RegistrationForm opens.", true);
 		Assert.assertTrue(registrationForm.isRegFormContentVisible());
 
+		Reporter.log("4/5", true);
+		Reporter.log("Fill the registration form with data of user #"+TestData.getUserNum(), true);
+		Reporter.log("", true);
+		Reporter.log("Fill the first name", true);
+		registrationForm.sendKeysFirstName(TestData.getUserFirstName());
+		Assert.assertTrue(registrationForm.firstNameFilled(), "FirstName not filled.");
+
+		Reporter.log("Fill the last name", true);
+		registrationForm.sendKeysLastName(TestData.getUserLastName());
+		Reporter.log("Fill the email", true);
+		registrationForm.sendKeysEmail(TestData.getUserEmail());
+		Reporter.log("Fill the age", true);
+		registrationForm.sendKeysAge(Integer.toString(TestData.getUserAge()));
+		Reporter.log("Fill the salary", true);
+		registrationForm.sendKeysSalary(Integer.toString(TestData.getUserSalary()));
+		Reporter.log("Fill the department", true);
+		registrationForm.sendKeysDepartment(TestData.getUserDepartment());
+		Reporter.log("Press submit button", true);
+		registrationForm.clickSubmit();
+		Assert.assertFalse(registrationForm.isRegFormContentStillVisible(), "Registration form didn't close.");
+		 */
+
 	}
 
-	/*
+/*
 	@Test(priority = 1)
 	void testCase1() {
 		Reporter.log("1 test case started.", true);
@@ -87,25 +143,25 @@ public class MainPageTests {
 		Reporter.log("Go to MainPage.", true);
 		Browser.goToUrl(config.getHomePageAddress());
 		Reporter.log("MainPage is open.", true);
-		Assert.assertTrue(mainPage.isPageOpen(), "MainPage not found.");
+		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
 
 		Reporter.log("2/8", true);
 		Reporter.log("Click AlertsFrameAndWindowsPageButton on MainPage.", true);
 		mainPage.clickButton("alertsFrameAndWindowsBtn");
-		Assert.assertTrue(alertsWindowsPage.isPageOpen(), "AlertsFrameAndWindowsPage not found.");
-		Reporter.log("Click Alerts button on AlertsWindowsPage.", true);
+		Assert.assertTrue(alertsWindowsPage.isOpen(), "AlertsFrameAndWindowsPage not found.");
+		Reporter.log("Click AlertsButton on AlertsWindowsPage.", true);
 		alertsWindowsPage.clickButton(TestData.getAlertsWindowsPageAlertBtnName());
 		Reporter.log("AlertsPage opens.", true);
-		Assert.assertTrue(alertsPage.isPageOpen(), "AlertsPage not found.");
+		Assert.assertTrue(alertsPage.isOpen(), "AlertsPage not found.");
 
 		Reporter.log("3/8", true);
 		Reporter.log("Click 'Button to see alert'", true);
 		alertsPage.clickButton(TestData.getToSeeAlertBtnName());
 		Reporter.log("Alert opens.", true);
 		Assert.assertTrue(alertsPage.isAlertDisplayed(), "Alert not found.");
-		message = TestData.getToSeeAlertMessage();
-		Reporter.log("Alert message is '" + message + "'", true);
-		Assert.assertEquals(message, alertsPage.getAlertText(), "Alert message doesn't match.");
+		text = TestData.getToSeeAlertMessage();
+		Reporter.log("Alert message is '"+text+"'", true);
+		Assert.assertEquals(text, alertsPage.getAlertText(), "Alert message doesn't match.");
 
 		Reporter.log("4/8", true);
 		Reporter.log("Click AlertWindow OK button.", true);
@@ -118,17 +174,17 @@ public class MainPageTests {
 		alertsPage.clickButton(TestData.getAlertConfirmBoxBtnName());
 		Reporter.log("ConfirmBoxAlert opens.", true);
 		Assert.assertTrue(alertsPage.isAlertDisplayed(), "Alert not found.");
-		message = TestData.getAlertConfirmBoxMessage();
-		Reporter.log("Alert message is '" + message + "'", true);
-		Assert.assertEquals(message, alertsPage.getAlertText(), "Alert message doesn't match.");
+		text = TestData.getAlertConfirmBoxMessage();
+		Reporter.log("Alert message is '"+text+"'", true);
+		Assert.assertEquals(text, alertsPage.getAlertText(), "Alert message doesn't match.");
 
 		Reporter.log("6/8", true);
 		Reporter.log("Click OK button.", true);
 		alertsPage.acceptAlert();
 		Reporter.log("Alert closed.", true);
 		Assert.assertFalse(alertsPage.isAlertStillDisplayed(), "Alert still displayed.");
-		message = TestData.getAlertConfirmResultLabelText();
-		Reporter.log("ConfirmResultLabel text '"+message+"' displayed.", true);
+		text = TestData.getAlertConfirmResultLabelText();
+		Reporter.log("ConfirmResultLabel text '"+text+"' displayed.", true);
 		Assert.assertEquals(alertsPage.getLabelText(TestData.getAlertConfirmResultLabelName()),
 				TestData.getAlertConfirmResultLabelText(),
 				"ConfirmResultText and TestDataText not equal.");
@@ -138,21 +194,21 @@ public class MainPageTests {
 		alertsPage.clickButton(TestData.getAlertPromptBoxBtnName());
 		Reporter.log("PromptBoxAlert opens.", true);
 		Assert.assertTrue(alertsPage.isAlertDisplayed(), "Alert not found.");
-		message = TestData.getAlertPromptBoxMessage();
-		Reporter.log("Alert message is '" + message + "'", true);
-		Assert.assertEquals(message, alertsPage.getAlertText(), "Alert message doesn't match.");
+		text = TestData.getAlertPromptBoxMessage();
+		Reporter.log("Alert message is '" + text + "'", true);
+		Assert.assertEquals(text, alertsPage.getAlertText(), "Alert message doesn't match.");
 
 		Reporter.log("8/8", true);
 		Reporter.log("Send random string to PromptBoxAlert.", true);
-		message = StringUtil.getRandomString();
-		alertsPage.sendKeysToAlertPrompt(message);
+		text = StringUtil.getRandomString();
+		alertsPage.sendKeysToAlertPrompt(text);
 		Reporter.log("Click OK button.", true);
 		alertsPage.acceptAlert();
 		Reporter.log("Alert closed.", true);
 		Assert.assertFalse(alertsPage.isAlertStillDisplayed(), "Alert still displayed.");
-		Reporter.log("Random string '"+message+"' displayed in the PromptLabel.", true);
+		Reporter.log("Random string '"+text+"' displayed in the PromptLabel.", true);
 		Assert.assertTrue(StringUtil.strContainsSub(alertsPage
-				.getLabelText(TestData.getAlertPromptResultLabelName()), message),
+				.getLabelText(TestData.getAlertPromptResultLabelName()), text),
 				"Randomly generated string not found in AlertPromptResultLabel.");
 	}
 
@@ -163,17 +219,17 @@ public class MainPageTests {
 		Reporter.log("Go to MainPage.", true);
 		Browser.goToUrl(config.getHomePageAddress());
 		Reporter.log("MainPage is open.", true);
-		Assert.assertTrue(mainPage.isPageOpen(), "MainPage not found.");
+		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
 
 		Reporter.log("2/3", true);
 		Reporter.log("Click AlertsFrameAndWindowsPageButton on MainPage.", true);
 		mainPage.clickButton("alertsFrameAndWindowsBtn");
 		Reporter.log("AlertsFrameAndWindowsPage displayed.", true);
-		Assert.assertTrue(alertsWindowsPage.isPageOpen(), "AlertsFrameAndWindowsPage not found.");
+		Assert.assertTrue(alertsWindowsPage.isOpen(), "AlertsFrameAndWindowsPage not found.");
 		Reporter.log("Click NestedFrames button on AlertsWindowsPage.", true);
 		alertsWindowsPage.clickButton(TestData.getNestedFramesBtnName());
 		Reporter.log("NestedFramesPage opens.", true);
-		Assert.assertTrue(nestedFramesPage.isPageOpen(), "NestedFramesPage not found.");
+		Assert.assertTrue(nestedFramesPage.isOpen(), "NestedFramesPage not found.");
 		name = TestData.getNestedFramesParentFrameName();
 		Reporter.log("'"+ name +"' displayed on NestedFramesPage.", true);
 		Assert.assertTrue(nestedFramesPage.isParentFrameOpen(), "ParentFrame not found.");
@@ -196,7 +252,7 @@ public class MainPageTests {
 		Reporter.log("Click FramesButton on AlertsWindowsPage.", true);
 		alertsWindowsPage.clickButton("framesBtn");
 		Reporter.log("FramesPage opens.", true);
-		Assert.assertTrue(framesPage.isPageOpen(), "FramesPage not found.");
+		Assert.assertTrue(framesPage.isOpen(), "FramesPage not found.");
 		Reporter.log("UpperFrame on FramesPage displayed.", true);
 		Assert.assertTrue(framesPage.isUpperFrameOpen(), "UpperFrame not found.");
 		Reporter.log("Switch to UpperFrame.", true);
@@ -216,10 +272,8 @@ public class MainPageTests {
 		Reporter.log("UpperFrameText and LowerFrameText equal.", true);
 		Assert.assertEquals(text, text2, "Texts not equal.");
 	}
+
  */
-
-
-
 	@AfterTest
 	void tearDown() {
 		Browser.getBrowserInstance().quit();

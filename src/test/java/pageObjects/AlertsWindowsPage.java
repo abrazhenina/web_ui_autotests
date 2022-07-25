@@ -14,6 +14,9 @@ public class AlertsWindowsPage extends BaseForm {
 	private Button framesBtn;
 	private String framesBtnName = "framesBtn";
 	private By framesBtnBtnLoc =  By.xpath("//span[text()='Frames']");
+	private Button browserWindowsBtn;
+	private String browserWindowsBtnName = "browserWindowsBtn";
+	private By browserWindowsBtnLoc = By.xpath("//span[text()='Browser Windows']");
 
 	public AlertsWindowsPage() {
 		super("alertsFrameAndWindows", By.xpath(
@@ -21,6 +24,7 @@ public class AlertsWindowsPage extends BaseForm {
 		this.alertsBtn = new Button(alertsBtnName, alertsBtnLoc);
 		this.nestedFramesBtn = new Button(nestedFramesBtnName, nestedFramesBtnLoc);
 		this.framesBtn = new Button(framesBtnName, framesBtnBtnLoc);
+		this.browserWindowsBtn = new Button(browserWindowsBtnName, browserWindowsBtnLoc);
 	}
 
 	public void clickButton(String buttonName) {
@@ -30,5 +34,7 @@ public class AlertsWindowsPage extends BaseForm {
 			nestedFramesBtn.clickButton();
 		else if (buttonName.equals(framesBtn.getName()))
 			framesBtn.clickButton();
+		else if (buttonName.equals(browserWindowsBtn.getName()))
+			browserWindowsBtn.clickButton();
 	}
 }

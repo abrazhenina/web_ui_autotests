@@ -13,11 +13,11 @@ public class NestedFramesPage extends Frame {
 	}
 
 	public boolean isParentFrameOpen() {
-		return frameParent.isPageOpen();
+		return frameParent.isOpen();
 	}
 
 	public boolean isChildFrameOpen() {
-		return frameChild.isPageOpen();
+		return frameChild.isOpen();
 	}
 
 	public void switchToParentFrame() {

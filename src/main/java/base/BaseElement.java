@@ -39,8 +39,7 @@ public abstract class BaseElement {
 
 	public boolean isClickable() {
 		return Waits.waiter()
-				.until(ExpectedConditions
-						.elementToBeClickable(this.getLocator()))
+				.until(ExpectedConditions.elementToBeClickable(this.getLocator()))
 				.isDisplayed();
 	}
 
@@ -51,11 +50,35 @@ public abstract class BaseElement {
 				.isDisplayed();
 	}
 
+	public boolean isStillVisible() {
+		try
+		{
+			Waits.waiter().until(ExpectedConditions
+					.presenceOfElementLocated(this.getLocator())).isDisplayed();
+			return true;
+		}
+		catch (NoSuchElementException Ex) {
+			return false;
+		}
+	}
+
 	public WebElement findElement() {
 		return Browser.getBrowserInstance().findElement(this.loc);
 	}
 
 	public String getText() {
 		return Browser.getBrowserInstance().findElement(this.loc).getText();
+	}
+
+	public String getTextFromModalElement(By containerLoc, By elementLoc) {
+		WebElement modalContainer = Waits.waiter().until(ExpectedConditions
+				.visibilityOfElementLocated(containerLoc));
+		WebElement element = modalContainer.findElement(elementLoc);
+		return element.getText();
+	}
+
+	public void clickModalBtn(By containerLoc, By btnLoc) {
+		WebElement modalContainer = Browser.getBrowserInstance().findElement(containerLoc);
+		modalContainer.findElement(btnLoc).click();
 	}
 }

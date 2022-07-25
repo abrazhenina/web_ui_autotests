@@ -14,11 +14,11 @@ public class FramesPage extends Frame {
 	}
 
 	public boolean isUpperFrameOpen() {
-		return frameUpper.isPageOpen();
+		return frameUpper.isOpen();
 	}
 
 	public boolean isLowerFrameOpen() {
-		return frameUpper.isPageOpen();
+		return frameUpper.isOpen();
 	}
 
 	public void switchToUpperFrame() {
