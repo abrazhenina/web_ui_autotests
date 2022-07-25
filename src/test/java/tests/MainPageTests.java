@@ -29,6 +29,8 @@ public class MainPageTests {
 	String text;
 	String text2;
 	FramesPage framesPage;
+	ElementsPage elementsPage;
+	WebTablesPage webTablesPage;
 
 	@BeforeTest
 	void setup () throws IOException {
@@ -46,6 +48,8 @@ public class MainPageTests {
 		alertsPage = new AlertsPage();
 		nestedFramesPage = new NestedFramesPage();
 		framesPage = new FramesPage();
+		elementsPage = new ElementsPage();
+		webTablesPage = new WebTablesPage();
 	}
 
 	/*
@@ -125,8 +129,6 @@ public class MainPageTests {
 				"Randomly generated string not found in AlertPromptResultLabel.");
 	}
 
-	 */
-
 	@Test(priority = 2)
 	void testCase2() {
 		Reporter.log("2 test case started.", true);
@@ -186,6 +188,28 @@ public class MainPageTests {
 		framesPage.switchBackFromFrames();
 		Reporter.log("UpperFrameText and LowerFrameText equal.", true);
 		Assert.assertEquals(text, text2, "Texts not equal.");
+	}
+ */
+
+	@Test(priority = 3)
+	void testCase3() {
+		Reporter.log("3 test case started.", true);
+		Reporter.log("1/5", true);
+		Reporter.log("Go to MainPage.", true);
+		Browser.goToUrl(config.getHomePageAddress());
+		Reporter.log("MainPage is open.", true);
+		Assert.assertTrue(mainPage.isPageOpen(), "MainPage not found.");
+
+		Reporter.log("2/5", true);
+		Reporter.log("Click ElementsButton.", true);
+		mainPage.clickButton("elementsBtn");
+		Reporter.log("ElementsPage opens.", true);
+		Assert.assertTrue(elementsPage.isPageOpen(), "ElementsPage not found.");
+		Reporter.log("Click WebTablesButton.", true);
+		elementsPage.clickButton("webTablesBtn");
+		Reporter.log("WebTablesPage opens.", true);
+		Assert.assertTrue(webTablesPage.isPageOpen());
+
 	}
 
 	@AfterTest
