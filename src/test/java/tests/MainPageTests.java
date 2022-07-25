@@ -175,8 +175,17 @@ public class MainPageTests {
 		Reporter.log("Read UpperFrame text.", true);
 		text = framesPage.getTextFromUpperFrame();
 		Reporter.log("Switch back from frame.", true);
-
-
+		framesPage.switchBackFromFrames();
+		Reporter.log("LowerFrame on FramesPage displayed.", true);
+		Assert.assertTrue(framesPage.isLowerFrameOpen(), "LowerFrame not found.");
+		Reporter.log("Switch to LowerFrame.", true);
+		framesPage.switchToLowerFrame();
+		Reporter.log("Read LowerFrame text.", true);
+		text2 = framesPage.getTextFromLowerFrame();
+		Reporter.log("Switch back from frame.", true);
+		framesPage.switchBackFromFrames();
+		Reporter.log("UpperFrameText and LowerFrameText equal.", true);
+		Assert.assertEquals(text, text2, "Texts not equal.");
 	}
 
 	@AfterTest

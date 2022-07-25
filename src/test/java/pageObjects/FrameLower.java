@@ -10,6 +10,7 @@ public class FrameLower extends Frame {
 	private By textLabelLoc = By.id("sampleHeading");
 	public FrameLower() {
 		super("frameLower", By.id("frame2"));
+		textLabel = new Label(textLabelName, textLabelLoc);
 	}
 
 	public String getTextFromFrameLabel() {

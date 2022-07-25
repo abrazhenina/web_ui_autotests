@@ -1,9 +1,9 @@
 package pageObjects;
 
-import base.BaseForm;
+import base.elements.Frame;
 import org.openqa.selenium.By;
 
-public class FramesPage extends BaseForm {
+public class FramesPage extends Frame {
 	private FrameUpper frameUpper;
 	private FrameLower frameLower;
 
