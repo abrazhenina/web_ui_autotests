@@ -75,8 +75,8 @@ public class MainPageTests {
 		Reporter.log("Click AddButton.", true);
 		webTablesPage.clickButton("addBtn");
 		Reporter.log("RegistrationForm opens.", true);
-
 		Assert.assertTrue(registrationForm.isRegFormContentVisible());
+
 	}
 
 	/*

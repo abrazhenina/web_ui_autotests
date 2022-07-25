@@ -1,8 +1,11 @@
 package data;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
+import java.util.List;
 
 public class TestData {
 	static private HashMap<String, String> map;
@@ -21,6 +24,8 @@ public class TestData {
 	static private String nestedFramesChildFrameName;
 	static private String nestedFramesParentFrameText;
 	static private String nestedFramesChildFrameText;
+	static private JsonArray usersTableJSONObj;
+	//static private
 
 	public TestData (JsonObject testData) {
 		map = new HashMap<>();
@@ -39,6 +44,8 @@ public class TestData {
 		nestedFramesChildFrameName = testData.get("nestedFramesChildFrameName").getAsString();
 		nestedFramesParentFrameText = testData.get("nestedFramesParentFrameText").getAsString();
 		nestedFramesChildFrameText = testData.get("nestedFramesChildFrameText").getAsString();
+		usersTableJSONObj = testData.get("usersTable").getAsJsonArray();
+		System.out.println(usersTableJSONObj);
 	}
 
 	public static String getAlertsWindowsPageAlertBtnName() {

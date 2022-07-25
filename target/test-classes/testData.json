@@ -13,5 +13,23 @@
   "nestedFramesParentFrameName": "frameParent",
   "nestedFramesParentFrameText": "Parent frame",
   "nestedFramesChildFrameName": "frameChild",
-  "nestedFramesChildFrameText": "Child Iframe"
+  "nestedFramesChildFrameText": "Child Iframe",
+  "usersTable": [
+      {
+        "firstName": "Jon",
+        "lastName": "Snow",
+        "email": "knownothing@gmail.com",
+        "age": 30,
+        "salary": 3000,
+        "department": "alpha"
+      },
+      {
+        "firstName": "Buttercup",
+        "lastName": "Cumbersnatch",
+        "email": "BudapestCandygram@mail.ru",
+        "age": 41,
+        "salary": 2000,
+        "department": "beta"
+      }
+  ]
 }
