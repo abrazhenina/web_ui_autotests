@@ -33,6 +33,7 @@ public class MainPageTests {
 	WebTablesPage webTablesPage;
 	RegistrationForm registrationForm;
 	BrowserWindowsPage browserWindowsPage;
+	LinksPage linksPage;
 
 	@BeforeTest
 	void setup () throws IOException {
@@ -54,6 +55,7 @@ public class MainPageTests {
 		webTablesPage = new WebTablesPage();
 		registrationForm = new RegistrationForm();
 		browserWindowsPage = new BrowserWindowsPage();
+		linksPage = new LinksPage();
 	}
 
 	@Test(priority = 4)
@@ -79,10 +81,30 @@ public class MainPageTests {
 		browserWindowsPage.clickNewTabBtn();
 		Reporter.log("Check the URL of new tab contains '/sample'", true);
 		Assert.assertTrue(browserWindowsPage.isSubstringInCurrentUrl("/sample"));
+
+		Reporter.log("4/7", true);
 		Reporter.log("Close this tab.", true);
 		browserWindowsPage.closeCurrentTab();
 		Reporter.log("On the current tab is BrowserWindowsPage.", true);
 		Assert.assertTrue(browserWindowsPage.isOpen(), "BrowserWindowsPage not found.");
+
+		Reporter.log("5/7", true);
+		Reporter.log("Click ElementsButton.", true);
+		browserWindowsPage.clickElementsHeaderBtn();
+		Assert.assertTrue(browserWindowsPage.isElementsDropdownShowed(), "ElementsDropdown not found.");
+		Reporter.log("Click LinksButton.", true);
+		browserWindowsPage.clickLinksBtn();
+		Reporter.log("LinksPage opens.", true);
+		Assert.assertTrue(linksPage.isOpen(), "LinksPage not found.");
+		Reporter.log("Click HomeLink.", true);
+		linksPage.clickHomeLink();
+		Reporter.log("New tab with MainPage opens.", true);
+		Reporter.log("MainPage is open.", true);
+		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
+		Reporter.log("Switch to previous tab.", true);
+		linksPage.switchToPrevPage();
+		Reporter.log("LinksPage opens.", true);
+		Assert.assertTrue(linksPage.isOpen(), "LinksPage not found.");
 
 
 /*

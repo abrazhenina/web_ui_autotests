@@ -20,9 +20,9 @@ public class MainPage extends BaseForm {
 
 	public void clickButton(String buttonName) {
 		if (buttonName == alertsFrameAndWindowsBtn.getName()) {
-			alertsFrameAndWindowsBtn.clickButton();
+			alertsFrameAndWindowsBtn.click();
 		} else if (buttonName == elementsBtn.getName()) {
-			elementsBtn.clickButton();
+			elementsBtn.click();
 		}
 	}
 }

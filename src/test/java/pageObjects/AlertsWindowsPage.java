@@ -29,12 +29,12 @@ public class AlertsWindowsPage extends BaseForm {
 
 	public void clickButton(String buttonName) {
 		if (buttonName.equals(alertsBtn.getName()))
-			alertsBtn.clickButton();
+			alertsBtn.click();
 		else if (buttonName.equals(nestedFramesBtn.getName()))
-			nestedFramesBtn.clickButton();
+			nestedFramesBtn.click();
 		else if (buttonName.equals(framesBtn.getName()))
-			framesBtn.clickButton();
+			framesBtn.click();
 		else if (buttonName.equals(browserWindowsBtn.getName()))
-			browserWindowsBtn.clickButton();
+			browserWindowsBtn.click();
 	}
 }

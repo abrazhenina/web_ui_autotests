@@ -1,12 +1,9 @@
 package base;
 
 import browser.Browser;
-import browser.BrowserFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Waits;
-
-import java.time.Duration;
 
 public abstract class BaseElement {
 	private String name;
@@ -25,7 +22,7 @@ public abstract class BaseElement {
 		return this.loc;
 	}
 
-	public void clickButton() {
+	public void click() {
 		Waits.waiter().until(ExpectedConditions
 				.elementToBeClickable(this.getLocator()))
 				.click();

@@ -35,6 +35,11 @@ public abstract class BaseForm {
 			}
 		}
 	}
+
+	public void switchToWindow(String window) {
+		Browser.getBrowserInstance().switchTo().window(window);
+	}
+
 	public boolean isSubstringInCurrentUrl(String substring) {
 		return Browser.getBrowserInstance().getCurrentUrl().contains(substring);
 	}

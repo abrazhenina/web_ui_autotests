@@ -15,6 +15,6 @@ public class ElementsPage extends BaseForm {
 
 	public void clickButton(String buttonName) {
 		if (buttonName.equals(webTablesBtn.getName()))
-			webTablesBtn.clickButton();
+			webTablesBtn.click();
 	}
 }

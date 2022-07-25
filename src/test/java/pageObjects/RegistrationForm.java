@@ -4,9 +4,7 @@ import base.BaseForm;
 import base.elements.Button;
 import base.elements.Label;
 import base.elements.TextBox;
-import browser.Browser;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class RegistrationForm extends BaseForm {
 	private Label modalContent;
@@ -87,6 +85,6 @@ public class RegistrationForm extends BaseForm {
 	}
 
 	public void clickSubmit() {
-		submitBtn.clickButton();
+		submitBtn.click();
 	}
 }

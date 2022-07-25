@@ -39,11 +39,11 @@ public class AlertsPage extends BaseForm {
 
 	public void clickButton(String buttonName) {
 		if (buttonName.equals(seeAlertBtn.getName()))
-			seeAlertBtn.clickButton();
+			seeAlertBtn.click();
 		else if (buttonName.equals(confirmBoxBtn.getName())) {
-			confirmBoxBtn.clickButton();
+			confirmBoxBtn.click();
 		} else if (buttonName.equals(promptBoxBtn.getName())) {
-			promptBoxBtn.clickButton();
+			promptBoxBtn.click();
 		}
 	}
 
