@@ -39,7 +39,15 @@ public abstract class BaseElement {
 
 	public boolean isClickable() {
 		return Waits.waiter()
-				.until(ExpectedConditions.elementToBeClickable(this.getLocator()))
+				.until(ExpectedConditions
+						.elementToBeClickable(this.getLocator()))
+				.isDisplayed();
+	}
+
+	public boolean isVisible() {
+		return Waits.waiter()
+				.until(ExpectedConditions
+						.visibilityOfElementLocated(this.getLocator()))
 				.isDisplayed();
 	}
 

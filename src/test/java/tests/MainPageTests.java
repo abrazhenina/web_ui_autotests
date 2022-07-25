@@ -31,6 +31,7 @@ public class MainPageTests {
 	FramesPage framesPage;
 	ElementsPage elementsPage;
 	WebTablesPage webTablesPage;
+	RegistrationForm registrationForm;
 
 	@BeforeTest
 	void setup () throws IOException {
@@ -50,6 +51,32 @@ public class MainPageTests {
 		framesPage = new FramesPage();
 		elementsPage = new ElementsPage();
 		webTablesPage = new WebTablesPage();
+		registrationForm = new RegistrationForm();
+	}
+
+	@Test(priority = 3)
+	void testCase3() {
+		Reporter.log("3 test case started.", true);
+		Reporter.log("1/5", true);
+		Reporter.log("Go to MainPage.", true);
+		Browser.goToUrl(config.getHomePageAddress());
+		Reporter.log("MainPage is open.", true);
+		Assert.assertTrue(mainPage.isPageOpen(), "MainPage not found.");
+
+		Reporter.log("2/5", true);
+		Reporter.log("Click ElementsButton.", true);
+		mainPage.clickButton("elementsBtn");
+		Reporter.log("ElementsPage opens.", true);
+		Assert.assertTrue(elementsPage.isPageOpen(), "ElementsPage not found.");
+		Reporter.log("Click WebTablesButton.", true);
+		elementsPage.clickButton("webTablesBtn");
+		Reporter.log("WebTablesPage opens.", true);
+		Assert.assertTrue(webTablesPage.isPageOpen());
+		Reporter.log("Click AddButton.", true);
+		webTablesPage.clickButton("addBtn");
+		Reporter.log("RegistrationForm opens.", true);
+
+		Assert.assertTrue(registrationForm.isRegFormContentVisible());
 	}
 
 	/*
@@ -191,26 +218,7 @@ public class MainPageTests {
 	}
  */
 
-	@Test(priority = 3)
-	void testCase3() {
-		Reporter.log("3 test case started.", true);
-		Reporter.log("1/5", true);
-		Reporter.log("Go to MainPage.", true);
-		Browser.goToUrl(config.getHomePageAddress());
-		Reporter.log("MainPage is open.", true);
-		Assert.assertTrue(mainPage.isPageOpen(), "MainPage not found.");
 
-		Reporter.log("2/5", true);
-		Reporter.log("Click ElementsButton.", true);
-		mainPage.clickButton("elementsBtn");
-		Reporter.log("ElementsPage opens.", true);
-		Assert.assertTrue(elementsPage.isPageOpen(), "ElementsPage not found.");
-		Reporter.log("Click WebTablesButton.", true);
-		elementsPage.clickButton("webTablesBtn");
-		Reporter.log("WebTablesPage opens.", true);
-		Assert.assertTrue(webTablesPage.isPageOpen());
-
-	}
 
 	@AfterTest
 	void tearDown() {
