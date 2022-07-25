@@ -2,10 +2,9 @@ package data;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import utils.JsonReader;
 
-import java.lang.reflect.Array;
 import java.util.HashMap;
-import java.util.List;
 
 public class TestData {
 	static private HashMap<String, String> map;
@@ -25,7 +24,14 @@ public class TestData {
 	static private String nestedFramesParentFrameText;
 	static private String nestedFramesChildFrameText;
 	static private JsonArray usersTableJSONObj;
-	//static private
+	static private int userNum;
+
+	static private String userFirstName;
+	static private String userLastName;
+	static private String userEmail;
+	static private int userAge;
+	static private int userSalary;
+	static private String userDepartment;
 
 	public TestData (JsonObject testData) {
 		map = new HashMap<>();
@@ -44,8 +50,14 @@ public class TestData {
 		nestedFramesChildFrameName = testData.get("nestedFramesChildFrameName").getAsString();
 		nestedFramesParentFrameText = testData.get("nestedFramesParentFrameText").getAsString();
 		nestedFramesChildFrameText = testData.get("nestedFramesChildFrameText").getAsString();
+		userNum = testData.get("userNum").getAsInt();
 		usersTableJSONObj = testData.get("usersTable").getAsJsonArray();
-		System.out.println(usersTableJSONObj);
+		userFirstName = JsonReader.getStringFromJSONArray(usersTableJSONObj, userNum, "firstName");
+		userLastName = JsonReader.getStringFromJSONArray(usersTableJSONObj, userNum, "lastName");
+		userEmail = JsonReader.getStringFromJSONArray(usersTableJSONObj, userNum, "email");
+		userAge = JsonReader.getIntFromJSONArray(usersTableJSONObj, userNum, "age");
+		userSalary = JsonReader.getIntFromJSONArray(usersTableJSONObj, userNum, "salary");
+		userDepartment = JsonReader.getStringFromJSONArray(usersTableJSONObj, userNum, "department");
 	}
 
 	public static String getAlertsWindowsPageAlertBtnName() {
@@ -99,5 +111,29 @@ public class TestData {
 
 	public static String getNestedFramesChildFrameText() {
 		return nestedFramesChildFrameText;
+	}
+
+	public static String getUserFirstName() {
+		return userFirstName;
+	}
+
+	public static String getUserLastName() {
+		return userLastName;
+	}
+
+	public static String getUserEmail() {
+		return userEmail;
+	}
+
+	public static int getUserAge() {
+		return userAge;
+	}
+
+	public static int getUserSalary() {
+		return userSalary;
+	}
+
+	public static String getUserDepartment() {
+		return userDepartment;
 	}
 }

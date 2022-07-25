@@ -31,5 +31,6 @@
         "salary": 2000,
         "department": "beta"
       }
-  ]
+  ],
+  "userNum": 1
 }
