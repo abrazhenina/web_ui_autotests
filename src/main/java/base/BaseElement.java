@@ -64,7 +64,7 @@ public abstract class BaseElement {
 	}
 
 	public String getText() {
-		return Browser.getBrowserInstance().findElement(this.loc).getText();
+		return Waits.waiter().until(ExpectedConditions.elementToBeClickable(this.loc)).getText();
 	}
 
 	public String getTextFromModalElement(By containerLoc, By elementLoc) {

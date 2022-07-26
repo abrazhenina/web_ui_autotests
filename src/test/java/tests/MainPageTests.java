@@ -12,6 +12,8 @@ import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import utils.Log;
+import utils.StringUtil;
 
 import java.io.IOException;
 
@@ -58,58 +60,9 @@ public class MainPageTests {
 		linksPage = new LinksPage();
 	}
 
-	@Test(priority = 4)
-	void testCase4() {
-		Reporter.log("4 test case started.", true);
-		Reporter.log("1/7", true);
-		Reporter.log("Go to MainPage.", true);
-		Browser.goToUrl(config.getHomePageAddress());
-		Reporter.log("MainPage is open.", true);
-		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
-
-		Reporter.log("2/7", true);
-		Reporter.log("Click AlertsFrameAndWindowsPageButton on MainPage.", true);
-		mainPage.clickButton("alertsFrameAndWindowsBtn");
-		Assert.assertTrue(alertsWindowsPage.isOpen(), "AlertsFrameAndWindowsPage not found.");
-		Reporter.log("Click BrowserWindowsButton on AlertsWindowsPage.", true);
-		alertsWindowsPage.clickButton("browserWindowsBtn");
-		Reporter.log("BrowserWindowsPage opens.", true);
-		Assert.assertTrue(browserWindowsPage.isOpen(), "BrowserWindowsPage not found.");
-
-		Reporter.log("3/7", true);
-		Reporter.log("Click NewTabButton.", true);
-		browserWindowsPage.clickNewTabBtn();
-		Reporter.log("Check the URL of new tab contains '/sample'", true);
-		Assert.assertTrue(browserWindowsPage.isSubstringInCurrentUrl("/sample"));
-
-		Reporter.log("4/7", true);
-		Reporter.log("Close this tab.", true);
-		browserWindowsPage.closeCurrentTab();
-		Reporter.log("On the current tab is BrowserWindowsPage.", true);
-		Assert.assertTrue(browserWindowsPage.isOpen(), "BrowserWindowsPage not found.");
-
-		Reporter.log("5/7", true);
-		Reporter.log("Click ElementsButton.", true);
-		browserWindowsPage.clickElementsHeaderBtn();
-		Assert.assertTrue(browserWindowsPage.isElementsDropdownShowed(), "ElementsDropdown not found.");
-		Reporter.log("Click LinksButton.", true);
-		browserWindowsPage.clickLinksBtn();
-		Reporter.log("LinksPage opens.", true);
-		Assert.assertTrue(linksPage.isOpen(), "LinksPage not found.");
-		Reporter.log("Click HomeLink.", true);
-		linksPage.clickHomeLink();
-		Reporter.log("New tab with MainPage opens.", true);
-		Reporter.log("MainPage is open.", true);
-		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
-		Reporter.log("Switch to previous tab.", true);
-		linksPage.switchToPrevPage();
-		Reporter.log("LinksPage opens.", true);
-		Assert.assertTrue(linksPage.isOpen(), "LinksPage not found.");
-
-
-/*
 	@Test(priority = 3)
 	void testCase3() {
+		Log.logger().info("3 test case started.");
 		Reporter.log("3 test case started.", true);
 		Reporter.log("1/5", true);
 		Reporter.log("Go to MainPage.", true);
@@ -131,15 +84,13 @@ public class MainPageTests {
 		Reporter.log("Click AddButton.", true);
 		webTablesPage.clickButton("addBtn");
 		Reporter.log("RegistrationForm opens.", true);
-		Assert.assertTrue(registrationForm.isRegFormContentVisible());
+		Assert.assertTrue(registrationForm.isRegFormVisible());
 
 		Reporter.log("4/5", true);
 		Reporter.log("Fill the registration form with data of user #"+TestData.getUserNum(), true);
 		Reporter.log("", true);
 		Reporter.log("Fill the first name", true);
 		registrationForm.sendKeysFirstName(TestData.getUserFirstName());
-		Assert.assertTrue(registrationForm.firstNameFilled(), "FirstName not filled.");
-
 		Reporter.log("Fill the last name", true);
 		registrationForm.sendKeysLastName(TestData.getUserLastName());
 		Reporter.log("Fill the email", true);
@@ -152,8 +103,8 @@ public class MainPageTests {
 		registrationForm.sendKeysDepartment(TestData.getUserDepartment());
 		Reporter.log("Press submit button", true);
 		registrationForm.clickSubmit();
-		Assert.assertFalse(registrationForm.isRegFormContentStillVisible(), "Registration form didn't close.");
-		 */
+		Assert.assertFalse(registrationForm.isRegFormClosed(), "Registration form didn't close.");
+
 
 	}
 
@@ -295,7 +246,58 @@ public class MainPageTests {
 		Assert.assertEquals(text, text2, "Texts not equal.");
 	}
 
+	@Test(priority = 4)
+	void testCase4() {
+		Reporter.log("4 test case started.", true);
+		Reporter.log("1/7", true);
+		Reporter.log("Go to MainPage.", true);
+		Browser.goToUrl(config.getHomePageAddress());
+		Reporter.log("MainPage is open.", true);
+		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
+
+		Reporter.log("2/7", true);
+		Reporter.log("Click AlertsFrameAndWindowsPageButton on MainPage.", true);
+		mainPage.clickButton("alertsFrameAndWindowsBtn");
+		Assert.assertTrue(alertsWindowsPage.isOpen(), "AlertsFrameAndWindowsPage not found.");
+		Reporter.log("Click BrowserWindowsButton on AlertsWindowsPage.", true);
+		alertsWindowsPage.clickButton("browserWindowsBtn");
+		Reporter.log("BrowserWindowsPage opens.", true);
+		Assert.assertTrue(browserWindowsPage.isOpen(), "BrowserWindowsPage not found.");
+
+		Reporter.log("3/7", true);
+		Reporter.log("Click NewTabButton.", true);
+		browserWindowsPage.clickNewTabBtn();
+		Reporter.log("Check the URL of new tab contains '/sample'", true);
+		Assert.assertTrue(browserWindowsPage.isSubstringInCurrentUrl("/sample"));
+
+		Reporter.log("4/7", true);
+		Reporter.log("Close this tab.", true);
+		browserWindowsPage.closeCurrentTab();
+		Reporter.log("On the current tab is BrowserWindowsPage.", true);
+		Assert.assertTrue(browserWindowsPage.isOpen(), "BrowserWindowsPage not found.");
+
+		Reporter.log("5/7", true);
+		Reporter.log("Click ElementsButton.", true);
+		browserWindowsPage.clickElementsHeaderBtn();
+		Assert.assertTrue(browserWindowsPage.isElementsDropdownShowed(), "ElementsDropdown not found.");
+		Reporter.log("Click LinksButton.", true);
+		browserWindowsPage.clickLinksBtn();
+		Reporter.log("LinksPage opens.", true);
+		Assert.assertTrue(linksPage.isOpen(), "LinksPage not found.");
+		Reporter.log("Click HomeLink.", true);
+		linksPage.clickHomeLink();
+		Reporter.log("New tab with MainPage opens.", true);
+		Reporter.log("MainPage is open.", true);
+		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
+		Reporter.log("Switch to previous tab.", true);
+		linksPage.switchToPrevPage();
+		Reporter.log("LinksPage opens.", true);
+		Assert.assertTrue(linksPage.isOpen(), "LinksPage not found.");
+	}
+
  */
+
+
 	@AfterTest
 	void tearDown() {
 		Browser.getBrowserInstance().quit();

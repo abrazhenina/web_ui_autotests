@@ -45,20 +45,20 @@ public class RegistrationForm extends BaseForm {
 	}
 
 
-	public boolean isRegFormContentVisible() {
+	public boolean isRegFormVisible() {
 		return modalContent.isVisible();
 	}
-	public boolean isRegFormContentStillVisible() {
-		return modalContent.isStillVisible();
+	public boolean isRegFormClosed() {
+		return !modalContent.isStillVisible();
 	}
 
 	public void sendKeysFirstName(String keys) {
-		firstNameInput.sendKeysToModalInput(this.getLocator(), firstNameInputLoc, keys);
 		firstNameInput.sendKeys(keys);
 	}
 
 	public boolean firstNameFilled() {
-		return firstNameInput.getTextFromModalElement(this.getLocator(), firstNameInputLoc).length()>0;
+		return !firstNameInput.getText().isEmpty();
+		//return firstNameInput.getTextFromModalElement(this.getLocator(), firstNameInputLoc).length()>0;
 	}
 
 	public void sendKeysLastName(String keys) {
@@ -66,22 +66,20 @@ public class RegistrationForm extends BaseForm {
 	}
 
 	public boolean lastNameFilled() {
-		if (lastNameInput.getTextFromModalElement(this.getLocator(), lastNameInputLoc).length()>0)
-			return true;
-		return false;
+		return lastNameInput.getTextFromModalElement(this.getLocator(), lastNameInputLoc).length() > 0;
 	}
 	public void sendKeysEmail(String keys) {
-		firstNameInput.sendKeys(keys);
+		emailInput.sendKeys(keys);
 	}
 	public void sendKeysAge(String keys) {
-		firstNameInput.sendKeys(keys);
+		ageInput.sendKeys(keys);
 	}
 	public void sendKeysSalary(String keys) {
-		firstNameInput.sendKeys(keys);
+		salaryInput.sendKeys(keys);
 	}
 
 	public void sendKeysDepartment(String keys) {
-		firstNameInput.sendKeys(keys);
+		departmentInput.sendKeys(keys);
 	}
 
 	public void clickSubmit() {

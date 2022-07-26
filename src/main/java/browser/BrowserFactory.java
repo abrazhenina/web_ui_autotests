@@ -2,6 +2,7 @@ package browser;
 
 import config.Config;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -28,6 +29,7 @@ public class BrowserFactory {
 		switch (browserName.toLowerCase()) {
 			case "chrome" -> {
 				ChromeOptions opt = new ChromeOptions();
+				opt.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
 				if (browserIncognito) {opt.addArguments("--incognito");}
 				if (browserLang) {opt.addArguments("--lang=en");}
 				if (browserWindowMaximized) {opt.addArguments("--start-maximized");}
@@ -35,7 +37,8 @@ public class BrowserFactory {
 			}
 			case "firefox" -> {
 				FirefoxOptions opt = new FirefoxOptions();
-				if (browserIncognito) {opt.addArguments("--incognito");}
+				opt.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
+				if (browserIncognito) {opt.addArguments("-private");}
 				if (browserLang) {opt.addArguments("--lang=en");}
 				if (browserWindowMaximized) {opt.addArguments("--start-maximized");}
 				return getFirefoxInstance(opt);
