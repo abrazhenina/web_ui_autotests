@@ -60,11 +60,11 @@ public abstract class BaseElement {
 	}
 
 	public WebElement findElement() {
-		return Browser.getBrowserInstance().findElement(this.loc);
+		return Waits.waiter().until(ExpectedConditions.visibilityOfElementLocated(this.loc));
 	}
 
 	public String getText() {
-		return Waits.waiter().until(ExpectedConditions.elementToBeClickable(this.loc)).getText();
+		return Waits.waiter().until(ExpectedConditions.visibilityOfElementLocated(this.loc)).getText();
 	}
 
 	public String getTextFromModalElement(By containerLoc, By elementLoc) {

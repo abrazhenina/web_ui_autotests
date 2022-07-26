@@ -16,6 +16,7 @@ import utils.Log;
 import utils.StringUtil;
 
 import java.io.IOException;
+import java.time.Duration;
 
 public class MainPageTests {
 	WebDriver driver;
@@ -62,7 +63,6 @@ public class MainPageTests {
 
 	@Test(priority = 3)
 	void testCase3() {
-		Log.logger().info("3 test case started.");
 		Reporter.log("3 test case started.", true);
 		Reporter.log("1/5", true);
 		Reporter.log("Go to MainPage.", true);
@@ -88,11 +88,12 @@ public class MainPageTests {
 
 		Reporter.log("4/5", true);
 		Reporter.log("Fill the registration form with data of user #"+TestData.getUserNum(), true);
-		Reporter.log("", true);
 		Reporter.log("Fill the first name", true);
-		registrationForm.sendKeysFirstName(TestData.getUserFirstName());
+		String userFirstName = TestData.getUserFirstName();
+		registrationForm.sendKeysFirstName(userFirstName);
 		Reporter.log("Fill the last name", true);
-		registrationForm.sendKeysLastName(TestData.getUserLastName());
+		String userLastName = TestData.getUserLastName();
+		registrationForm.sendKeysLastName(userLastName);
 		Reporter.log("Fill the email", true);
 		registrationForm.sendKeysEmail(TestData.getUserEmail());
 		Reporter.log("Fill the age", true);
@@ -104,7 +105,9 @@ public class MainPageTests {
 		Reporter.log("Press submit button", true);
 		registrationForm.clickSubmit();
 		Assert.assertFalse(registrationForm.isRegFormClosed(), "Registration form didn't close.");
+		Assert.assertTrue(webTablesPage.isUserInTable(userFirstName),"User not found in WebTable.");
 
+		Reporter.log("5/5", true);
 
 	}
 

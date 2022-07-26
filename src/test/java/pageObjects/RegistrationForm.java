@@ -38,7 +38,7 @@ public class RegistrationForm extends BaseForm {
 		firstNameInput = new TextBox(firstNameInputName, firstNameInputLoc);
 		lastNameInput = new TextBox(lastNameInputName, lastNameInputLoc);
 		emailInput = new TextBox(emailInputName, emailInputLoc);
-		ageInput = new TextBox(ageInputName, lastNameInputLoc);
+		ageInput = new TextBox(ageInputName, ageInputLoc);
 		salaryInput = new TextBox(salaryInputName, salaryInputLoc);
 		departmentInput = new TextBox(departmentInputName, departmentInputLoc);
 		submitBtn = new Button(submitBtnName, submitBtnLoc);
@@ -58,7 +58,6 @@ public class RegistrationForm extends BaseForm {
 
 	public boolean firstNameFilled() {
 		return !firstNameInput.getText().isEmpty();
-		//return firstNameInput.getTextFromModalElement(this.getLocator(), firstNameInputLoc).length()>0;
 	}
 
 	public void sendKeysLastName(String keys) {
