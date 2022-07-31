@@ -32,5 +32,7 @@
         "department": "beta"
       }
   ],
-  "userNum": 1
+  "userNum": 1,
+  "pickDateDay": 29,
+  "pickDateMonth": 2
 }
