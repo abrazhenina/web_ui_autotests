@@ -1,18 +1,18 @@
-package utils;
+package tests;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Formatter;
 
-public class TimeUtil {
-	public static String getCurrentMonthDayYear() {
-		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-		return formatter.format(date);
-	}
+public class Main {
 
-	public static String getCurrentDateTime() {
+	public static void main(String args[]) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String date = formatter.format(new Date());
 		LocalDate currentDate = LocalDate.parse(date);
@@ -22,6 +22,6 @@ public class TimeUtil {
 		SimpleDateFormat formatterWithoutMonth = new SimpleDateFormat("dd, yyyy h:mm a");
 		String dateTimeWithoutMonth = formatterWithoutMonth.format(new Date());
 		String dateTimeFull = monthCapitalized +" "+ dateTimeWithoutMonth;
-		return dateTimeFull;
+		System.out.println(dateTimeFull);
 	}
 }

@@ -8,40 +8,23 @@ import org.openqa.selenium.By;
 
 public class RegistrationForm extends BaseForm {
 	private Label modalContent;
-	private String modalContentName = "modalContent";
-	private By modalContentLoc = By.className("modal-content");
 	private TextBox firstNameInput;
-	private String firstNameInputName = "firstNameInput";
-	private By firstNameInputLoc = By.id("firstName");
 	private TextBox lastNameInput;
-	private String lastNameInputName = "lastNameInput";
-	private By lastNameInputLoc = By.id("lastName");
 	private TextBox emailInput;
-	private String emailInputName = "emailInput";
-	private By emailInputLoc = By.id("userEmail");
 	private TextBox ageInput;
-	private String ageInputName = "ageInput";
-	private By ageInputLoc = By.id("age");
 	private TextBox salaryInput;
-	private String salaryInputName = "salaryInput";
-	private By salaryInputLoc = By.id("salary");
 	private TextBox departmentInput;
-	private String departmentInputName = "departmentInput";
-	private By departmentInputLoc = By.id("department");
 	private Button submitBtn;
-	private String submitBtnName = "submitBtn";
-	private By submitBtnLoc = By.id("submit");
-
 	public RegistrationForm() {
 		super("regForm", By.className("modal-dialog"));
-		modalContent = new Label(modalContentName, modalContentLoc);
-		firstNameInput = new TextBox(firstNameInputName, firstNameInputLoc);
-		lastNameInput = new TextBox(lastNameInputName, lastNameInputLoc);
-		emailInput = new TextBox(emailInputName, emailInputLoc);
-		ageInput = new TextBox(ageInputName, ageInputLoc);
-		salaryInput = new TextBox(salaryInputName, salaryInputLoc);
-		departmentInput = new TextBox(departmentInputName, departmentInputLoc);
-		submitBtn = new Button(submitBtnName, submitBtnLoc);
+		modalContent = new Label("modalContent", By.className("modal-content"));
+		firstNameInput = new TextBox("firstNameInput", By.id("firstName"));
+		lastNameInput = new TextBox("lastNameInput", By.id("lastName"));
+		emailInput = new TextBox("emailInput", By.id("userEmail"));
+		ageInput = new TextBox("ageInput", By.id("age"));
+		salaryInput = new TextBox("salaryInput", By.id("salary"));
+		departmentInput = new TextBox("departmentInput", By.id("department"));
+		submitBtn = new Button("submitBtn", By.id("submit"));
 	}
 
 
@@ -65,7 +48,7 @@ public class RegistrationForm extends BaseForm {
 	}
 
 	public boolean lastNameFilled() {
-		return lastNameInput.getTextFromModalElement(this.getLocator(), lastNameInputLoc).length() > 0;
+		return lastNameInput.getTextFromModalElement(this.getLocator(), lastNameInput.getLocator()).length() > 0;
 	}
 	public void sendKeysEmail(String keys) {
 		emailInput.sendKeys(keys);

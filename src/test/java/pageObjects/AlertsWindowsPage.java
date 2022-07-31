@@ -6,25 +6,17 @@ import org.openqa.selenium.By;
 
 public class AlertsWindowsPage extends BaseForm {
 	private Button alertsBtn;
-	private String alertsBtnName = "alertBtn";
-	private By alertsBtnLoc = By.xpath("//span[text()='Alerts']");
 	private Button nestedFramesBtn;
-	private String nestedFramesBtnName = "nestedFramesBtn";
-	private By nestedFramesBtnLoc =  By.xpath("//span[text()='Nested Frames']");
 	private Button framesBtn;
-	private String framesBtnName = "framesBtn";
-	private By framesBtnBtnLoc =  By.xpath("//span[text()='Frames']");
 	private Button browserWindowsBtn;
-	private String browserWindowsBtnName = "browserWindowsBtn";
-	private By browserWindowsBtnLoc = By.xpath("//span[text()='Browser Windows']");
 
 	public AlertsWindowsPage() {
 		super("alertsFrameAndWindows", By.xpath(
 				"//div[@class='main-header' and contains(text(),'Alerts')]"));
-		this.alertsBtn = new Button(alertsBtnName, alertsBtnLoc);
-		this.nestedFramesBtn = new Button(nestedFramesBtnName, nestedFramesBtnLoc);
-		this.framesBtn = new Button(framesBtnName, framesBtnBtnLoc);
-		this.browserWindowsBtn = new Button(browserWindowsBtnName, browserWindowsBtnLoc);
+		this.alertsBtn = new Button("alertBtn", By.xpath("//span[text()='Alerts']"));
+		this.nestedFramesBtn = new Button("nestedFramesBtn", By.xpath("//span[text()='Nested Frames']"));
+		this.framesBtn = new Button("framesBtn", By.xpath("//span[text()='Frames']"));
+		this.browserWindowsBtn = new Button("browserWindowsBtn", By.xpath("//span[text()='Browser Windows']"));
 	}
 
 	public void clickButton(String buttonName) {

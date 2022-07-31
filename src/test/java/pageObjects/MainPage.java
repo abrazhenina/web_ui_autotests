@@ -6,16 +6,14 @@ import org.openqa.selenium.By;
 
 public class MainPage extends BaseForm {
 	private Button alertsFrameAndWindowsBtn;
-	private String alertsFrameAndWindowsBtnName = "alertsFrameAndWindowsBtn";
-	private By alertsFrameAndWindowsBtnLoc = By.xpath("//*[contains(text(),'Alerts')]");
 	private Button elementsBtn;
-	private String elementsBtnName = "elementsBtn";
-	private By elementsBtnLoc = By.xpath("//*[text()='Elements']");
+	public Button widgetsBtn;
 	public MainPage() {
 		super("mainPage", By.cssSelector(".home-content"));
-		this.alertsFrameAndWindowsBtn = new Button(alertsFrameAndWindowsBtnName,
-				alertsFrameAndWindowsBtnLoc);
-		this.elementsBtn = new Button(elementsBtnName, elementsBtnLoc);
+		this.alertsFrameAndWindowsBtn = new Button("alertsFrameAndWindowsBtn",
+				By.xpath("//*[contains(text(),'Alerts')]"));
+		this.elementsBtn = new Button("elementsBtn", By.xpath("//*[text()='Elements']"));
+		this.widgetsBtn = new Button("widgetsBtn", By.xpath("//*[text()='Widgets']"));
 	}
 
 	public void clickButton(String buttonName) {
@@ -23,6 +21,8 @@ public class MainPage extends BaseForm {
 			alertsFrameAndWindowsBtn.click();
 		} else if (buttonName == elementsBtn.getName()) {
 			elementsBtn.click();
+		} else if (buttonName == widgetsBtn.getName()) {
+			widgetsBtn.click();
 		}
 	}
 }

@@ -7,12 +7,10 @@ import org.openqa.selenium.By;
 public class FrameUpper extends Frame {
 
 	private Label textLabel;
-	private String textLabelName = "textLabel";
-	private By textLabelLoc = By.id("sampleHeading");
 
 	public FrameUpper() {
 		super("frameUpper", By.id("frame1"));
-		textLabel = new Label(textLabelName, textLabelLoc);
+		textLabel = new Label("textLabel", By.id("sampleHeading"));
 	}
 
 	public String getTextFromFrameLabel() {

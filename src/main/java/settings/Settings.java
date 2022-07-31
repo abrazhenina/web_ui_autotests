@@ -9,7 +9,6 @@ public class Settings {
 	public boolean browserLang;
 	public boolean browserWindowMaximized;
 	public int timeout;
-	public int timeout1;
 	public int timeout2;
 
 	public Settings (JsonObject config) {

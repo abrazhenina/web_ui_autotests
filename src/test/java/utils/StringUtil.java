@@ -1,14 +1,22 @@
 package utils;
 
-import java.nio.charset.Charset;
+import org.apache.commons.lang3.RandomStringUtils;
 import java.util.Random;
 
 public class StringUtil {
 	public static String getRandomString() {
-		byte[] array = new byte[7]; // length is bounded by 7
-		new Random().nextBytes(array);
-		String generatedString = new String(array, Charset.forName("UTF-8"));
+		int length = 10;
+		boolean useLetters = true;
+		boolean useNumbers = false;
+		String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
 		return generatedString;
+	}
+
+	public static String getRandomNumString0to100() {
+		Random random = new Random();
+		return Integer.toString(
+				random.ints(0, 100)
+				.findFirst().getAsInt());
 	}
 
 	public static boolean strContainsSub(String mainStr, String subStr) {

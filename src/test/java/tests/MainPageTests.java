@@ -4,19 +4,15 @@ import browser.Browser;
 import browser.BrowserFactory;
 import config.Config;
 import data.TestData;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.*;
 import pageObjects.*;
 import utils.JsonReader;
-import org.openqa.selenium.WebDriver;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-import utils.Log;
 import utils.StringUtil;
 
 import java.io.IOException;
-import java.time.Duration;
 
 public class MainPageTests {
 	WebDriver driver;
@@ -24,13 +20,13 @@ public class MainPageTests {
 	String configPath = "src/test/resources/config.json";
 	TestData testData;
 	Config config;
+	String name;
+	String text;
+	String text2;
 	MainPage mainPage;
 	AlertsWindowsPage alertsWindowsPage;
 	AlertsPage alertsPage;
 	NestedFramesPage nestedFramesPage;
-	String name;
-	String text;
-	String text2;
 	FramesPage framesPage;
 	ElementsPage elementsPage;
 	WebTablesPage webTablesPage;
@@ -48,7 +44,6 @@ public class MainPageTests {
 			e.printStackTrace();
 		}
 		BrowserFactory.setParameters();
-		driver = Browser.getBrowserInstance();
 		mainPage = new MainPage();
 		alertsWindowsPage = new AlertsWindowsPage();
 		alertsPage = new AlertsPage();
@@ -61,64 +56,27 @@ public class MainPageTests {
 		linksPage = new LinksPage();
 	}
 
-	@Test(priority = 3)
-	void testCase3() {
-		Reporter.log("3 test case started.", true);
-		Reporter.log("1/5", true);
-		Reporter.log("Go to MainPage.", true);
-		Browser.goToUrl(config.getHomePageAddress());
-		Reporter.log("MainPage is open.", true);
-		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
-
-		Reporter.log("2/5", true);
-		Reporter.log("Click ElementsButton.", true);
-		mainPage.clickButton("elementsBtn");
-		Reporter.log("ElementsPage opens.", true);
-		Assert.assertTrue(elementsPage.isOpen(), "ElementsPage not found.");
-		Reporter.log("Click WebTablesButton.", true);
-		elementsPage.clickButton("webTablesBtn");
-		Reporter.log("WebTablesPage opens.", true);
-		Assert.assertTrue(webTablesPage.isOpen());
-
-		Reporter.log("3/5", true);
-		Reporter.log("Click AddButton.", true);
-		webTablesPage.clickButton("addBtn");
-		Reporter.log("RegistrationForm opens.", true);
-		Assert.assertTrue(registrationForm.isRegFormVisible());
-
-		Reporter.log("4/5", true);
-		Reporter.log("Fill the registration form with data of user #"+TestData.getUserNum(), true);
-		Reporter.log("Fill the first name", true);
-		String userFirstName = TestData.getUserFirstName();
-		registrationForm.sendKeysFirstName(userFirstName);
-		Reporter.log("Fill the last name", true);
-		String userLastName = TestData.getUserLastName();
-		registrationForm.sendKeysLastName(userLastName);
-		Reporter.log("Fill the email", true);
-		registrationForm.sendKeysEmail(TestData.getUserEmail());
-		Reporter.log("Fill the age", true);
-		registrationForm.sendKeysAge(Integer.toString(TestData.getUserAge()));
-		Reporter.log("Fill the salary", true);
-		registrationForm.sendKeysSalary(Integer.toString(TestData.getUserSalary()));
-		Reporter.log("Fill the department", true);
-		registrationForm.sendKeysDepartment(TestData.getUserDepartment());
-		Reporter.log("Press submit button", true);
-		registrationForm.clickSubmit();
-		Assert.assertFalse(registrationForm.isRegFormClosed(), "Registration form didn't close.");
-		Assert.assertTrue(webTablesPage.isUserInTable(userFirstName),"User not found in WebTable.");
-
-		Reporter.log("5/5", true);
-
+	@BeforeMethod
+	void beforeMethod() {
+		driver = Browser.getBrowserInstance();
 	}
 
-/*
+	@AfterMethod
+	void afterMethod() {
+		Browser.getBrowserInstance().quit();
+	}
+	@AfterTest
+	void tearDown() {
+		Browser.getBrowserInstance().quit();
+	}
+
 	@Test(priority = 1)
 	void testCase1() {
 		Reporter.log("1 test case started.", true);
 		Reporter.log("1/8", true);
 		Reporter.log("Go to MainPage.", true);
 		Browser.goToUrl(config.getHomePageAddress());
-		Reporter.log("MainPage is open.", true);
+		Reporter.log("MainPage opens.", true);
 		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
 
 		Reporter.log("2/8", true);
@@ -190,11 +148,11 @@ public class MainPageTests {
 
 	@Test(priority = 2)
 	void testCase2() {
-		Reporter.log("2 test case started.", true);
+		Reporter.log("\n2 test case started.", true);
 		Reporter.log("1/3", true);
 		Reporter.log("Go to MainPage.", true);
 		Browser.goToUrl(config.getHomePageAddress());
-		Reporter.log("MainPage is open.", true);
+		Reporter.log("MainPage opens.", true);
 		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
 
 		Reporter.log("2/3", true);
@@ -249,13 +207,67 @@ public class MainPageTests {
 		Assert.assertEquals(text, text2, "Texts not equal.");
 	}
 
+	@Test(priority = 3)
+	void testCase3() {
+		Reporter.log("\n3 test case started.", true);
+		Reporter.log("1/5", true);
+		Reporter.log("Go to MainPage.", true);
+		Browser.goToUrl(config.getHomePageAddress());
+		Reporter.log("MainPage opens.", true);
+		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
+
+		Reporter.log("2/5", true);
+		Reporter.log("Click ElementsButton.", true);
+		mainPage.clickButton("elementsBtn");
+		Reporter.log("ElementsPage opens.", true);
+		Assert.assertTrue(elementsPage.isOpen(), "ElementsPage not found.");
+		Reporter.log("Click WebTablesButton.", true);
+		elementsPage.clickButton("webTablesBtn");
+		Reporter.log("WebTablesPage opens.", true);
+		Assert.assertTrue(webTablesPage.isOpen());
+
+		Reporter.log("3/5", true);
+		Reporter.log("Click AddButton.", true);
+		webTablesPage.clickButton("addBtn");
+		Reporter.log("RegistrationForm opens.", true);
+		Assert.assertTrue(registrationForm.isRegFormVisible());
+
+		Reporter.log("4/5", true);
+		String userNum = Integer.toString(TestData.getUserNum());
+		Reporter.log("Fill the registration form with data of user #"+userNum, true);
+		Reporter.log("Fill the first name.", true);
+		String userFirstName = TestData.getUserFirstName();
+		registrationForm.sendKeysFirstName(userFirstName);
+		Reporter.log("Fill the last name.", true);
+		String userLastName = TestData.getUserLastName();
+		registrationForm.sendKeysLastName(userLastName);
+		Reporter.log("Fill the email.", true);
+		registrationForm.sendKeysEmail(TestData.getUserEmail());
+		Reporter.log("Fill the age.", true);
+		registrationForm.sendKeysAge(Integer.toString(TestData.getUserAge()));
+		Reporter.log("Fill the salary.", true);
+		registrationForm.sendKeysSalary(Integer.toString(TestData.getUserSalary()));
+		Reporter.log("Fill the department.", true);
+		registrationForm.sendKeysDepartment(TestData.getUserDepartment());
+		Reporter.log("Press submit button.", true);
+		registrationForm.clickSubmit();
+		Assert.assertFalse(registrationForm.isRegFormClosed(), "Registration form didn't close.");
+		Assert.assertTrue(webTablesPage.isRecordInTable(userFirstName),"User not found in WebTable.");
+
+		Reporter.log("5/5", true);
+		Reporter.log("Delete user  #"+userNum+" WebTable record.", true);
+		webTablesPage.deleteRecord();
+		Assert.assertTrue(webTablesPage.isRecordDeleted(userFirstName),"User data still in WebTable.");
+
+	}
+
 	@Test(priority = 4)
 	void testCase4() {
-		Reporter.log("4 test case started.", true);
+		Reporter.log("\n4 test case started.", true);
 		Reporter.log("1/7", true);
 		Reporter.log("Go to MainPage.", true);
 		Browser.goToUrl(config.getHomePageAddress());
-		Reporter.log("MainPage is open.", true);
+		Reporter.log("MainPage opens.", true);
 		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
 
 		Reporter.log("2/7", true);
@@ -287,22 +299,18 @@ public class MainPageTests {
 		browserWindowsPage.clickLinksBtn();
 		Reporter.log("LinksPage opens.", true);
 		Assert.assertTrue(linksPage.isOpen(), "LinksPage not found.");
+
+		Reporter.log("6/7", true);
 		Reporter.log("Click HomeLink.", true);
 		linksPage.clickHomeLink();
 		Reporter.log("New tab with MainPage opens.", true);
 		Reporter.log("MainPage is open.", true);
+
+		Reporter.log("7/7", true);
 		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
 		Reporter.log("Switch to previous tab.", true);
 		linksPage.switchToPrevPage();
 		Reporter.log("LinksPage opens.", true);
 		Assert.assertTrue(linksPage.isOpen(), "LinksPage not found.");
-	}
-
- */
-
-
-	@AfterTest
-	void tearDown() {
-		Browser.getBrowserInstance().quit();
 	}
 }

@@ -7,7 +7,6 @@ import utils.JsonReader;
 import java.util.HashMap;
 
 public class TestData {
-	static private HashMap<String, String> map;
 	static private String alertsWindowsPageAlertBtnName;
 	static private String toSeeAlertBtnName;
 	static private String toSeeAlertBtnAlertMessage;
@@ -32,9 +31,10 @@ public class TestData {
 	static private int userAge;
 	static private int userSalary;
 	static private String userDepartment;
+	static private int pickDateDay;
+	static private int pickDateMonth;
 
 	public TestData (JsonObject testData) {
-		map = new HashMap<>();
 		alertsWindowsPageAlertBtnName = testData.get("alertsWindowsPageAlertBtnName").getAsString();
 		toSeeAlertBtnName = testData.get("toSeeAlertBtnName").getAsString();
 		toSeeAlertBtnAlertMessage = testData.get("toSeeAlertBtnAlertMessage").getAsString();
@@ -58,8 +58,16 @@ public class TestData {
 		userAge = JsonReader.getIntFromJSONArray(usersTableJSONObj, userNum, "age");
 		userSalary = JsonReader.getIntFromJSONArray(usersTableJSONObj, userNum, "salary");
 		userDepartment = JsonReader.getStringFromJSONArray(usersTableJSONObj, userNum, "department");
+		pickDateDay = testData.get("pickDateDay").getAsInt();
+		pickDateMonth = testData.get("pickDateMonth").getAsInt();
 	}
 
+	public static int getPickDateDay() {
+		return pickDateDay;
+	}
+	public static int getPickDateMonth() {
+		return pickDateMonth;
+	}
 	public static String getAlertsWindowsPageAlertBtnName() {
 		return alertsWindowsPageAlertBtnName;
 	}
@@ -81,61 +89,48 @@ public class TestData {
 	public static String getAlertConfirmResultLabelText() {
 		return alertConfirmResultLabelText;
 	}
-
 	public static String getAlertPromptBoxBtnName() {
 		return alertPromptBoxBtnName;
 	}
-
 	public static String getAlertPromptBoxMessage() {
 		return alertPromptBoxMessage;
 	}
 	public static String getAlertPromptResultLabelName() {
 		return alertPromptResultLabelName;
 	}
-
 	public static String getNestedFramesBtnName() {
 		return nestedFramesBtnName;
 	}
-
 	public static String getNestedFramesParentFrameName() {
 		return nestedFramesParentFrameName;
 	}
-
 	public static String getNestedFramesChildFrameName() {
 		return nestedFramesChildFrameName;
 	}
-
 	public static String getNestedFramesParentFrameText() {
 		return nestedFramesParentFrameText;
 	}
-
 	public static String getNestedFramesChildFrameText() {
 		return nestedFramesChildFrameText;
 	}
-
 	public static int getUserNum() {
 		return userNum;
 	}
 	public static String getUserFirstName() {
 		return userFirstName;
 	}
-
 	public static String getUserLastName() {
 		return userLastName;
 	}
-
 	public static String getUserEmail() {
 		return userEmail;
 	}
-
 	public static int getUserAge() {
 		return userAge;
 	}
-
 	public static int getUserSalary() {
 		return userSalary;
 	}
-
 	public static String getUserDepartment() {
 		return userDepartment;
 	}

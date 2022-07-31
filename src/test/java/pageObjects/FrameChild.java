@@ -6,11 +6,9 @@ import org.openqa.selenium.By;
 
 public class FrameChild extends Frame {
 	private Label textLabel;
-	private String textLabelName = "textLabel";
-	private By textLabelLoc = By.xpath("//p[text()='Child Iframe']");
 	public FrameChild() {
 		super("frameChild", By.xpath("//iframe[@srcdoc='<p>Child Iframe</p>']"));
-		textLabel = new Label(textLabelName, textLabelLoc);
+		textLabel = new Label("textLabel", By.xpath("//p[text()='Child Iframe']"));
 	}
 
 	public String getTextFromFrameLabel() {

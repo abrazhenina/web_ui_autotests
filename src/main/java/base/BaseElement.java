@@ -2,6 +2,7 @@ package base;
 
 import browser.Browser;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Waits;
 
@@ -22,22 +23,24 @@ public abstract class BaseElement {
 		return this.loc;
 	}
 
-	public void click() {
-		Waits.waiter().until(ExpectedConditions
-				.elementToBeClickable(this.getLocator()))
-				.click();
-	}
-
 	public boolean isDisplayed() {
 		return Waits.waiter()
-				.until(ExpectedConditions.elementToBeClickable(this.getLocator()))
+				.until(ExpectedConditions.visibilityOfElementLocated(this.getLocator()))
 				.isDisplayed();
 	}
 
-	public boolean isClickable() {
-		return Waits.waiter()
-				.until(ExpectedConditions.elementToBeClickable(this.getLocator()))
-				.isDisplayed();
+	public void moveToElement() {
+		WebDriver driver = Browser.getBrowserInstance();
+		WebElement element = driver.findElement(this.getLocator());
+		new Actions(driver)
+				.moveToElement(element)
+				.perform();
+	}
+
+	public void click() {
+		Waits.waiter().until(ExpectedConditions
+						.elementToBeClickable(this.getLocator()))
+				.click();
 	}
 
 	public boolean isVisible() {
@@ -59,10 +62,6 @@ public abstract class BaseElement {
 		}
 	}
 
-	public WebElement findElement() {
-		return Waits.waiter().until(ExpectedConditions.visibilityOfElementLocated(this.loc));
-	}
-
 	public String getText() {
 		return Waits.waiter().until(ExpectedConditions.visibilityOfElementLocated(this.loc)).getText();
 	}
@@ -72,10 +71,5 @@ public abstract class BaseElement {
 				.visibilityOfElementLocated(containerLoc));
 		WebElement element = modalContainer.findElement(elementLoc);
 		return element.getText();
-	}
-
-	public void clickModalBtn(By containerLoc, By btnLoc) {
-		WebElement modalContainer = Browser.getBrowserInstance().findElement(containerLoc);
-		modalContainer.findElement(btnLoc).click();
 	}
 }

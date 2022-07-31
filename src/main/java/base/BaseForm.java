@@ -2,7 +2,6 @@ package base;
 
 import browser.Browser;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Waits;
@@ -19,7 +18,7 @@ public abstract class BaseForm {
 
 	public boolean isOpen() {
 		return Waits.waiter().until(ExpectedConditions
-				.presenceOfElementLocated(this.getLocator())).isDisplayed();
+				.visibilityOfElementLocated(this.getLocator())).isDisplayed();
 	}
 
 	public String getWindowID() {
@@ -48,18 +47,6 @@ public abstract class BaseForm {
 		WebDriver driver = Browser.getBrowserInstance();
 		driver.close();
 		driver.switchTo().window(originalWindow);
-	}
-
-	public boolean isStillOpen() {
-		try
-		{
-			Waits.waiter().until(ExpectedConditions
-					.presenceOfElementLocated(this.getLocator())).isDisplayed();
-			return true;
-		}
-		catch (NoSuchElementException Ex) {
-			return false;
-		}
 	}
 
 	public String getName() {

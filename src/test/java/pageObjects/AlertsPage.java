@@ -13,28 +13,18 @@ import utils.Waits;
 
 public class AlertsPage extends BaseForm {
 	private Button seeAlertBtn;
-	private String seeAlertBtnName = "seeAlertBtn";
-	private By seeAlertBtnLoc = By.id("alertButton");
 	private Button confirmBoxBtn;
-	private String confirmBoxBtnName = "alertConfirmBoxBtn";
-	private By confirmBoxBtnLoc = By.id("confirmButton");
 	private Label confirmResultLabel;
-	private String confirmResultLabelName = "alertConfirmResultLabel";
-	private By confirmResultLoc = By.id("confirmResult");
 	private Button promptBoxBtn;
-	private String promptBoxBtnName = "alertPromptBoxBtn";
-	private By promptBoxBtnLoc = By.id("promtButton");
 	private Label promptResultLabel;
-	private String promptResultLabelName = "alertPromptResultLabel";
-	private By promptResultLoc = By.id("promptResult");
 
 	public AlertsPage() {
 		super("alertsPage", By.xpath("//div[text()='Alerts']"));
-		this.seeAlertBtn = new Button(seeAlertBtnName, seeAlertBtnLoc);
-		this.confirmBoxBtn = new Button(confirmBoxBtnName, confirmBoxBtnLoc);
-		this.confirmResultLabel = new Label(confirmResultLabelName, confirmResultLoc);
-		this.promptBoxBtn = new Button(promptBoxBtnName, promptBoxBtnLoc);
-		this.promptResultLabel = new Label(promptResultLabelName, promptResultLoc);
+		this.seeAlertBtn = new Button("seeAlertBtn", By.id("alertButton"));
+		this.confirmBoxBtn = new Button("alertConfirmBoxBtn", By.id("confirmButton"));
+		this.confirmResultLabel = new Label("alertConfirmResultLabel", By.id("confirmResult"));
+		this.promptBoxBtn = new Button("alertPromptBoxBtn", By.id("promtButton"));
+		this.promptResultLabel = new Label("alertPromptResultLabel", By.id("promptResult"));
 	}
 
 	public void clickButton(String buttonName) {
@@ -81,13 +71,13 @@ public class AlertsPage extends BaseForm {
 	}
 
 	public String getLabelText(String labelName) {
-		if(labelName.equals(confirmResultLabelName)) {
+		if(labelName.equals(confirmResultLabel.getName())) {
 			return Waits.waiter()
-					.until(ExpectedConditions.presenceOfElementLocated(confirmResultLoc))
+					.until(ExpectedConditions.presenceOfElementLocated(confirmResultLabel.getLocator()))
 					.getText();
-		} else if(labelName.equals(promptResultLabelName)) {
+		} else if(labelName.equals(promptResultLabel.getName())) {
 			return Waits.waiter()
-					.until(ExpectedConditions.presenceOfElementLocated(promptResultLoc))
+					.until(ExpectedConditions.presenceOfElementLocated(promptResultLabel.getLocator()))
 					.getText();
 		}
 		return null;
