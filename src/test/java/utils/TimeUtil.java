@@ -19,7 +19,7 @@ public class TimeUtil {
 		Month month = currentDate.getMonth();
 		String monthStr = month.toString();
 		String monthCapitalized = monthStr.substring(0, 1).toUpperCase() + monthStr.substring(1).toLowerCase();
-		SimpleDateFormat formatterWithoutMonth = new SimpleDateFormat("dd, yyyy h:mm a");
+		SimpleDateFormat formatterWithoutMonth = new SimpleDateFormat("d, yyyy h:mm a");
 		String dateTimeWithoutMonth = formatterWithoutMonth.format(new Date());
 		return monthCapitalized +" "+ dateTimeWithoutMonth;
 	}
