@@ -1,14 +1,10 @@
 package pageObjects;
 
 import base.BaseForm;
-import base.elements.Button;
-import base.elements.Form;
-import base.elements.Label;
-import base.elements.TextBox;
+import base.elements.*;
 import org.openqa.selenium.By;
 import utils.StringUtil;
 import utils.TimeUtil;
-import utils.Waits;
 
 public class WidgetsPage extends BaseForm {
 	private Form sliderForm;
@@ -21,8 +17,11 @@ public class WidgetsPage extends BaseForm {
 	private Form datePickerForm;
 	private TextBox datePickerDateInput;
 	private TextBox dateTimePickerInput;
-	private String openDatePickerWindowClassValue = "react-datepicker-ignore-onclickoutside";
-	private Label calendarWindow;
+	private Form calendarWindow;
+	private Dropdown monthSelect;
+	private Dropdown yearSelect;
+	private Form calendar7Days;
+	private Label day29;
 	public WidgetsPage() {
 		super("widgetsPage", By.xpath("//div[text()='Widgets']"));
 		sliderBtn = new Button("sliderBtn", By.xpath("//span[text()='Slider']"));
@@ -34,13 +33,30 @@ public class WidgetsPage extends BaseForm {
 		datePickerForm = new Form("datePickerForm", By.xpath("//div[text()='Date Picker']"));
 		datePickerDateInput = new TextBox("datePickerDateInput", By.id("datePickerMonthYearInput"));
 		dateTimePickerInput = new TextBox("dateTimePickerInput", By.id("dateAndTimePickerInput"));
-		calendarWindow = new Label("calendarWindow", By.className("react-datepicker__month-container"));
+		calendarWindow = new Form("calendarWindow", By.className("react-datepicker__month-container"));
+		monthSelect = new Dropdown("monthSelect", By.className("react-datepicker__month-select"));
+		calendar7Days = new Form("calendar7Days", By.className("react-datepicker__week"));
+		yearSelect = new Dropdown("yearSelect", By.className("react-datepicker__year-select"));
+		day29 = new Label("day29", By.className("react-datepicker__day--029"));
 	}
 
-	public String pickDate(int day, int month) {
+	public void openDateCalendar() {
 		datePickerDateInput.click();
+	}
 
-		return "";
+	public boolean isDateCalendarOpen() {
+		return calendarWindow.isOpen();
+	}
+
+	public void pickClosest29Fev() {
+		int closestLeapYear = TimeUtil.getClosestDateWith29Feb();
+		yearSelect.clickElementByIntValue(Integer.toString(closestLeapYear));
+		monthSelect.clickElementByIntValue("2");
+		day29.click();
+	}
+
+	public boolean isDatePickerDate29Fev() {
+		return datePickerDateInput.getTextFromInput().contains("02/29");
 	}
 
 	public boolean isSliderFormOpen() {
@@ -76,18 +92,10 @@ public class WidgetsPage extends BaseForm {
 	}
 
 	public boolean isDatePickerDateActual() {
-		String dataFromInput = datePickerDateInput.getTextFromInput();
-		if(dataFromInput.equals(TimeUtil.getCurrentMonthDayYear())) {
-			return true;
-		}
-		return false;
+		return datePickerDateInput.getTextFromInput().equals(TimeUtil.getCurrentMonthDayYear());
 	}
 
 	public boolean isDatePickerDateTimeActual() {
-		String dataFromInput = dateTimePickerInput.getTextFromInput();
-		if(dataFromInput.equals(TimeUtil.getCurrentDateTime())) {
-			return true;
-		}
-		return false;
+		return dateTimePickerInput.getTextFromInput().equals(TimeUtil.getCurrentDateTime());
 	}
 }

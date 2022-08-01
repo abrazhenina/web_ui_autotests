@@ -34,6 +34,7 @@ public class TestData {
 	static private int pickDateDay;
 	static private int pickDateMonth;
 
+
 	public TestData (JsonObject testData) {
 		alertsWindowsPageAlertBtnName = testData.get("alertsWindowsPageAlertBtnName").getAsString();
 		toSeeAlertBtnName = testData.get("toSeeAlertBtnName").getAsString();
