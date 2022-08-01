@@ -80,12 +80,13 @@ public class TC6DatePicker extends BaseTest {
 	}
 
 	@Test(priority = 3)
-	void testStep3() throws InterruptedException {
+	void testStep3() {
 		Reporter.log("DatePickerCalendar opens.", true);
 		widgetsPage.openDateCalendar();
 		Assert.assertTrue(widgetsPage.isDateCalendarOpen(), "DatePickerCalendar not found.");
+		Reporter.log("Pick 29 February closest to current day.", true);
 		widgetsPage.pickClosest29Fev();
+		Reporter.log("In the DatePicker DateInput is 29 February.", true);
 		Assert.assertTrue(widgetsPage.isDatePickerDate29Fev(), "DatePickerDate is not February 29.");
-		Thread.sleep(1000);
 	}
 }
