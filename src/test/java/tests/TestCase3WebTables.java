@@ -2,97 +2,71 @@ package tests;
 
 import base.BaseTest;
 import browser.Browser;
-import browser.BrowserFactory;
-import config.Config;
+import browser.BrowserConfig;
 import data.TestData;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObjects.*;
-import utils.JsonReader;
 
-import java.io.IOException;
-
-public class TC3WebTables extends BaseTest {
-	WebDriver driver;
-	static String testDataPath = "src/test/resources/testData.json";
-	static String configPath = "src/test/resources/config.json";
-	static TestData testData;
-	static Config config;
+public class TestCase3WebTables extends BaseTest {
 	MainPage mainPage;
 	ElementsPage elementsPage;
 	WebTablesPage webTablesPage;
 	RegistrationForm registrationForm;
-	int userNum;
+	String userNum;
 	String userFirstName;
-
-	@BeforeTest
-	void setup() {
-		try {
-			config = new Config(JsonReader.readJson(configPath));
-			testData = new TestData(JsonReader.readJson(testDataPath));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		BrowserFactory.setParameters();
-		driver = Browser.getBrowserInstance();
-		mainPage = new MainPage();
-		elementsPage = new ElementsPage();
-		webTablesPage = new WebTablesPage();
-		registrationForm = new RegistrationForm();
-	}
-
-	@AfterTest
-	void tearDown() {
-		Browser.getBrowserInstance().quit();
-	}
 
 	@Test (priority = 1)
 	void testStep1() {
 		Reporter.log("\n3 test case started.", true);
 		Reporter.log("1/5", true);
 		Reporter.log("Go to MainPage.", true);
-		Browser.goToUrl(config.getHomePageAddress());
+		Browser.getBrowserInstance();
+		Browser.goToUrl(BrowserConfig.getHomePageAddress());
 		Reporter.log("MainPage is open.", true);
+		mainPage = new MainPage();
 		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
 	}
 
 	@Test (priority = 2)
 	void testStep2() {
-		Reporter.log("2/5", true);
+		Reporter.log("\n2/5", true);
 		Reporter.log("Click ElementsButton.", true);
-		mainPage.clickButton("elementsBtn");
+		mainPage.clickElementsBtn();
 		Reporter.log("ElementsPage opens.", true);
+		elementsPage = new ElementsPage();
 		Assert.assertTrue(elementsPage.isOpen(), "ElementsPage not found.");
 		Reporter.log("Click WebTablesButton.", true);
-		elementsPage.clickButton("webTablesBtn");
+		elementsPage.clickWebTablesBtn();
 		Reporter.log("WebTablesPage opens.", true);
-		Assert.assertTrue(webTablesPage.isOpen());
+		webTablesPage = new WebTablesPage();
+		Assert.assertTrue(webTablesPage.isOpen(), "WebTablesPage not found.");
 	}
 
 	@Test (priority = 3)
 	void testStep3() {
-		Reporter.log("3/5", true);
+		Reporter.log("\n3/5", true);
 		Reporter.log("Click AddButton.", true);
-		webTablesPage.clickButton("addBtn");
+		webTablesPage.clickAddBtn();
 		Reporter.log("RegistrationForm opens.", true);
-		Assert.assertTrue(registrationForm.isRegFormVisible());
+		registrationForm = new RegistrationForm();
+		Assert.assertTrue(registrationForm.isRegFormVisible(), "RegForm not found.");
 	}
 
 	@Test (priority = 4)
 	void testStep4() {
-		Reporter.log("4/5", true);
-		String userNum = Integer.toString(TestData.getUserNum());
+		Reporter.log("\n4/5", true);
+		userNum = Integer.toString(TestData.getUserNum());
 		Reporter.log("Fill the registration form with data of user #" + userNum, true);
 		Reporter.log("Fill the first name.", true);
 		String userFirstName = TestData.getUserFirstName();
 		registrationForm.sendKeysFirstName(userFirstName);
+		//Assert.assertTrue(registrationForm.isFirstNameFilled(), "FirstNameInput not filled.");
 		Reporter.log("Fill the last name.", true);
 		String userLastName = TestData.getUserLastName();
 		registrationForm.sendKeysLastName(userLastName);
+		//Assert.assertTrue(registrationForm.isLastNameFilled(), "LastNameInput not filled.");
 		Reporter.log("Fill the email.", true);
 		registrationForm.sendKeysEmail(TestData.getUserEmail());
 		Reporter.log("Fill the age.", true);
@@ -110,7 +84,7 @@ public class TC3WebTables extends BaseTest {
 	@Test (priority = 5)
 	void testStep5() {
 		Reporter.log("5/5", true);
-		Reporter.log("Delete user  #"+userNum+" WebTable record.", true);
+		Reporter.log("Delete user #"+userNum+" WebTable record.", true);
 		webTablesPage.deleteRecord();
 		Assert.assertTrue(webTablesPage.isRecordDeleted(userFirstName),"User data still in WebTable.");
 	}

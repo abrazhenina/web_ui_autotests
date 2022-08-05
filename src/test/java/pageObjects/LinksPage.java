@@ -6,11 +6,11 @@ import org.openqa.selenium.By;
 import utils.Waits;
 
 public class LinksPage extends BaseForm {
-	private Link linkHome;
+	private Link linkHome = new Link("linkHome",  By.id("simpleLink"));
 	private String originalWindow;
 	public LinksPage() {
 		super("linksPage", By.xpath("//div[@class='main-header' and contains(text(),'Links')]"));
-		linkHome = new Link("linkHome",  By.id("simpleLink"));
+
 	}
 
 	public void clickHomeLink() {

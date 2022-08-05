@@ -4,13 +4,11 @@ import base.elements.Frame;
 import org.openqa.selenium.By;
 
 public class FramesPage extends Frame {
-	private FrameUpper frameUpper;
-	private FrameLower frameLower;
+	private FrameUpper frameUpper = new FrameUpper();
+	private FrameLower frameLower = new FrameLower();
 
 	public FramesPage() {
 		super("framesPage", By.xpath("//div[@class='main-header' and contains(text(),'Frames')]"));
-		frameUpper = new FrameUpper();
-		frameLower = new FrameLower();
 	}
 
 	public boolean isUpperFrameOpen() {

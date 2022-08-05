@@ -4,12 +4,10 @@ import base.elements.Frame;
 import org.openqa.selenium.By;
 
 public class NestedFramesPage extends Frame {
-	private FrameParent frameParent;
-	private FrameChild frameChild;
+	private FrameParent frameParent = new FrameParent();
+	private FrameChild frameChild = new FrameChild();
 	public NestedFramesPage() {
 		super("nestedFramesPage", By.xpath("//div[text()='Nested Frames']"));
-		frameParent = new FrameParent();
-		frameChild = new FrameChild();
 	}
 
 	public boolean isParentFrameOpen() {

@@ -15,21 +15,16 @@ public class WebTable extends BaseElement {
 	}
 
 	public boolean isStringInTable(String str) {
-		List<WebElement> webTable = Browser.getBrowserInstance().findElements(this.getLocator());
-		for (WebElement cell : webTable) {
-			if(cell.getText().contains(str))
-				return true;
+		try {
+			List<WebElement> webTable = Browser.getBrowserInstance().findElements(this.getLocator());
+			for (WebElement cell : webTable) {
+				if (cell.getText().contains(str))
+					return true;
+			}
+		} catch (Exception e) {
+			return false;
 		}
 		return false;
-	}
-
-	public boolean isStringDeletedFromTable(String str) {
-		List<WebElement> webTable = Browser.getBrowserInstance().findElements(this.getLocator());
-		for (WebElement cell : webTable) {
-			if(cell.getText().contains(str))
-				return false;
-		}
-		return true;
 	}
 
 	public void deleteRecord(By delBtnLoc) {

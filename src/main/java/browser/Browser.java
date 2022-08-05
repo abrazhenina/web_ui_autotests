@@ -17,6 +17,6 @@ public class Browser {
 	}
 
 	public static void goToUrl(String url) {
-		driver.get(url);
+		getBrowserInstance().get(url);
 	}
 }

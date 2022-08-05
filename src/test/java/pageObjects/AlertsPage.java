@@ -8,7 +8,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import utils.WaiterUtil;
 import utils.Waits;
 
 public class AlertsPage extends BaseForm {
@@ -27,14 +26,16 @@ public class AlertsPage extends BaseForm {
 		this.promptResultLabel = new Label("alertPromptResultLabel", By.id("promptResult"));
 	}
 
-	public void clickButton(String buttonName) {
-		if (buttonName.equals(seeAlertBtn.getName()))
-			seeAlertBtn.click();
-		else if (buttonName.equals(confirmBoxBtn.getName())) {
-			confirmBoxBtn.click();
-		} else if (buttonName.equals(promptBoxBtn.getName())) {
-			promptBoxBtn.click();
-		}
+	public void clickSeeAlertBtn() {
+		seeAlertBtn.click();
+	}
+
+	public void clickConfirmBoxBtn() {
+		confirmBoxBtn.click();
+	}
+
+	public void clickPromptBoxBtn() {
+		promptBoxBtn.click();
 	}
 
 	public boolean isAlertDisplayed() {
@@ -56,30 +57,29 @@ public class AlertsPage extends BaseForm {
 	}
 
 	public String getAlertText() {
-		Alert alert = WaiterUtil.waiter().until(ExpectedConditions.alertIsPresent());
+		Alert alert = Waits.waiter().until(ExpectedConditions.alertIsPresent());
 		return alert.getText();
 	}
 
 	public void acceptAlert() {
-		Alert alert = WaiterUtil.waiter().until(ExpectedConditions.alertIsPresent());
+		Alert alert = Waits.waiter().until(ExpectedConditions.alertIsPresent());
 		alert.accept();
 	}
 
 	public void sendKeysToAlertPrompt(String keys) {
-		Alert alert = WaiterUtil.waiter().until(ExpectedConditions.alertIsPresent());
+		Alert alert = Waits.waiter().until(ExpectedConditions.alertIsPresent());
 		alert.sendKeys(keys);
 	}
 
-	public String getLabelText(String labelName) {
-		if(labelName.equals(confirmResultLabel.getName())) {
-			return Waits.waiter()
-					.until(ExpectedConditions.presenceOfElementLocated(confirmResultLabel.getLocator()))
-					.getText();
-		} else if(labelName.equals(promptResultLabel.getName())) {
-			return Waits.waiter()
-					.until(ExpectedConditions.presenceOfElementLocated(promptResultLabel.getLocator()))
-					.getText();
-		}
-		return null;
+	public String getConfirmResultText() {
+		return Waits.waiter()
+				.until(ExpectedConditions.presenceOfElementLocated(confirmResultLabel.getLocator()))
+				.getText();
+	}
+
+	public String getPromptResultText() {
+		return Waits.waiter()
+				.until(ExpectedConditions.presenceOfElementLocated(promptResultLabel.getLocator()))
+				.getText();
 	}
 }

@@ -2,7 +2,9 @@ package base;
 
 import browser.Browser;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Waits;
 
@@ -55,5 +57,13 @@ public abstract class BaseForm {
 
 	public By getLocator() {
 		return this.loc;
+	}
+
+	public void scrollDown() {
+		new Actions(Browser.getBrowserInstance())
+				.moveToElement(Browser.getBrowserInstance().findElement(this.getLocator()))
+				.keyDown(Keys.ARROW_DOWN)
+				.keyUp(Keys.ARROW_DOWN)
+				.perform();
 	}
 }

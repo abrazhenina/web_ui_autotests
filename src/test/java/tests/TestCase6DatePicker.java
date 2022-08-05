@@ -2,72 +2,35 @@ package tests;
 
 import base.BaseTest;
 import browser.Browser;
-import browser.BrowserFactory;
-import config.Config;
-import data.TestData;
-import org.openqa.selenium.WebDriver;
+import browser.BrowserConfig;
 import org.testng.Assert;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import pageObjects.FramesPage;
 import pageObjects.MainPage;
-import pageObjects.NestedFramesPage;
 import pageObjects.WidgetsPage;
-import utils.JsonReader;
-import utils.TimeUtil;
 
-import java.io.IOException;
-
-public class TC6DatePicker extends BaseTest {
-	private WebDriver driver;
-	private String testDataPath = "src/test/resources/testData.json";
-	private String configPath = "src/test/resources/config.json";
-	private TestData testData;
-	private Config config;
+public class TestCase6DatePicker extends BaseTest {
 	private MainPage mainPage;
-	private NestedFramesPage nestedFramesPage;
-	private FramesPage framesPage;
 	private WidgetsPage widgetsPage;
-
-	@BeforeTest
-	void setup() {
-		try {
-			config = new Config(JsonReader.readJson(configPath));
-			testData = new TestData(JsonReader.readJson(testDataPath));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		BrowserFactory.setParameters();
-		driver = Browser.getBrowserInstance();
-		mainPage = new MainPage();
-		nestedFramesPage = new NestedFramesPage();
-		framesPage = new FramesPage();
-		widgetsPage = new WidgetsPage();
-	}
-
-	@AfterTest
-	void tearDown() {
-		Browser.getBrowserInstance().quit();
-	}
 
 	@Test(priority = 1)
 	void testStep1() {
-		Reporter.log("\n5 test case started.", true);
-		Reporter.log("\n1/6", true);
+		Reporter.log("\n6 test case started.", true);
+		Reporter.log("\n1/3", true);
 		Reporter.log("Go to MainPage.", true);
-		Browser.goToUrl(config.getHomePageAddress());
+		Browser.goToUrl(BrowserConfig.getHomePageAddress());
 		Reporter.log("MainPage opens.", true);
+		mainPage = new MainPage();
 		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
 	}
 
 	@Test(priority = 2)
 	void testStep2() {
-		Reporter.log("\n2/6", true);
+		Reporter.log("\n2/3", true);
 		Reporter.log("Click WidgetsButton.", true);
-		mainPage.clickButton("widgetsBtn");
+		mainPage.clickWidgetsBtn();
 		Reporter.log("WidgetsPage opens.", true);
+		widgetsPage = new WidgetsPage();
 		Assert.assertTrue(widgetsPage.isOpen(), "WidgetsPage not found.");
 		Reporter.log("Click DatePickerButton.", true);
 		widgetsPage.clickDatePickerBtn();
@@ -81,6 +44,7 @@ public class TC6DatePicker extends BaseTest {
 
 	@Test(priority = 3)
 	void testStep3() {
+		Reporter.log("\n3/3", true);
 		Reporter.log("DatePickerCalendar opens.", true);
 		widgetsPage.openDateCalendar();
 		Assert.assertTrue(widgetsPage.isDateCalendarOpen(), "DatePickerCalendar not found.");

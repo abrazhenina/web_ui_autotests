@@ -1,8 +1,8 @@
-package config;
+package browser;
 
 import com.google.gson.JsonObject;
 
-public class Config {
+public class BrowserConfig {
 	private static String homePageAddress;
 	private static String browserName;
 	private static boolean browserIncognito;
@@ -10,7 +10,7 @@ public class Config {
 	private static boolean browserWindowMaximized;
 	private static int timeout;
 
-	public Config (JsonObject config) {
+	public BrowserConfig(JsonObject config) {
 		homePageAddress = config.get("homePageAddress").getAsString();
 		browserName = config.get("browserName").getAsString();
 		browserIncognito = config.get("browserIncognito").getAsBoolean();

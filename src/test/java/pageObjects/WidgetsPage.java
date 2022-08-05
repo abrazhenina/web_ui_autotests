@@ -3,41 +3,33 @@ package pageObjects;
 import base.BaseForm;
 import base.elements.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import utils.StringUtil;
 import utils.TimeUtil;
 
 public class WidgetsPage extends BaseForm {
-	private Form sliderForm;
-	private Button sliderBtn;
-	private TextBox sliderInput;
-	private Label slider;
-	private Label sliderPopUpLabel;
+	private Form sliderForm = new Form("sliderForm", By.xpath("//div[text()='Slider']"));
+	private Button sliderBtn = new Button("sliderBtn", By.xpath("//span[text()='Slider']"));
+	private TextBox sliderInput = new TextBox("sliderInput", By.id("sliderValue"));
+	private Slider slider = new Slider("slider", By.className("range-slider--primary"));
+	private Button datePickerBtn = new Button("datePickerBtn",  By.xpath("//span[text()='Date Picker']"));
+	private Form datePickerForm = new Form("datePickerForm", By.xpath("//div[text()='Date Picker']"));
+	private TextBox datePickerDateInput = new TextBox("datePickerDateInput", By.id("datePickerMonthYearInput"));
+	private TextBox dateTimePickerInput = new TextBox("dateTimePickerInput", By.id("dateAndTimePickerInput"));
+	private Form calendarWindow = new Form("calendarWindow", By.className("react-datepicker__month-container"));
+	private Dropdown monthSelect = new Dropdown("monthSelect", By.className("react-datepicker__month-select"));
+	private Dropdown yearSelect = new Dropdown("yearSelect", By.className("react-datepicker__year-select"));
+	private Label day29 = new Label("day29", By.className("react-datepicker__day--029"));
+	private Button progressBarBtn = new Button("progressBarBtn", By.xpath("//span[text()='Progress Bar']"));
+	private Form progressBarForm = new Form("progressBar", By.xpath("//div[text()='Progress Bar']"));
+	private Button startStopBtn = new Button("startStopBtn", By.id("startStopButton"));
+	private Label progressBar = new Label("progressBar", By.xpath("//div[@id='progressBar']//div"));
+	private Label pageHeader = new Label("pageHeader", By.className("main-header"));
 	private String randomNumStr;
-	private Button datePickerBtn;
-	private Form datePickerForm;
-	private TextBox datePickerDateInput;
-	private TextBox dateTimePickerInput;
-	private Form calendarWindow;
-	private Dropdown monthSelect;
-	private Dropdown yearSelect;
-	private Form calendar7Days;
-	private Label day29;
+	private int sliderNum = 0;
+
 	public WidgetsPage() {
 		super("widgetsPage", By.xpath("//div[text()='Widgets']"));
-		sliderBtn = new Button("sliderBtn", By.xpath("//span[text()='Slider']"));
-		sliderForm = new Form("sliderForm", By.xpath("//div[text()='Slider']"));
-		sliderInput = new TextBox("sliderInput", By.id("sliderValue"));
-		slider = new Label("slider", By.className("range-slider--primary"));
-		sliderPopUpLabel = new Label("sliderPopUpLabel", By.className("range-slider__tooltip__label"));
-		datePickerBtn = new Button("datePickerBtn",  By.xpath("//span[text()='Date Picker']"));
-		datePickerForm = new Form("datePickerForm", By.xpath("//div[text()='Date Picker']"));
-		datePickerDateInput = new TextBox("datePickerDateInput", By.id("datePickerMonthYearInput"));
-		dateTimePickerInput = new TextBox("dateTimePickerInput", By.id("dateAndTimePickerInput"));
-		calendarWindow = new Form("calendarWindow", By.className("react-datepicker__month-container"));
-		monthSelect = new Dropdown("monthSelect", By.className("react-datepicker__month-select"));
-		calendar7Days = new Form("calendar7Days", By.className("react-datepicker__week"));
-		yearSelect = new Dropdown("yearSelect", By.className("react-datepicker__year-select"));
-		day29 = new Label("day29", By.className("react-datepicker__day--029"));
 	}
 
 	public void openDateCalendar() {
@@ -66,29 +58,59 @@ public class WidgetsPage extends BaseForm {
 	public boolean isDatePickerFormOpen() {
 		return datePickerForm.isOpen();
 	}
-
-	public void clickSliderBtn() {
-		sliderBtn.click();
+	public boolean isProgressBarFormOpen() {
+		return progressBarForm.isOpen();
 	}
 
 	public void clickDatePickerBtn() {
 		datePickerBtn.click();
 	}
 
-	public void sendRandomNumToSliderInput() {
-		randomNumStr = StringUtil.getRandomNumString0to100();
-		sliderInput.clearInput();
-		sliderInput.sendKeys(randomNumStr);
+	public void clickSliderBtn() {
+		sliderBtn.click();
+		if(!sliderBtn.isElementClassValueActive()) {
+			sliderBtn.click();
+		}
 	}
 
-	public boolean isSliderLabelNumEqualToNumSentToSliderInput() {
-		slider.moveToElement();
-		System.out.println("'"+randomNumStr+"'");
-		System.out.println("'"+sliderPopUpLabel.getText()+"'");
-		if(sliderPopUpLabel.isDisplayed()) {
-			return (randomNumStr.equals(sliderPopUpLabel.getText()));
+	public void clickProgressBarBtn() {
+		clickBlankSpaceOnPage();
+		this.scrollDown();
+		try {
+			progressBarBtn.click();
+		} catch (ElementClickInterceptedException e) {
+			this.scrollDown();
+			progressBarBtn.click();
 		}
+	}
+
+	public void clickStartBtn() {
+		startStopBtn.click();
+	}
+
+	public void clickStopBtnAt28Percent() {
+		int percent = getProgressBarTextInt();
+		while(percent < 28) {
+			percent = getProgressBarTextInt();
+		}
+		startStopBtn.click();
+	}
+
+	public void clickBlankSpaceOnPage() {
+		pageHeader.click();
+	}
+	public int getProgressBarTextInt() {
+		return progressBar.getAriaValueNowInt();
+	}
+
+	public boolean isProgressBarValueBetween28And30() {
+		if(progressBar.getAriaValueNowInt() >= 28 && progressBar.getAriaValueNowInt() <=30)
+			return true;
 		return false;
+	}
+
+	public boolean isSliderNumEqualToGeneratedNum() {
+		return randomNumStr.equals(sliderInput.getTextFromInput());
 	}
 
 	public boolean isDatePickerDateActual() {
@@ -97,5 +119,21 @@ public class WidgetsPage extends BaseForm {
 
 	public boolean isDatePickerDateTimeActual() {
 		return dateTimePickerInput.getTextFromInput().equals(TimeUtil.getCurrentDateTime());
+	}
+
+	public void moveSliderToZero() {
+		slider.click();
+		sliderNum = Integer.parseInt(sliderInput.getTextFromInput());
+		for(int i=0; i<=sliderNum; i++) {
+			slider.moveSliderToLeft();
+		}
+	}
+
+	public void setRandomNumToSlider() {
+		randomNumStr = StringUtil.getRandomNumString0to100();
+		int randomNum = Integer.parseInt(randomNumStr);
+		for(int i=0; i<randomNum; i++) {
+			slider.moveSliderToRight();
+		}
 	}
 }

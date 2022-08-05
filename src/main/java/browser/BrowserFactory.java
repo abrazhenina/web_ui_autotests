@@ -1,6 +1,5 @@
 package browser;
 
-import config.Config;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
@@ -17,15 +16,11 @@ public class BrowserFactory {
 	private BrowserFactory() {
 	}
 
-	public static void setParameters() {
-		browserName = Config.getBrowserName();
-		browserIncognito = Config.getBrowserIncognito();
-		browserLang = Config.getBrowserLang();
-		browserWindowMaximized = Config.getBrowserWindowMaximized();
-	}
-
 	public static WebDriver getBrowser() {
-		setParameters();
+		browserName = BrowserConfig.getBrowserName();
+		browserIncognito = BrowserConfig.getBrowserIncognito();
+		browserLang = BrowserConfig.getBrowserLang();
+		browserWindowMaximized = BrowserConfig.getBrowserWindowMaximized();
 		switch (browserName.toLowerCase()) {
 			case "chrome" -> {
 				ChromeOptions opt = new ChromeOptions();

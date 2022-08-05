@@ -19,14 +19,19 @@ public class AlertsWindowsPage extends BaseForm {
 		this.browserWindowsBtn = new Button("browserWindowsBtn", By.xpath("//span[text()='Browser Windows']"));
 	}
 
-	public void clickButton(String buttonName) {
-		if (buttonName.equals(alertsBtn.getName()))
-			alertsBtn.click();
-		else if (buttonName.equals(nestedFramesBtn.getName()))
-			nestedFramesBtn.click();
-		else if (buttonName.equals(framesBtn.getName()))
-			framesBtn.click();
-		else if (buttonName.equals(browserWindowsBtn.getName()))
-			browserWindowsBtn.click();
+	public void clickAlertsBtn() {
+		alertsBtn.click();
+	}
+
+	public void clickNestedFramesBtn() {
+		nestedFramesBtn.click();
+	}
+
+	public void clickFramesBtn() {
+		framesBtn.click();
+	}
+
+	public void clickBrowserWindowsBtn() {
+		browserWindowsBtn.click();
 	}
 }

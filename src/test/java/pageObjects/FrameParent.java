@@ -5,10 +5,9 @@ import base.elements.Label;
 import org.openqa.selenium.By;
 
 public class FrameParent extends Frame {
-	private Label textLabel;
+	private Label textLabel = new Label("textLabel", By.xpath("//body[text()='Parent frame']"));
 	public FrameParent() {
 		super("frameParent", By.id("frame1"));
-		textLabel = new Label("textLabel", By.xpath("//body[text()='Parent frame']"));
 	}
 
 	public String getTextFromFrameLabel() {

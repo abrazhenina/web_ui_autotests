@@ -6,11 +6,11 @@ import org.openqa.selenium.By;
 
 public class FrameUpper extends Frame {
 
-	private Label textLabel;
+	private Label textLabel = new Label("textLabel", By.id("sampleHeading"));
 
 	public FrameUpper() {
 		super("frameUpper", By.id("frame1"));
-		textLabel = new Label("textLabel", By.id("sampleHeading"));
+
 	}
 
 	public String getTextFromFrameLabel() {
