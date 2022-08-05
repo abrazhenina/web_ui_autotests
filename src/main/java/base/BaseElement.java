@@ -35,6 +35,13 @@ public abstract class BaseElement {
 		Waits.waiter().until(ExpectedConditions.elementToBeClickable(this.getLocator())).click();
 	}
 
+	public void clickJS() {
+		WebDriver driver = Browser.getBrowserInstance();
+		WebElement element = driver.findElement(this.getLocator());
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", element);
+	}
+
 	public boolean isVisible() {
 		try
 		{

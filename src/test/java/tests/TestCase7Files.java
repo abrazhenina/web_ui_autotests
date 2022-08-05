@@ -31,7 +31,7 @@ public class TestCase7Files extends BaseTest {
 		Reporter.log("ElementsPage opens.", true);
 		elementsPage = new ElementsPage();
 		Assert.assertTrue(elementsPage.isOpen(), "ElementsPage not found.");
-		Reporter.log("Click UploadDownloadBtn.", true);
+		Reporter.log("Click UploadDownloadButton.", true);
 		elementsPage.clickUploadDownloadBtn();
 		Reporter.log("UploadDownloadForm opens.", true);
 		Assert.assertTrue(elementsPage.isUploadDownloadFormOpen(), "UploadDownloadForm not found.");
@@ -40,7 +40,19 @@ public class TestCase7Files extends BaseTest {
 	@Test (priority = 3)
 	void testStep3() {
 		Reporter.log("3/4", true);
-		Reporter.log("Click DownloadBtn.", true);
+		Reporter.log("Click DownloadButton.", true);
 		elementsPage.clickDownloadBtn();
+		Reporter.log("The file downloaded.", true);
+		elementsPage.isFileDownloaded();
+	}
+
+	@Test (priority = 4)
+	void testStep4() throws InterruptedException {
+		Reporter.log("4/4", true);
+		Reporter.log("Click UploadButton.", true);
+		elementsPage.clickUploadBtn();
+		Thread.sleep(2000);
+		//Reporter.log("The file downloaded.", true);
+		//elementsPage.isFileDownloaded();
 	}
 }

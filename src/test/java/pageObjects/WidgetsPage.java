@@ -3,7 +3,6 @@ package pageObjects;
 import base.BaseForm;
 import base.elements.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
 import utils.StringUtil;
 import utils.TimeUtil;
 
@@ -24,7 +23,6 @@ public class WidgetsPage extends BaseForm {
 	private Form progressBarForm = new Form("progressBar", By.xpath("//div[text()='Progress Bar']"));
 	private Button startStopBtn = new Button("startStopBtn", By.id("startStopButton"));
 	private Label progressBar = new Label("progressBar", By.xpath("//div[@id='progressBar']//div"));
-	private Label pageHeader = new Label("pageHeader", By.className("main-header"));
 	private String randomNumStr;
 	private int sliderNum = 0;
 
@@ -67,21 +65,11 @@ public class WidgetsPage extends BaseForm {
 	}
 
 	public void clickSliderBtn() {
-		sliderBtn.click();
-		if(!sliderBtn.isElementClassValueActive()) {
-			sliderBtn.click();
-		}
+		sliderBtn.clickJS();
 	}
 
 	public void clickProgressBarBtn() {
-		clickBlankSpaceOnPage();
-		this.scrollDown();
-		try {
-			progressBarBtn.click();
-		} catch (ElementClickInterceptedException e) {
-			this.scrollDown();
-			progressBarBtn.click();
-		}
+		progressBarBtn.clickJS();
 	}
 
 	public void clickStartBtn() {
@@ -96,9 +84,6 @@ public class WidgetsPage extends BaseForm {
 		startStopBtn.click();
 	}
 
-	public void clickBlankSpaceOnPage() {
-		pageHeader.click();
-	}
 	public int getProgressBarTextInt() {
 		return progressBar.getAriaValueNowInt();
 	}

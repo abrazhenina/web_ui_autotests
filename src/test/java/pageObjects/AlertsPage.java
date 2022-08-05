@@ -11,19 +11,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Waits;
 
 public class AlertsPage extends BaseForm {
-	private Button seeAlertBtn;
-	private Button confirmBoxBtn;
-	private Label confirmResultLabel;
-	private Button promptBoxBtn;
-	private Label promptResultLabel;
+	private Button seeAlertBtn = new Button("seeAlertBtn", By.id("alertButton"));
+	private Button confirmBoxBtn = new Button("alertConfirmBoxBtn", By.id("confirmButton"));
+	private Label confirmResultLabel = new Label("alertConfirmResultLabel", By.id("confirmResult"));
+	private Button promptBoxBtn = new Button("alertPromptBoxBtn", By.id("promtButton"));
+	private Label promptResultLabel = new Label("alertPromptResultLabel", By.id("promptResult"));
 
 	public AlertsPage() {
 		super("alertsPage", By.xpath("//div[text()='Alerts']"));
-		this.seeAlertBtn = new Button("seeAlertBtn", By.id("alertButton"));
-		this.confirmBoxBtn = new Button("alertConfirmBoxBtn", By.id("confirmButton"));
-		this.confirmResultLabel = new Label("alertConfirmResultLabel", By.id("confirmResult"));
-		this.promptBoxBtn = new Button("alertPromptBoxBtn", By.id("promtButton"));
-		this.promptResultLabel = new Label("alertPromptResultLabel", By.id("promptResult"));
 	}
 
 	public void clickSeeAlertBtn() {

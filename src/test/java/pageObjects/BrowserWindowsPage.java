@@ -7,23 +7,17 @@ import org.openqa.selenium.By;
 import utils.Waits;
 
 public class BrowserWindowsPage extends BaseForm {
-	private Button newTabBtn;
-	private Button newWindowBtn;
-	private Button messageWindowBtn;
+	private Button newTabBtn = new Button("newTabBtn", By.id("tabButton"));
+	private Button newWindowBtn = new Button("newWindowBtn", By.id("windowButton"));
+	private Button messageWindowBtn = new Button("messageWindowBtn", By.id("messageWindowButton"));
+	private Button elementsHeaderBtn = new Button("elementsHeaderBtn", By.xpath("//div[@class='header-wrapper']//div[text()='Elements']"));
+	private Button linksBtn = new Button("linksBtn", By.xpath("//span[text()='Links']"));
+	private Dropdown elementsDropdownShowed = new Dropdown("elementsDropdown", By.cssSelector(".element-list.show"));
 	private String originalWindow;
-	private Button elementsHeaderBtn;
-	private Button linksBtn;
-	private Dropdown elementsDropdownShowed;
 
 	public BrowserWindowsPage() {
 		super("browserWindows", By.xpath(
 				"//div[@class='main-header' and text()='Browser Windows']"));
-		newTabBtn = new Button("newTabBtn", By.id("tabButton"));
-		newWindowBtn = new Button("newWindowBtn", By.id("windowButton"));
-		messageWindowBtn = new Button("messageWindowBtn", By.id("messageWindowButton"));
-		elementsHeaderBtn = new Button("elementsHeaderBtn", By.xpath("//div[@class='header-wrapper']//div[text()='Elements']"));
-		linksBtn = new Button("linksBtn", By.xpath("//span[text()='Links']"));
-		elementsDropdownShowed = new Dropdown("elementsDropdown", By.cssSelector(".element-list.show"));
 	}
 
 	public void clickNewTabBtn() {

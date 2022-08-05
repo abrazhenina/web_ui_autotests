@@ -71,7 +71,7 @@ public class TestCase2IFrames extends BaseTest {
 		Reporter.log("Switch to UpperFrame.", true);
 		framesPage.switchToUpperFrame();
 		Reporter.log("Read UpperFrame text.", true);
-		text = framesPage.getTextFromUpperFrame();
+		text = framesPage.getTextFromUpperFrame(); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		Reporter.log("Switch back from frame.", true);
 		framesPage.switchBackFromFrames();
 		Reporter.log("LowerFrame on FramesPage displayed.", true);

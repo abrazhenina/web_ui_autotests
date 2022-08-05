@@ -10,7 +10,6 @@ public class FrameUpper extends Frame {
 
 	public FrameUpper() {
 		super("frameUpper", By.id("frame1"));
-
 	}
 
 	public String getTextFromFrameLabel() {

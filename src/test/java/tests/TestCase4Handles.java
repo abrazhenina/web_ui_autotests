@@ -66,6 +66,7 @@ public class TestCase4Handles extends BaseTest {
 		Reporter.log("Click LinksButton.", true);
 		browserWindowsPage.clickLinksBtn();
 		Reporter.log("LinksPage opens.", true);
+		linksPage = new LinksPage();
 		Assert.assertTrue(linksPage.isOpen(), "LinksPage not found.");
 	}
 
@@ -73,7 +74,6 @@ public class TestCase4Handles extends BaseTest {
 	void testStep6() {
 		Reporter.log("6/7", true);
 		Reporter.log("Click HomeLink.", true);
-		linksPage = new LinksPage();
 		linksPage.clickHomeLink();
 		Reporter.log("New tab with MainPage opens.", true);
 		Reporter.log("MainPage is open.", true);
