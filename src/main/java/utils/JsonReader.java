@@ -14,8 +14,10 @@ public class JsonReader {
 
         String jsonString = "";
         try {
+            Log.log().info("Read JsonFile " + filePath);
             jsonString = Files.readString(filePath);
         } catch(IOException e) {
+            Log.log().info("IOException while reading JsonFile " + filePath);
             e.printStackTrace();
         }
         JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();

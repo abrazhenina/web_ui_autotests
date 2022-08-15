@@ -2,8 +2,6 @@ package base;
 
 import browser.Browser;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Waits;
 
@@ -65,18 +63,12 @@ public abstract class BaseElement {
 		return element.getText();
 	}
 
-	public String getValue() {
-		return Browser.getBrowserInstance().findElement(this.getLocator()).getAttribute("value");
-	}
-
 	public int getAriaValueNowInt() {
 		return Integer.parseInt(Browser.getBrowserInstance()
 				.findElement(this.getLocator()).getAttribute("aria-valuenow"));
 	}
 	public boolean isElementClassValueActive() {
 		String elClassValue = Browser.getBrowserInstance().findElement(this.getLocator()).getAttribute("class");
-		if(elClassValue.contains("active"))
-			return true;
-		return false;
+		return elClassValue.contains("active");
 	}
 }

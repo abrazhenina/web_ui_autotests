@@ -11,10 +11,6 @@ public class Slider extends BaseElement {
 		super(name, loc);
 	}
 
-	public String getSliderValue() {
-		return getValue();
-	}
-
 	public void moveSliderToLeft() {
 		new Actions(Browser.getBrowserInstance())
 				.moveToElement(Browser.getBrowserInstance().findElement(this.getLocator()))

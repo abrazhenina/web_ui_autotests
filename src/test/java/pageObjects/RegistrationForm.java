@@ -5,6 +5,7 @@ import base.elements.Button;
 import base.elements.Label;
 import base.elements.TextBox;
 import org.openqa.selenium.By;
+import utils.Log;
 
 public class RegistrationForm extends BaseForm {
 	private Label modalContent = new Label("modalContent", By.className("modal-content"));
@@ -30,44 +31,43 @@ public class RegistrationForm extends BaseForm {
 	}
 
 	public void sendKeysFirstName(String keys) {
+		Log.log().info("Fill the first name.");
 		firstNameInput.click();
 		firstNameInput.sendKeys(keys);
 	}
 
-	public boolean isFirstNameFilled() {
-		return firstNameInput.getTextFromModalElement(this.getLocator(), firstNameInput.getLocator()).length() > 0;
-	}
-
 	public void sendKeysLastName(String keys) {
+		Log.log().info("Fill the last name.");
 		lastNameInput.click();
 		lastNameInput.sendKeys(keys);
 	}
 
-	public boolean isLastNameFilled() {
-		return lastNameInput.getTextFromModalElement(this.getLocator(), lastNameInput.getLocator()).length() > 0;
-	}
-
 	public void sendKeysEmail(String keys) {
+		Log.log().info("Fill the email.");
 		emailInput.click();
 		emailInput.sendKeys(keys);
 	}
 
 	public void sendKeysAge(String keys) {
+		Log.log().info("Fill the age.");
 		ageInput.click();
 		ageInput.sendKeys(keys);
 	}
 
 	public void sendKeysSalary(String keys) {
+		Log.log().info("Fill the salary.");
 		salaryInput.click();
 		salaryInput.sendKeys(keys);
 	}
 
 	public void sendKeysDepartment(String keys) {
+		Log.log().info("Fill the department.");
 		departmentInput.click();
 		departmentInput.sendKeys(keys);
 	}
 
 	public void clickSubmit() {
+		Log.log().info("Press submit button.");
 		submitBtn.click();
 	}
 }

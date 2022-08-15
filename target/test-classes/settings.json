@@ -1,9 +1,0 @@
-{
-  "homePageAddress": "https://store.steampowered.com",
-  "browserName": "chrome",
-  "browserIncognito" : true,
-  "browserLang": true,
-  "timeout": 10,
-  "timeout1": 1,
-  "timeout2": 2
-}

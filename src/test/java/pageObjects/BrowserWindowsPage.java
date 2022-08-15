@@ -4,6 +4,7 @@ import base.BaseForm;
 import base.elements.Button;
 import base.elements.Dropdown;
 import org.openqa.selenium.By;
+import utils.Log;
 import utils.Waits;
 
 public class BrowserWindowsPage extends BaseForm {
@@ -21,6 +22,7 @@ public class BrowserWindowsPage extends BaseForm {
 	}
 
 	public void clickNewTabBtn() {
+		Log.log().info("Click NewTabButton.");
 		originalWindow = getWindowID();
 		int expectedNumOfWindows = 2;
 		newTabBtn.click();
@@ -29,18 +31,26 @@ public class BrowserWindowsPage extends BaseForm {
 	}
 
 	public void closeCurrentTab() {
+		Log.log().info("Close this tab.");
 		this.closeTab(originalWindow);
 	}
 
 	public void clickElementsHeaderBtn() {
+		Log.log().info("Click ElementsPageButton.");
 		elementsHeaderBtn.click();
 	}
 
 	public void clickLinksBtn() {
+		Log.log().info("Click LinksPageButton.");
 		linksBtn.click();
 	}
 
 	public boolean isElementsDropdownShowed() {
 		return elementsDropdownShowed.isDisplayed();
+	}
+
+	public boolean isBrowserWindowsPageOpen() {
+		Log.log().info("On the current tab is BrowserWindowsPage.");
+		return isOpen();
 	}
 }

@@ -17,32 +17,43 @@ public class BrowserFactory {
 	}
 
 	public static WebDriver getBrowser() {
-		browserName = BrowserConfig.getBrowserName();
-		browserIncognito = BrowserConfig.getBrowserIncognito();
-		browserLang = BrowserConfig.getBrowserLang();
-		browserWindowMaximized = BrowserConfig.getBrowserWindowMaximized();
-		switch (browserName.toLowerCase()) {
-			case "chrome" -> {
-				ChromeOptions opt = new ChromeOptions();
-				opt.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
-				if (browserIncognito) {opt.addArguments("--incognito");}
-				if (browserLang) {opt.addArguments("--lang=en");}
-				if (browserWindowMaximized) {opt.addArguments("--start-maximized");}
-				return getChromeInstance(opt);
+			browserName = BrowserConfig.getBrowserName();
+			browserIncognito = BrowserConfig.getBrowserIncognito();
+			browserLang = BrowserConfig.getBrowserLang();
+			browserWindowMaximized = BrowserConfig.getBrowserWindowMaximized();
+			switch (browserName.toLowerCase()) {
+				case "chrome" -> {
+					ChromeOptions opt = new ChromeOptions();
+					opt.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
+					if (browserIncognito) {
+						opt.addArguments("--incognito");
+					}
+					if (browserLang) {
+						opt.addArguments("--lang=en");
+					}
+					if (browserWindowMaximized) {
+						opt.addArguments("--start-maximized");
+					}
+					return getChromeInstance(opt);
+				}
+				case "firefox" -> {
+					FirefoxOptions opt = new FirefoxOptions();
+					opt.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
+					if (browserIncognito) {
+						opt.addArguments("-private");}
+					if (browserLang) {
+						opt.addArguments("--lang=en");
+					}
+					if (browserWindowMaximized) {
+						opt.addArguments("--start-maximized");
+					}
+					return getFirefoxInstance(opt);
+				}
+				default -> {
+					driver = WebDriverManager.chromedriver().create();
+				}
 			}
-			case "firefox" -> {
-				FirefoxOptions opt = new FirefoxOptions();
-				opt.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
-				if (browserIncognito) {opt.addArguments("-private");}
-				if (browserLang) {opt.addArguments("--lang=en");}
-				if (browserWindowMaximized) {opt.addArguments("--start-maximized");}
-				return getFirefoxInstance(opt);
-			}
-			default -> {
-				driver = WebDriverManager.chromedriver().create();
-			}
-		}
-		return driver;
+			return driver;
 	}
 
 	public static WebDriver getChromeInstance(ChromeOptions opt) {

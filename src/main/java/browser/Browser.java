@@ -1,10 +1,11 @@
 package browser;
 
 import org.openqa.selenium.WebDriver;
+import utils.Log;
 
 public class Browser {
 
-	private static WebDriver driver;
+	private static WebDriver driver = null;
 
 	private Browser() {
 	}
@@ -19,4 +20,15 @@ public class Browser {
 	public static void goToUrl(String url) {
 		getBrowserInstance().get(url);
 	}
+
+	public static void setDriverNull() {
+		driver = null;
+	}
 }
+
+
+
+
+
+
+
