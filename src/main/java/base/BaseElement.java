@@ -56,19 +56,8 @@ public abstract class BaseElement {
 		return Waits.waiter().until(ExpectedConditions.visibilityOfElementLocated(this.loc)).getText();
 	}
 
-	public String getTextFromModalElement(By containerLoc, By elementLoc) {
-		WebElement modalContainer = Waits.waiter().until(ExpectedConditions
-				.visibilityOfElementLocated(containerLoc));
-		WebElement element = modalContainer.findElement(elementLoc);
-		return element.getText();
-	}
-
 	public int getAriaValueNowInt() {
 		return Integer.parseInt(Browser.getBrowserInstance()
 				.findElement(this.getLocator()).getAttribute("aria-valuenow"));
-	}
-	public boolean isElementClassValueActive() {
-		String elClassValue = Browser.getBrowserInstance().findElement(this.getLocator()).getAttribute("class");
-		return elClassValue.contains("active");
 	}
 }

@@ -4,6 +4,7 @@ import base.BaseForm;
 import base.elements.Link;
 import org.openqa.selenium.By;
 import utils.Log;
+import utils.TabsUtil;
 import utils.Waits;
 
 public class LinksPage extends BaseForm {
@@ -17,17 +18,13 @@ public class LinksPage extends BaseForm {
 	public void clickHomeLink() {
 		Log.log().info("Click HomeLink.");
 		Log.log().info("New tab with MainPage opens.");
-		originalWindow = getWindowID();
-		int expectedNumOfWindows = 2;
+		TabsUtil.originalWindow = TabsUtil.getWindowID();
 		linkHome.click();
-		Waits.waitForNewWindow(expectedNumOfWindows);
-		changeToSecondWindowHandle(originalWindow);
+		Waits.waitForNewWindow(2);
+		TabsUtil.changeToSecondWindowHandle();
 	}
 
-	public void switchToPrevPage() {
-		Log.log().info("Switch to previous tab.");
-		switchToWindow(originalWindow);
-	}
+
 
 	public boolean isLinksPageOpen() {
 		Log.log().info("LinksPage opens.");

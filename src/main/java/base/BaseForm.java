@@ -2,9 +2,6 @@ package base;
 
 import browser.Browser;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Log;
 import utils.Waits;
@@ -25,33 +22,9 @@ public abstract class BaseForm {
 				.visibilityOfElementLocated(this.getLocator())).isDisplayed();
 	}
 
-	public String getWindowID() {
-		return Browser.getBrowserInstance().getWindowHandle();
-	}
-
-	public void changeToSecondWindowHandle(String originalWindow) {
-		WebDriver driver = Browser.getBrowserInstance();
-		for (String windowHandle : driver.getWindowHandles()) {
-			if(!originalWindow.contentEquals(windowHandle)) {
-				driver.switchTo().window(windowHandle);
-				break;
-			}
-		}
-	}
-
-	public void switchToWindow(String window) {
-		Browser.getBrowserInstance().switchTo().window(window);
-	}
-
 	public boolean isSubstringInCurrentUrl(String substring) {
 		Log.log().info("Check the URL of new tab contains '/sample'");
 		return Browser.getBrowserInstance().getCurrentUrl().contains(substring);
-	}
-
-	public void closeTab(String originalWindow) {
-		WebDriver driver = Browser.getBrowserInstance();
-		driver.close();
-		driver.switchTo().window(originalWindow);
 	}
 
 	public String getName() {
@@ -60,13 +33,5 @@ public abstract class BaseForm {
 
 	public By getLocator() {
 		return this.loc;
-	}
-
-	public void scrollDown() {
-		new Actions(Browser.getBrowserInstance())
-				.moveToElement(Browser.getBrowserInstance().findElement(this.getLocator()))
-				.keyDown(Keys.ARROW_DOWN)
-				.keyUp(Keys.ARROW_DOWN)
-				.perform();
 	}
 }

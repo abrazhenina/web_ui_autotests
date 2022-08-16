@@ -3,14 +3,9 @@ package pageObjects;
 import base.BaseForm;
 import base.elements.Button;
 import base.elements.Label;
-import browser.Browser;
-import data.TestData;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Log;
-import utils.StringUtil;
 import utils.Waits;
 
 public class AlertsPage extends BaseForm {
@@ -20,9 +15,8 @@ public class AlertsPage extends BaseForm {
 	private Button promptBoxBtn = new Button("alertPromptBoxBtn", By.id("promtButton"));
 	private Label promptResultLabel = new Label("alertPromptResultLabel", By.id("promptResult"));
 	String text = "text";
-	String randomStr;
 	public AlertsPage() {
-		super("alertsPage", By.xpath("//div[text()='Alerts']"));
+		super("alertsPage", By.xpath("//div[@class='main-header' and contains(text(),'Alerts')]"));
 	}
 
 	public void clickSeeAlertBtn() {
@@ -40,41 +34,6 @@ public class AlertsPage extends BaseForm {
 		promptBoxBtn.click();
 	}
 
-	public boolean isAlertDisplayed() {
-		Log.log().info("Alert opens.");
-		return Waits.waiter().until(ExpectedConditions.alertIsPresent()) != null;
-	}
-
-	public boolean isAlertStillDisplayed() {
-		try
-		{
-			Browser.getBrowserInstance().switchTo().alert();
-			return true;
-		}
-		catch (NoAlertPresentException Ex) {
-			Log.log().info("Alert closed.");
-			return false;
-		}
-	}
-
-	public void acceptAlert() {
-		Log.log().info("Click OK button.");
-		Waits.waiter().until(ExpectedConditions.alertIsPresent()).accept();
-	}
-
-	public String sendRandomStrToAlertPrompt() {
-		Log.log().info("Send random string to PromptBoxAlert.");
-		randomStr = StringUtil.getRandomString();
-		Waits.waiter().until(ExpectedConditions.alertIsPresent()).sendKeys(randomStr);
-		return randomStr;
-	}
-
-	public String getAlertText() {
-		text = Waits.waiter().until(ExpectedConditions.alertIsPresent()).getText();
-		Log.log().info("Alert message is '"+text+"'");
-		return text;
-	}
-
 	public String getConfirmResultText() {
 		text = Waits.waiter().until(ExpectedConditions.presenceOfElementLocated(
 				confirmResultLabel.getLocator())).getText();
@@ -87,9 +46,5 @@ public class AlertsPage extends BaseForm {
 				promptResultLabel.getLocator())).getText();
 		Log.log().info("Alert message is '"+text+"'");
 		return text;
-	}
-
-	public boolean isStrInAlertText() {
-		return StringUtil.strContainsSub(getPromptResultText(), randomStr);
 	}
 }

@@ -5,8 +5,7 @@ import data.TestData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
-import utils.FilesUtil;
-import utils.Log;
+import utils.*;
 
 public class TestCaseDemoQA extends BaseTest {
 	MainPage mainPage;
@@ -44,34 +43,34 @@ public class TestCaseDemoQA extends BaseTest {
 
 		Log.log().info("3/8");
 		alertsPage.clickSeeAlertBtn();
-		Assert.assertTrue(alertsPage.isAlertDisplayed(), "Alert not found.");
-		Assert.assertEquals(alertsPage.getAlertText(), TestData.getToSeeAlertMessage(), "Alert message doesn't match.");
+		Assert.assertTrue(AlertsUtil.isAlertDisplayed(), "Alert not found.");
+		Assert.assertEquals(AlertsUtil.getAlertText(), TestData.getToSeeAlertMessage(), "Alert message doesn't match.");
 
 		Log.log().info("4/8");
-		alertsPage.acceptAlert();
-		Assert.assertFalse(alertsPage.isAlertStillDisplayed(), "Alert still displayed.");
+		AlertsUtil.acceptAlert();
+		Assert.assertFalse(AlertsUtil.isAlertStillDisplayed(), "Alert still displayed.");
 
 		Log.log().info("5/8");
 		alertsPage.clickConfirmBoxBtn();
-		Assert.assertTrue(alertsPage.isAlertDisplayed(), "Alert not found.");
-		Assert.assertEquals(alertsPage.getAlertText(), TestData.getAlertConfirmBoxMessage(), "Alert message doesn't match.");
+		Assert.assertTrue(AlertsUtil.isAlertDisplayed(), "Alert not found.");
+		Assert.assertEquals(AlertsUtil.getAlertText(), TestData.getAlertConfirmBoxMessage(), "Alert message doesn't match.");
 
 		Log.log().info("6/8");
-		alertsPage.acceptAlert();
-		Assert.assertFalse(alertsPage.isAlertStillDisplayed(), "Alert still displayed.");
+		AlertsUtil.acceptAlert();
+		Assert.assertFalse(AlertsUtil.isAlertStillDisplayed(), "Alert still displayed.");
 		Assert.assertEquals(alertsPage.getConfirmResultText(), TestData.getAlertConfirmResultLabelText(),
 				"ConfirmResultText and TestDataText not equal.");
 
 		Log.log().info("7/8");
 		alertsPage.clickPromptBoxBtn();
-		Assert.assertTrue(alertsPage.isAlertDisplayed(), "Alert not found.");
-		Assert.assertEquals(alertsPage.getAlertText(), TestData.getAlertPromptBoxMessage(), "Alert message doesn't match.");
+		Assert.assertTrue(AlertsUtil.isAlertDisplayed(), "Alert not found.");
+		Assert.assertEquals(AlertsUtil.getAlertText(), TestData.getAlertPromptBoxMessage(), "Alert message doesn't match.");
 
 		Log.log().info("8/8");
-		randomStr = alertsPage.sendRandomStrToAlertPrompt();
-		alertsPage.acceptAlert();
-		Assert.assertFalse(alertsPage.isAlertStillDisplayed(), "Alert still displayed.");
-		Assert.assertTrue(alertsPage.isStrInAlertText(),
+		randomStr = AlertsUtil.sendRandomStrToAlertPrompt();
+		AlertsUtil.acceptAlert();
+		Assert.assertFalse(AlertsUtil.isAlertStillDisplayed(), "Alert still displayed.");
+		Assert.assertTrue(StringUtil.strContainsSub(alertsPage.getPromptResultText(), randomStr),
 				"Randomly generated string not found in AlertPromptResultLabel.");
 	}
 
@@ -176,7 +175,7 @@ public class TestCaseDemoQA extends BaseTest {
 		Assert.assertTrue(browserWindowsPage.isSubstringInCurrentUrl("/sample"), "'/sample' not found in the URL.");
 
 		Log.log().info("4/7");
-		browserWindowsPage.closeCurrentTab();
+		TabsUtil.closeCurrentTab();
 		Assert.assertTrue(browserWindowsPage.isBrowserWindowsPageOpen(), "BrowserWindowsPage not found.");
 
 		Log.log().info("5/7");
@@ -192,7 +191,7 @@ public class TestCaseDemoQA extends BaseTest {
 		Assert.assertTrue(mainPage.isMainPageOpen(), "MainPage not found.");
 
 		Log.log().info("7/7");
-		linksPage.switchToPrevPage();
+		TabsUtil.switchToPrevPage();
 		Assert.assertTrue(linksPage.isLinksPageOpen(), "LinksPage not found.");
 	}
 
