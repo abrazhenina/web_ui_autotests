@@ -8,18 +8,18 @@ import java.util.Date;
 public class TimeUtil {
 	public static String getCurrentMonthDayYear() {
 		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat(Constants.currentDateFormat);
 		return formatter.format(date);
 	}
 
 	public static String getCurrentDateTime() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat(Constants.currentDateTimeFormat);
 		String date = formatter.format(new Date());
 		LocalDate currentDate = LocalDate.parse(date);
 		Month month = currentDate.getMonth();
 		String monthStr = month.toString();
 		String monthCapitalized = monthStr.substring(0, 1).toUpperCase() + monthStr.substring(1).toLowerCase();
-		SimpleDateFormat formatterWithoutMonth = new SimpleDateFormat("d, yyyy h:mm a");
+		SimpleDateFormat formatterWithoutMonth = new SimpleDateFormat(Constants.dateTimeWithoutMonth);
 		String dateTimeWithoutMonth = formatterWithoutMonth.format(new Date());
 		return monthCapitalized +" "+ dateTimeWithoutMonth;
 	}

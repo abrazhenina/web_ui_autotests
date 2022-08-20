@@ -24,8 +24,10 @@ public class TestCaseDemoQA extends BaseTest {
 	BrowserWindowsPage browserWindowsPage;
 	LinksPage linksPage;
 	WidgetsPage widgetsPage;
+	private String filePath = "C:\\sampleFile.jpeg";
+	private String fileName = "sampleFile.jpeg";
 
-	@Test(priority = 1)
+	//@Test(priority = 1)
 	void alerts() {
 		Log.log().info("1 test case started.");
 		Log.log().info("1/8");
@@ -74,7 +76,7 @@ public class TestCaseDemoQA extends BaseTest {
 				"Randomly generated string not found in AlertPromptResultLabel.");
 	}
 
-	@Test(priority = 2)
+	//@Test(priority = 2)
 	void frames() {
 		Log.log().info("2 test case started.");
 		Log.log().info("1/3");
@@ -114,7 +116,7 @@ public class TestCaseDemoQA extends BaseTest {
 		Assert.assertEquals(text, text2, "Texts not equal.");
 	}
 
-	@Test(priority = 3)
+	//@Test(priority = 3)
 	void webTables() {
 		Log.log().info("3 test case started.");
 		Log.log().info("1/5");
@@ -154,7 +156,7 @@ public class TestCaseDemoQA extends BaseTest {
 		Assert.assertTrue(webTablesPage.isRecordDeleted(userFirstName),"User data still in WebTable.");
 	}
 
-	@Test(priority = 4)
+	//@Test(priority = 4)
 	void handles() {
 		Log.log().info("4 test case started.");
 		Log.log().info("1/7");
@@ -195,7 +197,7 @@ public class TestCaseDemoQA extends BaseTest {
 		Assert.assertTrue(linksPage.isLinksPageOpen(), "LinksPage not found.");
 	}
 
-	@Test(priority = 5)
+	//@Test(priority = 5)
 	void sliderProgressBar() {
 		Log.log().info("5 test case started.");
 		Log.log().info("1/6");
@@ -228,7 +230,7 @@ public class TestCaseDemoQA extends BaseTest {
 		Assert.assertTrue(widgetsPage.isProgressBarValueBetween28And30(), "ProgressBarValue not in[28;30].");
 	}
 
-	@Test(priority = 6)
+	//@Test(priority = 6)
 	void datePicker() {
 		Log.log().info("6 test case started.");
 		Log.log().info("1/3");
@@ -265,14 +267,16 @@ public class TestCaseDemoQA extends BaseTest {
 		elementsPage = new ElementsPage();
 		Assert.assertTrue(elementsPage.isOpen(), "ElementsPage not found.");
 		elementsPage.clickUploadDownloadBtn();
-		Assert.assertTrue(elementsPage.isUploadDownloadFormOpen(), "UploadDownloadForm not found.");
+		Assert.assertTrue(elementsPage.isUploadDownloadFormOpen(),
+				"UploadDownloadForm not found.");
 
 		Log.log().info("3/4");
 		elementsPage.clickDownloadBtn();
 		FilesUtil.isFileDownloaded();
 
 		Log.log().info("4/4");
-		elementsPage.clickUploadBtn();
-		FilesUtil.isFileDownloaded();
+		elementsPage.sendFilePathToUploadInput(filePath);
+		Assert.assertTrue(elementsPage.isFileNameDisplayedInUploadLabel(fileName),
+				"FileName not found in UploadLabel.");
 	}
 }

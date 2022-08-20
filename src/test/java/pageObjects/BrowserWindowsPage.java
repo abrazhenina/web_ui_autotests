@@ -13,7 +13,6 @@ public class BrowserWindowsPage extends BaseForm {
 	private Button elementsHeaderBtn = new Button("elementsHeaderBtn", By.xpath("//*[@class='header-text' and contains(text(),'Elements')]"));
 	private Button linksBtn = new Button("linksBtn", By.xpath("//span[text()='Links']"));
 	private Dropdown elementsDropdownShowed = new Dropdown("elementsDropdown", By.cssSelector(".element-list.show"));
-	private String originalWindow;
 
 	public BrowserWindowsPage() {
 		super("browserWindows", By.xpath("//div[@class='main-header' and contains(text(),'Browser Windows')]"));
@@ -45,4 +44,6 @@ public class BrowserWindowsPage extends BaseForm {
 		Log.log().info("On the current tab is BrowserWindowsPage.");
 		return isOpen();
 	}
+
+
 }
