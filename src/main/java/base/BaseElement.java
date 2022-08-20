@@ -3,6 +3,7 @@ package base;
 import browser.Browser;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.Log;
 import utils.Waits;
 
 public abstract class BaseElement {
@@ -23,17 +24,20 @@ public abstract class BaseElement {
 	}
 
 	public boolean isDisplayed() {
+		Log.log().info(this.getName() + " displayed.");
 		return Waits.waiter()
 				.until(ExpectedConditions.visibilityOfElementLocated(this.getLocator()))
 				.isDisplayed();
 	}
 
 	public void click() {
+		Log.log().info("Click "+this.getName());
 		Waits.waiter().until(ExpectedConditions.visibilityOfElementLocated(this.getLocator()));
 		Waits.waiter().until(ExpectedConditions.elementToBeClickable(this.getLocator())).click();
 	}
 
 	public void clickJS() {
+		Log.log().info("JavaScript click "+this.getName());
 		WebDriver driver = Browser.getBrowserInstance();
 		WebElement element = driver.findElement(this.getLocator());
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
@@ -41,6 +45,7 @@ public abstract class BaseElement {
 	}
 
 	public boolean isVisible() {
+		Log.log().info(this.getName() + " visible.");
 		try
 		{
 			Waits.waiter().until(ExpectedConditions
@@ -53,10 +58,12 @@ public abstract class BaseElement {
 	}
 
 	public String getText() {
+		Log.log().info("Get text from "+this.getName());
 		return Waits.waiter().until(ExpectedConditions.visibilityOfElementLocated(this.loc)).getText();
 	}
 
 	public int getAriaValueNowInt() {
+		Log.log().info("Get 'aria-valuenow' class value of "+this.getName());
 		return Integer.parseInt(Browser.getBrowserInstance()
 				.findElement(this.getLocator()).getAttribute("aria-valuenow"));
 	}
