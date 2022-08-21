@@ -24,8 +24,6 @@ public class TestCaseDemoQA extends BaseTest {
 	BrowserWindowsPage browserWindowsPage;
 	LinksPage linksPage;
 	WidgetsPage widgetsPage;
-	private String filePath = "C:\\sampleFile.jpeg";
-	private String fileName = "sampleFile.jpeg";
 
 	//@Test(priority = 1)
 	void alerts() {
@@ -275,8 +273,8 @@ public class TestCaseDemoQA extends BaseTest {
 		FilesUtil.isFileDownloaded();
 
 		Log.log().info("4/4");
-		elementsPage.sendFilePathToUploadInput(filePath);
-		Assert.assertTrue(elementsPage.isFileNameDisplayedInUploadLabel(fileName),
+		elementsPage.sendFilePathToUploadInput(Constants.filePath);
+		Assert.assertTrue(elementsPage.isFileNameDisplayedInUploadLabel(Constants.fileName),
 				"FileName not found in UploadLabel.");
 	}
 }
