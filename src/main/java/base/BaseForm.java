@@ -2,6 +2,8 @@ package base;
 
 import browser.Browser;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Log;
 import utils.Waits;
@@ -17,7 +19,7 @@ public abstract class BaseForm {
 	}
 
 	public boolean isOpen() {
-		Log.log().info("Page opens.");
+		Log.log().info(this.getName()+" opens.");
 		return Waits.waiter().until(ExpectedConditions
 				.visibilityOfElementLocated(this.getLocator())).isDisplayed();
 	}
@@ -33,5 +35,10 @@ public abstract class BaseForm {
 
 	public By getLocator() {
 		return this.loc;
+	}
+
+	public void switchBackFromFrames() {
+		Log.log().info("Switch back from frame.");
+		Browser.getBrowserInstance().switchTo().defaultContent();
 	}
 }

@@ -74,10 +74,11 @@ public class TestCaseDemoQA extends BaseTest {
 				"Randomly generated string not found in AlertPromptResultLabel.");
 	}
 
-	//@Test(priority = 2)
+	@Test(priority = 2)
 	void frames() {
 		Log.log().info("2 test case started.");
 		Log.log().info("1/3");
+		mainPage = new MainPage();
 		mainPage.goToMainPage();
 		Assert.assertTrue(mainPage.isOpen(), "MainPage not found.");
 
@@ -88,12 +89,10 @@ public class TestCaseDemoQA extends BaseTest {
 		alertsWindowsPage.clickNestedFramesBtn();
 		nestedFramesPage = new NestedFramesPage();
 		Assert.assertTrue(nestedFramesPage.isOpen(), "NestedFramesPage not found.");
-		Assert.assertTrue(nestedFramesPage.isParentFrameOpen(), "ParentFrame not found.");
 		nestedFramesPage.switchToParentFrame();
 		Assert.assertEquals(nestedFramesPage.getTextFromParentFrame(), TestData.getNestedFramesParentFrameText(),
 				"Expected text and actual text not equal.");
 		nestedFramesPage.switchToChildFrame();
-		Assert.assertTrue(nestedFramesPage.isChildFrameOpen(), "ParentFrame not found.");
 		Assert.assertEquals(nestedFramesPage.getTextFromChildFrame(), TestData.getNestedFramesChildFrameText(),
 				"Expected text and actual text not equal.");
 		nestedFramesPage.switchBackFromFrames();
@@ -102,11 +101,11 @@ public class TestCaseDemoQA extends BaseTest {
 		alertsWindowsPage.clickFramesBtn();
 		framesPage = new FramesPage();
 		Assert.assertTrue(framesPage.isOpen(), "FramesPage not found.");
-		Assert.assertTrue(framesPage.isUpperFrameOpen(), "UpperFrame not found.");
+		Assert.assertTrue(framesPage.isUpperFrameVisible(), "UpperFrame not found.");
 		framesPage.switchToUpperFrame();
 		text = framesPage.getTextFromUpperFrame();
 		framesPage.switchBackFromFrames();
-		Assert.assertTrue(framesPage.isLowerFrameOpen(), "LowerFrame not found.");
+		Assert.assertTrue(framesPage.isLowerFrameVisible(), "LowerFrame not found.");
 		framesPage.switchToLowerFrame();
 		text2 = framesPage.getTextFromLowerFrame();
 		framesPage.switchBackFromFrames();
@@ -252,7 +251,7 @@ public class TestCaseDemoQA extends BaseTest {
 		Assert.assertTrue(widgetsPage.isDatePickerDate29Fev(), "DatePickerDate is not February 29.");
 	}
 
-	@Test(priority = 7)
+	//@Test(priority = 7)
 	void files() {
 		Log.log().info("7 test case started.");
 		Log.log().info("1/4");

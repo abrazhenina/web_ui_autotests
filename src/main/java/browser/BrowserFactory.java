@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class BrowserFactory {
-	private static WebDriver driver;
+	private static WebDriver driver = null;
 	private static String browserName;
 	private static boolean browserIncognito;
 	private static boolean browserLang;

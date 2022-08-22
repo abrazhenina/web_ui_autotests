@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.Log;
 import utils.Waits;
 
+import java.util.List;
+
 public abstract class BaseElement {
 	private String name;
 	private By loc;
@@ -27,6 +29,13 @@ public abstract class BaseElement {
 		Log.log().info(this.getName() + " displayed.");
 		return Waits.waiter()
 				.until(ExpectedConditions.visibilityOfElementLocated(this.getLocator()))
+				.isDisplayed();
+	}
+
+	public boolean isPresent() {
+		Log.log().info(this.getName() + " is present.");
+		return Waits.waiter()
+				.until(ExpectedConditions.presenceOfElementLocated(this.getLocator()))
 				.isDisplayed();
 	}
 
@@ -59,12 +68,26 @@ public abstract class BaseElement {
 
 	public String getText() {
 		Log.log().info("Get text from "+this.getName());
-		return Waits.waiter().until(ExpectedConditions.visibilityOfElementLocated(this.loc)).getText();
+		return Waits.waiter().until(ExpectedConditions.presenceOfElementLocated(this.loc)).getText();
 	}
 
 	public int getAriaValueNowInt() {
 		Log.log().info("Get 'aria-valuenow' class value of "+this.getName());
 		return Integer.parseInt(Browser.getBrowserInstance()
 				.findElement(this.getLocator()).getAttribute("aria-valuenow"));
+	}
+
+	public boolean isStringInTable(String str) {
+		Log.log().info("String '"+str+"' is in table "+this.getName());
+		try {
+			List<WebElement> webTable = Browser.getBrowserInstance().findElements(this.getLocator());
+			for (WebElement cell : webTable) {
+				if (cell.getText().contains(str))
+					return true;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return false;
 	}
 }

@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class JsonReader {
-    public static JsonObject readJson(String path) throws IOException {
+    public static JsonObject readJson(String path) {
         Path filePath = Path.of(path);
 
         String jsonString = "";

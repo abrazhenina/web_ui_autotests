@@ -1,25 +1,29 @@
 package pageObjects;
 
+import base.BaseForm;
 import base.elements.Frame;
+import base.elements.Label;
 import org.openqa.selenium.By;
 import utils.Log;
 
-public class FramesPage extends Frame {
-	private FrameUpper frameUpper = new FrameUpper();
-	private FrameLower frameLower = new FrameLower();
+public class FramesPage extends BaseForm {
+	private Frame frameUpper = new Frame("frameUpper", By.id("frame1"));
+	private Label upperTextLabel = new Label("upperTextLabel", By.id("sampleHeading"));
+	private Frame frameLower = new Frame("frameLower", By.id("frame2"));
+	private Label lowerTextLabel = new Label("textLabel", By.id("sampleHeading"));
 
 	public FramesPage() {
 		super("framesPage", By.xpath("//div[@class='main-header' and contains(text(),'Frames')]"));
 	}
 
-	public boolean isUpperFrameOpen() {
+	public boolean isUpperFrameVisible() {
 		Log.log().info("UpperFrame on FramesPage displayed.");
-		return frameUpper.isOpen();
+		return frameUpper.isVisible();
 	}
 
-	public boolean isLowerFrameOpen() {
+	public boolean isLowerFrameVisible() {
 		Log.log().info("LowerFrame on FramesPage displayed.");
-		return frameUpper.isOpen();
+		return frameUpper.isVisible();
 	}
 
 	public void switchToUpperFrame() {
@@ -34,12 +38,12 @@ public class FramesPage extends Frame {
 
 	public String getTextFromUpperFrame() {
 		Log.log().info("Read UpperFrame text.");
-		return frameUpper.getTextFromFrameLabel();
+		return upperTextLabel.getText();
 	}
 
 	public String getTextFromLowerFrame() {
 		Log.log().info("Read LowerFrame text.");
-		return frameLower.getTextFromFrameLabel();
+		return lowerTextLabel.getText();
 	}
 
 }
