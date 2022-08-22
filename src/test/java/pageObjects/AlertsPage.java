@@ -21,17 +21,17 @@ public class AlertsPage extends BaseForm {
 
 	public void clickSeeAlertBtn() {
 		Log.log().info("Click 'Button to see alert'");
-		seeAlertBtn.click();
+		seeAlertBtn.clickJS();
 	}
 
 	public void clickConfirmBoxBtn() {
 		Log.log().info("Click 'On button click, confirm box will appear'");
-		confirmBoxBtn.click();
+		confirmBoxBtn.clickJS();
 	}
 
 	public void clickPromptBoxBtn() {
 		Log.log().info("Click 'On button click, prompt box will appear'");
-		promptBoxBtn.click();
+		promptBoxBtn.clickJS();
 	}
 
 	public String getConfirmResultText() {

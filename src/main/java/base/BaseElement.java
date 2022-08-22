@@ -68,7 +68,7 @@ public abstract class BaseElement {
 
 	public String getText() {
 		Log.log().info("Get text from "+this.getName());
-		return Waits.waiter().until(ExpectedConditions.presenceOfElementLocated(this.loc)).getText();
+		return Waits.waiter().until(ExpectedConditions.visibilityOfElementLocated(this.loc)).getText();
 	}
 
 	public int getAriaValueNowInt() {

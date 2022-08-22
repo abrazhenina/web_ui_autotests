@@ -25,7 +25,7 @@ public class TestCaseDemoQA extends BaseTest {
 	LinksPage linksPage;
 	WidgetsPage widgetsPage;
 
-	//@Test(priority = 1)
+	@Test(priority = 1)
 	void alerts() {
 		Log.log().info("1 test case started.");
 		Log.log().info("1/8");
@@ -101,7 +101,7 @@ public class TestCaseDemoQA extends BaseTest {
 		alertsWindowsPage.clickFramesBtn();
 		framesPage = new FramesPage();
 		Assert.assertTrue(framesPage.isOpen(), "FramesPage not found.");
-		Assert.assertTrue(framesPage.isUpperFrameVisible(), "UpperFrame not found.");
+		//Assert.assertTrue(framesPage.isUpperFrameVisible(), "UpperFrame not found.");
 		framesPage.switchToUpperFrame();
 		text = framesPage.getTextFromUpperFrame();
 		framesPage.switchBackFromFrames();
@@ -112,8 +112,7 @@ public class TestCaseDemoQA extends BaseTest {
 		Log.log().info("UpperFrameText and LowerFrameText equal.");
 		Assert.assertEquals(text, text2, "Texts not equal.");
 	}
-
-	//@Test(priority = 3)
+	@Test(priority = 3)
 	void webTables() {
 		Log.log().info("3 test case started.");
 		Log.log().info("1/5");
@@ -136,6 +135,7 @@ public class TestCaseDemoQA extends BaseTest {
 
 		Log.log().info("4/5");
 		userNum = Integer.toString(TestData.getUserNum());
+		userFirstName = TestData.getUserFirstName();
 		Log.log().info("Fill the registration form with data of user #" + userNum);
 		registrationForm.sendKeysFirstName(TestData.getUserFirstName());
 		registrationForm.sendKeysLastName(TestData.getUserLastName());
@@ -153,7 +153,7 @@ public class TestCaseDemoQA extends BaseTest {
 		Assert.assertTrue(webTablesPage.isRecordDeleted(userFirstName),"User data still in WebTable.");
 	}
 
-	//@Test(priority = 4)
+	@Test(priority = 4)
 	void handles() {
 		Log.log().info("4 test case started.");
 		Log.log().info("1/7");
@@ -194,7 +194,7 @@ public class TestCaseDemoQA extends BaseTest {
 		Assert.assertTrue(linksPage.isLinksPageOpen(), "LinksPage not found.");
 	}
 
-	//@Test(priority = 5)
+	@Test(priority = 5)
 	void sliderProgressBar() {
 		Log.log().info("5 test case started.");
 		Log.log().info("1/6");
@@ -227,7 +227,7 @@ public class TestCaseDemoQA extends BaseTest {
 		Assert.assertTrue(widgetsPage.isProgressBarValueBetween28And30(), "ProgressBarValue not in[28;30].");
 	}
 
-	//@Test(priority = 6)
+	@Test(priority = 6)
 	void datePicker() {
 		Log.log().info("6 test case started.");
 		Log.log().info("1/3");
@@ -251,7 +251,7 @@ public class TestCaseDemoQA extends BaseTest {
 		Assert.assertTrue(widgetsPage.isDatePickerDate29Fev(), "DatePickerDate is not February 29.");
 	}
 
-	//@Test(priority = 7)
+	@Test(priority = 7)
 	void files() {
 		Log.log().info("7 test case started.");
 		Log.log().info("1/4");

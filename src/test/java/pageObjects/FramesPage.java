@@ -7,9 +7,9 @@ import org.openqa.selenium.By;
 import utils.Log;
 
 public class FramesPage extends BaseForm {
-	private Frame frameUpper = new Frame("frameUpper", By.id("frame1"));
+	private Frame upperFrame = new Frame("upperFrame", By.id("frame1"));
 	private Label upperTextLabel = new Label("upperTextLabel", By.id("sampleHeading"));
-	private Frame frameLower = new Frame("frameLower", By.id("frame2"));
+	private Frame lowerFrame = new Frame("lowerFrame", By.id("frame2"));
 	private Label lowerTextLabel = new Label("textLabel", By.id("sampleHeading"));
 
 	public FramesPage() {
@@ -18,22 +18,22 @@ public class FramesPage extends BaseForm {
 
 	public boolean isUpperFrameVisible() {
 		Log.log().info("UpperFrame on FramesPage displayed.");
-		return frameUpper.isVisible();
+		return upperFrame.isVisible();
 	}
 
 	public boolean isLowerFrameVisible() {
 		Log.log().info("LowerFrame on FramesPage displayed.");
-		return frameUpper.isVisible();
+		return upperFrame.isVisible();
 	}
 
 	public void switchToUpperFrame() {
 		Log.log().info("Switch to UpperFrame.");
-		frameUpper.switchToFrame();
+		upperFrame.switchToFrame();
 	}
 
 	public void switchToLowerFrame() {
 		Log.log().info("Switch to LowerFrame.");
-		frameLower.switchToFrame();
+		lowerFrame.switchToFrame();
 	}
 
 	public String getTextFromUpperFrame() {

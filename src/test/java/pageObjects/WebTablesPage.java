@@ -20,14 +20,17 @@ public class WebTablesPage extends BaseForm {
 	}
 
 	public boolean isRecordInTable(String userData) {
+		Log.log().info(userData + "is in the table.");
 		return webTableCells.isStringInTable(userData);
 	}
 
 	public boolean isRecordDeleted(String userData) {
+		Log.log().info(userData + " is deleted from the table.");
 		return !webTableCells.isStringInTable(userData);
 	}
 
 	public void deleteRecord() {
+		Log.log().info("Delete record.");
 		webTableCells.deleteRecord(delRecordBtn.getLocator());
 	}
 }

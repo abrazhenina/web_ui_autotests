@@ -15,9 +15,6 @@ public class TextBox extends BaseElement {
 		super(name, loc);
 	}
 
-	public void clearInput() {
-		Browser.getBrowserInstance().findElement(this.getLocator()).clear();
-	}
 	public void sendKeys(String keys) {
 		WebElement input = Waits.waiter().until(ExpectedConditions.visibilityOfElementLocated(this.getLocator()));
 		new Actions(Browser.getBrowserInstance())
