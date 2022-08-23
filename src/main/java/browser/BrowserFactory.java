@@ -16,7 +16,7 @@ public class BrowserFactory {
 	private BrowserFactory() {
 	}
 
-	public static WebDriver getBrowser() {
+	protected static WebDriver getBrowser() {
 			browserName = BrowserConfig.getBrowserName();
 			browserIncognito = BrowserConfig.getBrowserIncognito();
 			browserLang = BrowserConfig.getBrowserLang();
@@ -49,18 +49,15 @@ public class BrowserFactory {
 					}
 					return getFirefoxInstance(opt);
 				}
-				default -> {
-					driver = WebDriverManager.chromedriver().create();
-				}
 			}
 			return driver;
 	}
 
-	public static WebDriver getChromeInstance(ChromeOptions opt) {
+	private static WebDriver getChromeInstance(ChromeOptions opt) {
 		return WebDriverManager.chromedriver().capabilities(opt).create();
 	}
 
-	public static WebDriver getFirefoxInstance(FirefoxOptions opt) {
+	private static WebDriver getFirefoxInstance(FirefoxOptions opt) {
 		return WebDriverManager.firefoxdriver().capabilities(opt).create();
 	}
 }

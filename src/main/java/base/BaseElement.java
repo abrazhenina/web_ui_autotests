@@ -9,8 +9,8 @@ import utils.Waits;
 import java.util.List;
 
 public abstract class BaseElement {
-	private String name;
-	private By loc;
+	private final String name;
+	private final By loc;
 
 	public BaseElement(String name, By loc) {
 		this.name = name;
@@ -29,13 +29,6 @@ public abstract class BaseElement {
 		Log.log().info(this.getName() + " displayed.");
 		return Waits.waiter()
 				.until(ExpectedConditions.visibilityOfElementLocated(this.getLocator()))
-				.isDisplayed();
-	}
-
-	public boolean isPresent() {
-		Log.log().info(this.getName() + " is present.");
-		return Waits.waiter()
-				.until(ExpectedConditions.presenceOfElementLocated(this.getLocator()))
 				.isDisplayed();
 	}
 

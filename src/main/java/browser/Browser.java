@@ -1,7 +1,6 @@
 package browser;
 
 import org.openqa.selenium.WebDriver;
-import utils.Log;
 
 public class Browser {
 
